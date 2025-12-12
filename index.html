@@ -98,10 +98,6 @@ button:hover {
   margin-bottom: 10px;
 }
 
-.services p {
-  line-height: 1.5;
-}
-
 /* رسالة النجاح */
 #success {
   display: none;
@@ -116,7 +112,7 @@ button:hover {
 <body>
 
 <!-- اللوغو -->
-<img src="logo.png" class="logo" alt="Logo">
+<img src="logo.png" class="logo">
 
 <!-- زر اللغة -->
 <div class="lang-btn" onclick="toggleLanguage()">AR</div>
@@ -133,10 +129,10 @@ button:hover {
 
   <div id="success">Your submission is received. We will contact you soon to schedule a meeting.</div>
 
-  <!-- قسم خدماتنا جاهز للتعديل -->
+  <!-- قسم خدماتنا جاهز للتعديل، بدون الجملة الافتراضية -->
   <div class="services" id="servicesSection">
     <h2>Our Services</h2>
-    <p>Here you can add details about the services your agency provides.</p>
+    <!-- يمكن إضافة محتوى حقيقي هنا لاحقًا -->
   </div>
 </div>
 
@@ -152,7 +148,6 @@ function toggleLanguage() {
     document.getElementById("subtitle").innerText = "كل ما تحتاجه علامتك التجارية، في مكان واحد";
     document.getElementById("submitBtn").innerText = "إرسال";
     document.getElementById("servicesSection").querySelector("h2").innerText = "خدماتنا";
-    document.getElementById("servicesSection").querySelector("p").innerText = "هنا يمكنك إضافة تفاصيل عن الخدمات التي تقدمها وكالتك.";
     document.getElementById("success").innerText = "تم استلام طلبك، سنتواصل معك لتحديد موعد.";
   } else {
     document.querySelector(".lang-btn").innerText = "AR";
@@ -160,7 +155,6 @@ function toggleLanguage() {
     document.getElementById("subtitle").innerText = "Everything your brand needs, all in one place";
     document.getElementById("submitBtn").innerText = "Submit";
     document.getElementById("servicesSection").querySelector("h2").innerText = "Our Services";
-    document.getElementById("servicesSection").querySelector("p").innerText = "Here you can add details about the services your agency provides.";
     document.getElementById("success").innerText = "Your submission is received. We will contact you soon to schedule a meeting.";
   }
 }
