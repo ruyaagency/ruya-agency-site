@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RU'YA AGENCY</title>
+
+<style>
+/* الخلفية المتدرجة المتحركة */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  background: linear-gradient(120deg, #02030f, #051437, #02030f);
+  background-size: 300% 300%;
+  animation: gradientMove 15s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* اللوغو */
+.logo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 90px;
+  z-index: 999;
+}
+
+/* زر اللغة */
+.lang-btn {
+  position: fixed;
+  top: 20px;
+  right: 25px;
+  background: white;
+  color: black;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* حاوية المحتوى */
+.container {
+  max-width: 600px;
+  margin: 160px auto;
+  padding: 30px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 12px;
+  backdrop-filter: blur(7px);
+  text-align: center;
+}
+
+/* العنوان الرئيسي والشعار النصي */
+h1 {
+  margin-bottom: 10px;
+  font-size: 28px;
+}
+
+h2.subtitle {
+  margin-top: 0;
+  font-size: 16px;
+  font-weight: normal;
+  color: #cccccc;
+}
+
+/* زر Submit */
+button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background: white;
+  color: black;
+  border: none;
+  font-weight: bold;
+  font-size: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* قسم خدماتنا */
+.services {
+  margin-top: 40px;
+  padding: 20px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+}
+
+.services h2 {
+  margin-bottom: 10px;
+}
+
+.services p {
+  line-height: 1.5;
+}
+
+/* رسالة النجاح */
+#success {
+  display: none;
+  margin-top: 20px;
+  padding: 10px;
+  background: rgba(0,255,100,0.3);
+  border-radius: 8px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- اللوغو -->
+<img src="logo.png" class="logo" alt="Logo">
+
+<!-- زر اللغة -->
+<div class="lang-btn" onclick="toggleLanguage()">AR</div>
+
+<div class="container">
+  <!-- العنوان الرئيسي -->
+  <h1 id="title">RU'YA AGENCY</h1>
+  <h2 class="subtitle" id="subtitle">Everything your brand needs, all in one place</h2>
+
+  <!-- زر Submit يفتح Google Form -->
+  <button id="submitBtn" onclick="window.open('https://forms.gle/NrANWtgv5zWuhn6K9', '_blank')">
+    Submit
+  </button>
+
+  <div id="success">Your submission is received. We will contact you soon to schedule a meeting.</div>
+
+  <!-- قسم خدماتنا جاهز للتعديل -->
+  <div class="services" id="servicesSection">
+    <h2>Our Services</h2>
+    <p>Here you can add details about the services your agency provides.</p>
+  </div>
+</div>
+
+<script>
+// تبديل اللغة عربي / إنجليزي
+let arabic = false;
+function toggleLanguage() {
+  arabic = !arabic;
+
+  if (arabic) {
+    document.querySelector(".lang-btn").innerText = "EN";
+    document.getElementById("title").innerText = "وكالة RU'YA";
+    document.getElementById("subtitle").innerText = "كل ما تحتاجه علامتك التجارية، في مكان واحد";
+    document.getElementById("submitBtn").innerText = "إرسال";
+    document.getElementById("servicesSection").querySelector("h2").innerText = "خدماتنا";
+    document.getElementById("servicesSection").querySelector("p").innerText = "هنا يمكنك إضافة تفاصيل عن الخدمات التي تقدمها وكالتك.";
+    document.getElementById("success").innerText = "تم استلام طلبك، سنتواصل معك لتحديد موعد.";
+  } else {
+    document.querySelector(".lang-btn").innerText = "AR";
+    document.getElementById("title").innerText = "RU'YA AGENCY";
+    document.getElementById("subtitle").innerText = "Everything your brand needs, all in one place";
+    document.getElementById("submitBtn").innerText = "Submit";
+    document.getElementById("servicesSection").querySelector("h2").innerText = "Our Services";
+    document.getElementById("servicesSection").querySelector("p").innerText = "Here you can add details about the services your agency provides.";
+    document.getElementById("success").innerText = "Your submission is received. We will contact you soon to schedule a meeting.";
+  }
+}
+</script>
+
+</body>
+</html>
