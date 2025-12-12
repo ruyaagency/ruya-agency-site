@@ -24,12 +24,12 @@ body {
 
 /* اللوغو */
 .logo {
-  position: fixed; /* يبقى ثابت في البداية */
-  top: 20px;
-  left: 20px;
-  width: 90px;
+  position: fixed; /* يبقى ثابت */
+  top: 10px;       /* قريب من الأعلى */
+  left: 10px;      /* قريب من اليسار */
+  width: 60px;     /* أصغر */
   z-index: 999;
-  transition: transform 0.3s ease; /* سلاسة الحركة */
+  transition: transform 0.3s ease; /* حركة سلسة */
 }
 
 /* زر اللغة */
@@ -160,14 +160,15 @@ function toggleLanguage() {
   document.getElementById("success").innerText = arabic ? "تم استلام طلبك، سنتواصل معك لتحديد موعد." : "Your submission is received. We will contact you soon to schedule a meeting.";
 }
 
-// حركة اللوغو عند وصول قسم Our Services
+// حركة اللوغو عند وصول قسم Our Services (حركة طفيفة فقط)
 window.addEventListener('scroll', () => {
   const servicesSection = document.getElementById('servicesSection');
   const logo = document.querySelector('.logo');
   const rect = servicesSection.getBoundingClientRect();
 
-  if(rect.top <= 100) { // عندما يقترب Our Services من أعلى الشاشة
-    let offset = window.scrollY - (servicesSection.offsetTop - 100);
+  if(rect.top <= 100) {
+    // حركة طفيفة أقصى 30px
+    let offset = Math.min(window.scrollY - (servicesSection.offsetTop - 100), 30);
     logo.style.transform = `translateY(${offset}px)`;
   } else {
     logo.style.transform = `translateY(0px)`;
