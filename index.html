@@ -21,6 +21,8 @@ body {
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
+/* اللوغو */
 .logo {
   position: fixed; /* يبدأ ثابت */
   top: 20px;
@@ -28,26 +30,6 @@ body {
   width: 90px;
   z-index: 999;
   transition: all 0.3s ease;
-}
-</style>
-
-<script>
-window.addEventListener('scroll', () => {
-  const servicesSection = document.getElementById('servicesSection');
-  const logo = document.querySelector('.logo');
-
-  const rect = servicesSection.getBoundingClientRect();
-  
-  if(rect.top <= 100) { 
-    // عندما يصل قسم خدماتنا إلى أعلى الشاشة تقريبًا
-    logo.style.position = 'absolute'; // يبدأ التحرك مع الصفحة
-    logo.style.top = window.scrollY + 20 + 'px';
-  } else {
-    // قبل الوصول للقسم، يبقى ثابت
-    logo.style.position = 'fixed';
-    logo.style.top = '20px';
-/* اللوغو */
-
 }
 
 /* زر اللغة */
@@ -223,6 +205,23 @@ function toggleLanguage() {
     document.getElementById("success").innerText = "Your submission is received. We will contact you soon to schedule a meeting.";
   }
 }
+
+// حركة اللوغو عند السحب
+window.addEventListener('scroll', () => {
+  const servicesSection = document.getElementById('servicesSection');
+  const logo = document.querySelector('.logo');
+  const rect = servicesSection.getBoundingClientRect();
+  
+  if(rect.top <= 100) { 
+    // عندما يصل قسم خدماتنا إلى أعلى الشاشة تقريبًا
+    logo.style.position = 'absolute';
+    logo.style.top = window.scrollY + 20 + 'px';
+  } else {
+    // قبل الوصول للقسم، يبقى ثابت
+    logo.style.position = 'fixed';
+    logo.style.top = '20px';
+  }
+});
 </script>
 
 </body>
