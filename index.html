@@ -6,6 +6,7 @@
 <title>RU'YA AGENCY</title>
 
 <style>
+/* الخلفية المتدرجة المتحركة */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -23,12 +24,12 @@ body {
 
 /* اللوغو */
 .logo {
-  position: fixed; /* ثابت في البداية */
+  position: fixed; /* يبقى ثابت في البداية */
   top: 20px;
   left: 20px;
   width: 90px;
-  z-index: 1000;
-  transition: top 0.3s ease;
+  z-index: 999;
+  transition: transform 0.3s ease; /* سلاسة الحركة */
 }
 
 /* زر اللغة */
@@ -99,8 +100,10 @@ button:hover { opacity: 0.8; }
 
 <body>
 
-<img src="https://via.placeholder.com/90" class="logo">
+<!-- اللوغو -->
+<img src="logo.png" class="logo">
 
+<!-- زر اللغة -->
 <div class="lang-btn" onclick="toggleLanguage()">AR</div>
 
 <div class="container">
@@ -163,14 +166,11 @@ window.addEventListener('scroll', () => {
   const logo = document.querySelector('.logo');
   const rect = servicesSection.getBoundingClientRect();
 
-  if(rect.top <= 0) {
-    // يبدأ التحرك مع الصفحة
-    logo.style.position = 'absolute';
-    logo.style.top = window.scrollY + 20 + 'px';
+  if(rect.top <= 100) { // عندما يقترب Our Services من أعلى الشاشة
+    let offset = window.scrollY - (servicesSection.offsetTop - 100);
+    logo.style.transform = `translateY(${offset}px)`;
   } else {
-    // قبل الوصول يبقى ثابت
-    logo.style.position = 'fixed';
-    logo.style.top = '20px';
+    logo.style.transform = `translateY(0px)`;
   }
 });
 </script>
