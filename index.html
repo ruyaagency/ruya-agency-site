@@ -92,10 +92,23 @@ button:hover {
   padding: 20px;
   background: rgba(255,255,255,0.1);
   border-radius: 10px;
+  text-align: left;
 }
 
 .services h2 {
   margin-bottom: 10px;
+}
+
+/* المحتوى داخل الخدمات */
+.services-content {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.services-content ul {
+  list-style: disc;
+  margin-left: 20px;
 }
 
 /* رسالة النجاح */
@@ -129,10 +142,39 @@ button:hover {
 
   <div id="success">Your submission is received. We will contact you soon to schedule a meeting.</div>
 
-  <!-- قسم خدماتنا بدون الجملة الافتراضية -->
+  <!-- قسم خدماتنا -->
   <div class="services" id="servicesSection">
-    <h2>Our Services</h2>
-    <!-- يمكن إضافة محتوى حقيقي هنا لاحقًا -->
+    <h2 id="servicesTitle">Our Services</h2>
+    <div class="services-content" id="servicesContent">
+      <div id="servicesEn">
+        <p>We provide a wide range of comprehensive marketing services, including:</p>
+        <ul>
+          <li>Brand and personal identity building</li>
+          <li>Creative advertising campaigns</li>
+          <li>Digital marketing and content management</li>
+          <li>Influencer marketing strategies</li>
+          <li>Sales growth and market expansion solutions</li>
+          <li>Visual identity and creative design</li>
+        </ul>
+        <p>And much more, all tailored to meet your specific goals.</p>
+        <h4>Flexible Packages for Every Need</h4>
+        <p>We offer a variety of packages designed to fit different budgets and business stages, whether you're launching, scaling, or repositioning. Each package is crafted to maximize value and deliver outstanding results.</p>
+      </div>
+      <div id="servicesAr" style="display:none">
+        <p>نقدّم مجموعة واسعة من خدمات التسويق الشاملة، بما في ذلك:</p>
+        <ul>
+          <li>بناء الهوية الشخصية والعلامة التجارية</li>
+          <li>حملات إعلانية إبداعية</li>
+          <li>التسويق الرقمي وإدارة المحتوى</li>
+          <li>استراتيجيات التسويق عبر المؤثرين</li>
+          <li>نمو المبيعات وتوسيع السوق</li>
+          <li>الهوية البصرية والتصميم الإبداعي</li>
+        </ul>
+        <p>والمزيد، كل ذلك مصمم خصيصًا لتحقيق أهدافك.</p>
+        <h4>حزم مرنة لكل احتياجاتك</h4>
+        <p>نقدّم مجموعة متنوعة من الحزم تناسب مختلف الميزانيات ومراحل الأعمال، سواء كنت تطلق مشروعًا جديدًا، أو توسّع، أو تعيد تموضعه. كل حزمة مصممة لتحقيق أقصى قيمة ونتائج متميزة.</p>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -147,14 +189,18 @@ function toggleLanguage() {
     document.getElementById("title").innerText = "وكالة RU'YA";
     document.getElementById("subtitle").innerText = "كل ما تحتاجه علامتك التجارية، في مكان واحد";
     document.getElementById("submitBtn").innerText = "إرسال";
-    document.getElementById("servicesSection").querySelector("h2").innerText = "خدماتنا";
+    document.getElementById("servicesTitle").innerText = "خدماتنا";
+    document.getElementById("servicesEn").style.display = "none";
+    document.getElementById("servicesAr").style.display = "block";
     document.getElementById("success").innerText = "تم استلام طلبك، سنتواصل معك لتحديد موعد.";
   } else {
     document.querySelector(".lang-btn").innerText = "AR";
     document.getElementById("title").innerText = "RU'YA AGENCY";
     document.getElementById("subtitle").innerText = "Everything your brand needs, all in one place";
     document.getElementById("submitBtn").innerText = "Submit";
-    document.getElementById("servicesSection").querySelector("h2").innerText = "Our Services";
+    document.getElementById("servicesTitle").innerText = "Our Services";
+    document.getElementById("servicesEn").style.display = "block";
+    document.getElementById("servicesAr").style.display = "none";
     document.getElementById("success").innerText = "Your submission is received. We will contact you soon to schedule a meeting.";
   }
 }
