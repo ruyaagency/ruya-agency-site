@@ -6,14 +6,17 @@
 <title>RU'YA AGENCY</title>
 
 <style>
-/* الخلفية المتدرجة المتحركة */
-body {
+html, body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  color: white;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
   background: linear-gradient(120deg, #02030f, #051437, #02030f);
   background-size: 300% 300%;
   animation: gradientMove 15s ease infinite;
+  font-family: Arial, sans-serif;
+  color: white;
 }
 
 @keyframes gradientMove {
@@ -29,13 +32,13 @@ body {
   left: 10px;
   width: 60px;
   z-index: 999;
-  transition: transform 0.3s ease, top 0.3s ease;
+  transition: top 0.3s ease, left 0.3s ease;
 }
 
 /* زر اللغة */
 .lang-btn {
   position: fixed;
-  top: 10px;
+  top: 20px;
   right: 25px;
   background: white;
   color: black;
@@ -43,8 +46,8 @@ body {
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
-  z-index: 1000; /* فوق الإطار */
-  transition: transform 0.3s ease, top 0.3s ease;
+  z-index: 1000;
+  transition: top 0.3s ease;
 }
 
 /* حاوية المحتوى */
@@ -90,17 +93,8 @@ button:hover { opacity: 0.8; }
 
 .services-content ul { list-style: disc; margin-left: 20px; }
 
-#success {
-  display: none;
-  margin-top: 20px;
-  padding: 10px;
-  background: rgba(0,255,100,0.3);
-  border-radius: 8px;
-}
-
-/* Footer الأزرار */
 .footer {
-  margin-top: 60px;
+  margin-top: 40px;
   font-size: 13px;
   color: #777;
   text-align: center;
@@ -113,8 +107,14 @@ button:hover { opacity: 0.8; }
   transition: 0.2s;
 }
 
-.footer a:hover {
-  color: #000;
+.footer a:hover { color: #000; }
+
+#success {
+  display: none;
+  margin-top: 20px;
+  padding: 10px;
+  background: rgba(0,255,100,0.3);
+  border-radius: 8px;
 }
 </style>
 </head>
@@ -131,9 +131,7 @@ button:hover { opacity: 0.8; }
   <h1 id="title">RU'YA AGENCY</h1>
   <h2 class="subtitle" id="subtitle">Everything your brand needs, all in one place</h2>
 
-  <button id="submitBtn">
-    Submit
-  </button>
+  <button id="submitBtn" onclick="playDClick(); window.open('https://forms.gle/NrANWtgv5zWuhn6K9', '_blank')">Submit</button>
 
   <div id="success">Your submission is received. We will contact you soon to schedule a meeting.</div>
 
@@ -162,38 +160,22 @@ button:hover { opacity: 0.8; }
           <li>نمو المبيعات وتوسيع السوق</li>
           <li>الهوية البصرية والتصميم الإبداعي</li>
         </ul>
-        <p>في وكالة RU'YA، نحن أكثر من مجرد وكالة تسويق، نحن شركاؤك الإبداعيون للنمو. فريقنا مدفوع بالابتكار والتفكير خارج الصندوق، مكرس لصياغة استراتيجيات ذكية وفعّالة ترتقي بعلامتك التجارية وتوسع حضورك في السوق.</p>
+        <p>في وكالة Ru'ya، نحن أكثر من مجرد وكالة تسويق، نحن شركاؤك الإبداعيون للنمو. فريقنا مدفوع بالإبداع والتفكير خارج الصندوق، مكرّس لصياغة استراتيجيات ذكية وفعّالة ترتقي بعلامتك التجارية وتوسع حضورك في السوق.</p>
       </div>
     </div>
   </div>
 
   <div class="footer">
-    <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" id="instaBtn">Instagram</a>
+    <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" onclick="playClick()">Instagram</a>
     ·
-    <a href="mailto:ru.yaagency01@gmail.com" id="contactBtn">Contact us</a>
+    <a href="mailto:ru.yaagency01@gmail.com" onclick="playClick()">Contact us</a>
   </div>
 </div>
 
-<!-- أصوات النقر -->
-<audio id="clickSound" src="click.mp3" preload="auto"></audio>
-<audio id="dclickSound" src="dclick.mp3" preload="auto"></audio>
+<audio id="clickSound" src="click.mp3"></audio>
+<audio id="dclickSound" src="dclick.mp3"></audio>
 
 <script>
-// أصوات النقر مع تخفيض الصوت
-const clickAudio = document.getElementById('clickSound');
-clickAudio.volume = 0.2;
-const dclickAudio = document.getElementById('dclickSound');
-dclickAudio.volume = 0.2;
-
-// أزرار الروابط
-document.getElementById('instaBtn').addEventListener('click', () => { clickAudio.play(); });
-document.getElementById('contactBtn').addEventListener('click', () => { clickAudio.play(); });
-document.getElementById('submitBtn').addEventListener('click', () => { 
-  dclickAudio.play(); 
-  window.open('https://forms.gle/NrANWtgv5zWuhn6K9', '_blank');
-});
-
-// تبديل اللغة
 let arabic = false;
 function toggleLanguage() {
   arabic = !arabic;
@@ -207,21 +189,37 @@ function toggleLanguage() {
   document.getElementById("success").innerText = arabic ? "تم استلام طلبك، سنتواصل معك لتحديد موعد." : "Your submission is received. We will contact you soon to schedule a meeting.";
 }
 
-// حركة اللوغو وزر اللغة عند اقتراب الإطار
-const logo = document.querySelector('.logo');
-const langBtn = document.querySelector('.lang-btn');
-const container = document.getElementById('mainContainer');
-const offsetTrigger = 150; // نقطة بداية الحركة
+// أصوات
+function playClick() {
+  const audio = document.getElementById('clickSound');
+  audio.volume = 0.2; // قلل الصوت
+  audio.currentTime = 0;
+  audio.play();
+}
 
+function playDClick() {
+  const audio = document.getElementById('dclickSound');
+  audio.volume = 0.2; // قلل الصوت
+  audio.currentTime = 0;
+  audio.play();
+}
+
+// حركة اللوغو والزر مع الإطار فقط عند اقتراب container
 window.addEventListener('scroll', () => {
+  const container = document.getElementById('mainContainer');
+  const logo = document.querySelector('.logo');
+  const langBtn = document.querySelector('.lang-btn');
+
   const rect = container.getBoundingClientRect();
-  if(rect.top <= offsetTrigger) {
-    let offset = Math.min(offsetTrigger - rect.top, 50); // الحد الأقصى لتحريك اللوغو/الزر
+  const triggerY = 120; // نقطة بداية الحركة
+
+  if(rect.top <= triggerY) {
+    let offset = triggerY - rect.top;
     logo.style.top = 10 + offset + 'px';
-    langBtn.style.top = 10 + offset + 'px';
+    langBtn.style.top = 20 + offset + 'px';
   } else {
     logo.style.top = '10px';
-    langBtn.style.top = '10px';
+    langBtn.style.top = '20px';
   }
 });
 </script>
