@@ -27,17 +27,14 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* اللوغو */
 .logo {
   position: absolute; /* يتحرك مع السحب */
   top: 10px;
   left: 10px;
   width: 60px;
   z-index: 999;
-  transition: transform 0.2s ease-out;
 }
 
-/* زر اللغة */
 .lang-btn {
   position: absolute; /* يتحرك مع السحب */
   top: 20px;
@@ -49,7 +46,6 @@ body {
   cursor: pointer;
   font-weight: bold;
   z-index: 999;
-  transition: transform 0.2s ease-out;
 }
 
 .container {
@@ -91,7 +87,6 @@ button:hover { opacity: 0.8; }
 }
 
 .services-content { font-size: 14px; line-height: 1.6; }
-
 .services-content ul { margin-left: 20px; }
 
 .services-paragraph {
@@ -174,13 +169,9 @@ button:hover { opacity: 0.8; }
   </div>
 
   <div class="footer">
-    <a onclick="playClick(); window.open('https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5','_blank')">
-      Instagram
-    </a>
+    <a onclick="playClick(); window.open('https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5','_blank')">Instagram</a>
     ·
-    <a onclick="playClick(); window.location.href='mailto:ru.yaagency01@gmail.com'">
-      Contact us
-    </a>
+    <a onclick="playClick(); window.location.href='mailto:ru.yaagency01@gmail.com'">Contact us</a>
   </div>
 </div>
 
@@ -210,56 +201,34 @@ function toggleLanguage() {
   arabic = !arabic;
   document.querySelector(".lang-btn").innerText = arabic ? "EN" : "AR";
   document.getElementById("title").innerText = arabic ? "وكالة RU'YA" : "RU'YA AGENCY";
-  document.getElementById("subtitle").innerText = arabic
-    ? "كل ما تحتاجه علامتك التجارية، في مكان واحد"
-    : "Everything your brand needs, all in one place";
+  document.getElementById("subtitle").innerText = arabic ? "كل ما تحتاجه علامتك التجارية، في مكان واحد" : "Everything your brand needs, all in one place";
   document.getElementById("submitBtn").innerText = arabic ? "إرسال" : "Submit";
   document.getElementById("servicesTitle").innerText = arabic ? "خدماتنا" : "Our Services";
   document.getElementById("servicesEn").style.display = arabic ? "none" : "block";
   document.getElementById("servicesAr").style.display = arabic ? "block" : "none";
-});
+}
 
-/* الحركة الديناميكية مع السحب */
+// حركة سلسة ديناميكية مع السحب
 let isDragging = false;
 let startY = 0;
 let scrollY = 0;
 
-document.addEventListener('mousedown', (e) => {
-  isDragging = true;
-  startY = e.clientY;
-});
+function updatePosition(delta) {
+  scrollY = Math.min(Math.max(scrollY - delta, 0), document.getElementById('content').scrollHeight - window.innerHeight);
+  document.getElementById('content').style.transform = `translateY(${-scrollY}px)`;
+  document.querySelector('.logo').style.transform = `translateY(${-scrollY}px)`;
+  document.querySelector('.lang-btn').style.transform = `translateY(${-scrollY}px)`;
+}
 
+// دعم السحب بالفأرة
+document.addEventListener('mousedown', (e) => { isDragging = true; startY = e.clientY; });
 document.addEventListener('mouseup', () => { isDragging = false; });
+document.addEventListener('mousemove', (e) => { if(isDragging){ let delta = e.clientY - startY; startY = e.clientY; updatePosition(delta); } });
 
-document.addEventListener('mousemove', (e) => {
-  if(isDragging){
-    let delta = e.clientY - startY;
-    startY = e.clientY;
-    scrollY = Math.min(Math.max(scrollY - delta, 0), document.body.scrollHeight - window.innerHeight);
-    document.getElementById('content').style.transform = `translateY(${-scrollY}px)`;
-    document.querySelector('.logo').style.transform = `translateY(${-scrollY}px)`;
-    document.querySelector('.lang-btn').style.transform = `translateY(${-scrollY}px)`;
-  }
-});
-
-/* دعم السحب باللمس */
-document.addEventListener('touchstart', (e) => {
-  isDragging = true;
-  startY = e.touches[0].clientY;
-});
-
+// دعم السحب باللمس
+document.addEventListener('touchstart', (e) => { isDragging = true; startY = e.touches[0].clientY; });
 document.addEventListener('touchend', () => { isDragging = false; });
-
-document.addEventListener('touchmove', (e) => {
-  if(isDragging){
-    let delta = e.touches[0].clientY - startY;
-    startY = e.touches[0].clientY;
-    scrollY = Math.min(Math.max(scrollY - delta, 0), document.body.scrollHeight - window.innerHeight);
-    document.getElementById('content').style.transform = `translateY(${-scrollY}px)`;
-    document.querySelector('.logo').style.transform = `translateY(${-scrollY}px)`;
-    document.querySelector('.lang-btn').style.transform = `translateY(${-scrollY}px)`;
-  }
-});
+document.addEventListener('touchmove', (e) => { if(isDragging){ let delta = e.touches[0].clientY - startY; startY = e.touches[0].clientY; updatePosition(delta); } });
 </script>
 
 </body>
