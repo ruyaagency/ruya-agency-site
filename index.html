@@ -22,14 +22,21 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* اللوغو الآن يتحرك مع الصفحة */
+/* حاوية الرأس */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 40px 0 40px;
+}
+
+/* اللوغو */
 .logo {
   width: 60px;
-  margin: 20px;
   transition: transform 0.3s ease;
 }
 
-/* زر اللغة الآن يتحرك مع الصفحة */
+/* زر اللغة */
 .lang-btn {
   background: white;
   color: black;
@@ -37,8 +44,6 @@ body {
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
-  display: inline-block;
-  margin: 20px;
 }
 
 /* حاوية المحتوى */
@@ -123,11 +128,11 @@ button:hover { opacity: 0.8; }
 
 <body>
 
-<!-- اللوغو -->
-<img src="logo.png" class="logo" alt="Logo">
-
-<!-- زر اللغة -->
-<div class="lang-btn" id="langBtn">AR</div>
+<!-- رأس الصفحة -->
+<header>
+  <img src="logo.png" class="logo" alt="Logo">
+  <div class="lang-btn" id="langBtn">AR</div>
+</header>
 
 <div class="container">
   <h1 id="title">RU'YA AGENCY</h1>
