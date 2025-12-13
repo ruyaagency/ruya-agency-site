@@ -184,11 +184,11 @@ button:hover { opacity: 0.8; }
 
   <!-- ====== FOOTER ====== -->
   <div class="footer">
-    <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" id="instagramLink" target="_blank">
+    <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" target="_blank" class="social-btn">
       Instagram
     </a>
     ·
-    <a href="mailto:ru.yaagency01@gmail.com" id="contactLink">
+    <a href="mailto:ru.yaagency01@gmail.com" class="social-btn">
       Contact us
     </a>
   </div>
@@ -209,31 +209,26 @@ document.getElementById("langBtn").addEventListener("click", () => {
   document.getElementById("servicesAr").style.display = arabic ? "block" : "none";
 });
 
-// ===== الأصوات للأزرار =====
-// تحميل الملفات الصوتية
+// ===== أصوات الأزرار =====
 const clickSound = new Audio('click.mp3');
-clickSound.volume = 0.2; // تقليل الصوت
+clickSound.volume = 0.2; // 20%
+
 const dclickSound = new Audio('dclick.mp3');
-dclickSound.volume = 0.2;
+dclickSound.volume = 0.2; // 20%
 
-// دالة لتشغيل الصوت بسلاسة حتى لو ضغط المستخدم بسرعة
-function playSound(audio) {
-  const sound = audio.cloneNode(); // إنشاء نسخة جديدة لتجنب التوقف
-  sound.play().catch(e => {});
-}
+// إضافة الصوت للأزرار
+document.querySelectorAll('.social-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    clickSound.currentTime = 0;
+    clickSound.play();
+  });
+});
 
-// زر Submit
-document.getElementById("submitBtn").addEventListener("click", () => {
-  playSound(dclickSound);
+document.getElementById('submitBtn').addEventListener('click', () => {
+  dclickSound.currentTime = 0;
+  dclickSound.play();
+  // فتح الرابط بعد تشغيل الصوت
   window.open('https://forms.gle/NrANWtgv5zWuhn6K9', '_blank');
-});
-
-// روابط Instagram و Contact
-document.getElementById("instagramLink").addEventListener("click", () => {
-  playSound(clickSound);
-});
-document.getElementById("contactLink").addEventListener("click", () => {
-  playSound(clickSound);
 });
 </script>
 
