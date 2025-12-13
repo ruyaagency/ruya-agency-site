@@ -9,8 +9,8 @@
 html, body {
   margin: 0;
   padding: 0;
+  overflow: hidden; /* منع over scroll */
   height: 100%;
-  overflow: hidden;
 }
 
 body {
@@ -27,29 +27,19 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-.wrapper {
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain; /* يمنع over-scroll */
-  position: relative;
-}
-
-.content {
-  position: relative;
-}
-
+/* اللوغو */
 .logo {
-  position: absolute;
+  position: absolute; /* يتحرك مع السحب */
   top: 10px;
   left: 10px;
   width: 60px;
   z-index: 999;
+  transition: transform 0.2s ease-out;
 }
 
+/* زر اللغة */
 .lang-btn {
-  position: absolute;
+  position: absolute; /* يتحرك مع السحب */
   top: 20px;
   right: 25px;
   background: white;
@@ -59,9 +49,11 @@ body {
   cursor: pointer;
   font-weight: bold;
   z-index: 999;
+  transition: transform 0.2s ease-out;
 }
 
 .container {
+  width: 100%;
   max-width: 600px;
   margin: 160px auto;
   padding: 30px;
@@ -69,6 +61,7 @@ body {
   border-radius: 12px;
   backdrop-filter: blur(7px);
   text-align: center;
+  position: relative;
 }
 
 h1 { margin-bottom: 10px; font-size: 28px; }
@@ -98,6 +91,7 @@ button:hover { opacity: 0.8; }
 }
 
 .services-content { font-size: 14px; line-height: 1.6; }
+
 .services-content ul { margin-left: 20px; }
 
 .services-paragraph {
@@ -122,63 +116,71 @@ button:hover { opacity: 0.8; }
   cursor: pointer;
 }
 
-.footer a:hover { color: #fff; }
+.footer a:hover {
+  color: #fff;
+}
 </style>
 </head>
 
 <body>
-<div class="wrapper">
-  <div class="content" id="content">
-    <img src="logo.png" class="logo">
-    <div class="lang-btn" onclick="toggleLanguage()">AR</div>
 
-    <div class="container">
-      <h1 id="title">RU'YA AGENCY</h1>
-      <h2 class="subtitle" id="subtitle">Everything your brand needs, all in one place</h2>
-      <button id="submitBtn" onclick="submitAction()">Submit</button>
+<img src="logo.png" class="logo">
+<div class="lang-btn" onclick="toggleLanguage()">AR</div>
 
-      <div class="services" id="servicesSection">
-        <h2 id="servicesTitle">Our Services</h2>
-        <div class="services-content">
-          <div id="servicesEn">
-            <ul>
-              <li>Brand and personal identity building</li>
-              <li>Creative advertising campaigns</li>
-              <li>Digital marketing and content management</li>
-              <li>Influencer marketing strategies</li>
-              <li>Sales growth and market expansion solutions</li>
-              <li>Visual identity and creative design</li>
-            </ul>
-            <p class="services-paragraph">
-              At Ru'ya Agency, we are more than just a marketing agency, we are your creative growth partners.
-              Our team is driven by innovation and outside-the-box thinking, dedicated to crafting smart,
-              impactful strategies that elevate your brand and expand your market presence.
-            </p>
-          </div>
-          <div id="servicesAr" style="display:none">
-            <ul>
-              <li>بناء الهوية الشخصية والعلامة التجارية</li>
-              <li>حملات إعلانية إبداعية</li>
-              <li>التسويق الرقمي وإدارة المحتوى</li>
-              <li>استراتيجيات التسويق عبر المؤثرين</li>
-              <li>تنمية المبيعات وتوسيع السوق</li>
-              <li>الهوية البصرية والتصميم الإبداعي</li>
-            </ul>
-            <p class="services-paragraph">
-              في وكالة رؤيا، نحن أكثر من مجرد وكالة تسويق، نحن شركاؤك في النمو الإبداعي.
-              فريقنا مدفوع بالابتكار والتفكير خارج الصندوق، ونعمل على ابتكار استراتيجيات ذكية
-              ومؤثرة ترفع من قيمة علامتك التجارية وتوسّع حضورك في السوق.
-            </p>
-          </div>
-        </div>
+<div class="container" id="content">
+  <h1 id="title">RU'YA AGENCY</h1>
+  <h2 class="subtitle" id="subtitle">Everything your brand needs, all in one place</h2>
+
+  <button id="submitBtn" onclick="submitAction()">Submit</button>
+
+  <div class="services" id="servicesSection">
+    <h2 id="servicesTitle">Our Services</h2>
+
+    <div class="services-content">
+      <div id="servicesEn">
+        <ul>
+          <li>Brand and personal identity building</li>
+          <li>Creative advertising campaigns</li>
+          <li>Digital marketing and content management</li>
+          <li>Influencer marketing strategies</li>
+          <li>Sales growth and market expansion solutions</li>
+          <li>Visual identity and creative design</li>
+        </ul>
+
+        <p class="services-paragraph">
+          At Ru'ya Agency, we are more than just a marketing agency, we are your creative growth partners.
+          Our team is driven by innovation and outside-the-box thinking, dedicated to crafting smart,
+          impactful strategies that elevate your brand and expand your market presence.
+        </p>
       </div>
 
-      <div class="footer">
-        <a onclick="playClick(); window.open('https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5','_blank')">Instagram</a>
-        ·
-        <a onclick="playClick(); window.location.href='mailto:ru.yaagency01@gmail.com'">Contact us</a>
+      <div id="servicesAr" style="display:none">
+        <ul>
+          <li>بناء الهوية الشخصية والعلامة التجارية</li>
+          <li>حملات إعلانية إبداعية</li>
+          <li>التسويق الرقمي وإدارة المحتوى</li>
+          <li>استراتيجيات التسويق عبر المؤثرين</li>
+          <li>تنمية المبيعات وتوسيع السوق</li>
+          <li>الهوية البصرية والتصميم الإبداعي</li>
+        </ul>
+
+        <p class="services-paragraph">
+          في وكالة رؤيا، نحن أكثر من مجرد وكالة تسويق، نحن شركاؤك في النمو الإبداعي.
+          فريقنا مدفوع بالابتكار والتفكير خارج الصندوق، ونعمل على ابتكار استراتيجيات ذكية
+          ومؤثرة ترفع من قيمة علامتك التجارية وتوسّع حضورك في السوق.
+        </p>
       </div>
     </div>
+  </div>
+
+  <div class="footer">
+    <a onclick="playClick(); window.open('https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5','_blank')">
+      Instagram
+    </a>
+    ·
+    <a onclick="playClick(); window.location.href='mailto:ru.yaagency01@gmail.com'">
+      Contact us
+    </a>
   </div>
 </div>
 
@@ -188,23 +190,77 @@ button:hover { opacity: 0.8; }
 <script>
 const clickSound = document.getElementById("clickSound");
 const dclickSound = document.getElementById("dclickSound");
+
 clickSound.volume = 0.3;
 dclickSound.volume = 0.35;
 
-function playClick() { clickSound.currentTime = 0; clickSound.play(); }
-function submitAction() { dclickSound.currentTime = 0; dclickSound.play(); window.open('https://forms.gle/NrANWtgv5zWuhn6K9','_blank'); }
+function playClick() {
+  clickSound.currentTime = 0;
+  clickSound.play();
+}
+
+function submitAction() {
+  dclickSound.currentTime = 0;
+  dclickSound.play();
+  window.open('https://forms.gle/NrANWtgv5zWuhn6K9', '_blank');
+}
 
 let arabic = false;
 function toggleLanguage() {
   arabic = !arabic;
   document.querySelector(".lang-btn").innerText = arabic ? "EN" : "AR";
   document.getElementById("title").innerText = arabic ? "وكالة RU'YA" : "RU'YA AGENCY";
-  document.getElementById("subtitle").innerText = arabic ? "كل ما تحتاجه علامتك التجارية، في مكان واحد" : "Everything your brand needs, all in one place";
+  document.getElementById("subtitle").innerText = arabic
+    ? "كل ما تحتاجه علامتك التجارية، في مكان واحد"
+    : "Everything your brand needs, all in one place";
   document.getElementById("submitBtn").innerText = arabic ? "إرسال" : "Submit";
   document.getElementById("servicesTitle").innerText = arabic ? "خدماتنا" : "Our Services";
   document.getElementById("servicesEn").style.display = arabic ? "none" : "block";
   document.getElementById("servicesAr").style.display = arabic ? "block" : "none";
-}
+});
+
+/* الحركة الديناميكية مع السحب */
+let isDragging = false;
+let startY = 0;
+let scrollY = 0;
+
+document.addEventListener('mousedown', (e) => {
+  isDragging = true;
+  startY = e.clientY;
+});
+
+document.addEventListener('mouseup', () => { isDragging = false; });
+
+document.addEventListener('mousemove', (e) => {
+  if(isDragging){
+    let delta = e.clientY - startY;
+    startY = e.clientY;
+    scrollY = Math.min(Math.max(scrollY - delta, 0), document.body.scrollHeight - window.innerHeight);
+    document.getElementById('content').style.transform = `translateY(${-scrollY}px)`;
+    document.querySelector('.logo').style.transform = `translateY(${-scrollY}px)`;
+    document.querySelector('.lang-btn').style.transform = `translateY(${-scrollY}px)`;
+  }
+});
+
+/* دعم السحب باللمس */
+document.addEventListener('touchstart', (e) => {
+  isDragging = true;
+  startY = e.touches[0].clientY;
+});
+
+document.addEventListener('touchend', () => { isDragging = false; });
+
+document.addEventListener('touchmove', (e) => {
+  if(isDragging){
+    let delta = e.touches[0].clientY - startY;
+    startY = e.touches[0].clientY;
+    scrollY = Math.min(Math.max(scrollY - delta, 0), document.body.scrollHeight - window.innerHeight);
+    document.getElementById('content').style.transform = `translateY(${-scrollY}px)`;
+    document.querySelector('.logo').style.transform = `translateY(${-scrollY}px)`;
+    document.querySelector('.lang-btn').style.transform = `translateY(${-scrollY}px)`;
+  }
+});
 </script>
+
 </body>
 </html>
