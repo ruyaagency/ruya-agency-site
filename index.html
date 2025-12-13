@@ -24,12 +24,12 @@ body {
 
 /* اللوغو */
 .logo {
-  position: fixed; /* يبقى ثابت */
-  top: 10px;       /* قريب من الأعلى */
-  left: 10px;      /* قريب من اليسار */
-  width: 60px;     /* أصغر */
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  width: 60px;
   z-index: 999;
-  transition: transform 0.3s ease; /* حركة سلسة */
+  transition: transform 0.3s ease;
 }
 
 /* زر اللغة */
@@ -57,7 +57,7 @@ body {
 }
 
 h1 { margin-bottom: 10px; font-size: 28px; }
-h2.subtitle { margin-top: 0; font-size: 16px; font-weight: normal; color: #cccccc; }
+h2.subtitle { margin-top: 0; font-size: 16px; color: #cccccc; }
 
 button {
   width: 100%;
@@ -74,6 +74,7 @@ button {
 
 button:hover { opacity: 0.8; }
 
+/* الخدمات */
 .services {
   margin-top: 40px;
   padding: 20px;
@@ -82,18 +83,44 @@ button:hover { opacity: 0.8; }
   text-align: left;
 }
 
-.services h2 { margin-bottom: 10px; }
+.services-content {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
 
-.services-content { margin-top: 10px; font-size: 14px; line-height: 1.5; }
+.services-content ul {
+  list-style: disc;
+  margin-left: 20px;
+}
 
-.services-content ul { list-style: disc; margin-left: 20px; }
-
+/* رسالة النجاح */
 #success {
   display: none;
   margin-top: 20px;
   padding: 10px;
   background: rgba(0,255,100,0.3);
   border-radius: 8px;
+}
+
+/* ====== FOOTER ====== */
+.footer {
+  margin-top: 140px;
+  margin-bottom: 40px;
+  font-size: 13px;
+  color: #777;
+  text-align: center;
+}
+
+.footer a {
+  color: #777;
+  text-decoration: none;
+  margin: 0 10px;
+  transition: 0.2s;
+}
+
+.footer a:hover {
+  color: #fff;
 }
 </style>
 </head>
@@ -118,9 +145,9 @@ button:hover { opacity: 0.8; }
 
   <div class="services" id="servicesSection">
     <h2 id="servicesTitle">Our Services</h2>
-    <div class="services-content" id="servicesContent">
+
+    <div class="services-content">
       <div id="servicesEn">
-        <p>We provide a wide range of comprehensive marketing services, including:</p>
         <ul>
           <li>Brand and personal identity building</li>
           <li>Creative advertising campaigns</li>
@@ -130,8 +157,8 @@ button:hover { opacity: 0.8; }
           <li>Visual identity and creative design</li>
         </ul>
       </div>
+
       <div id="servicesAr" style="display:none">
-        <p>نقدّم مجموعة واسعة من خدمات التسويق الشاملة، بما في ذلك:</p>
         <ul>
           <li>بناء الهوية الشخصية والعلامة التجارية</li>
           <li>حملات إعلانية إبداعية</li>
@@ -143,6 +170,18 @@ button:hover { opacity: 0.8; }
       </div>
     </div>
   </div>
+
+  <!-- ====== FOOTER ====== -->
+  <div class="footer">
+    <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" target="_blank">
+      Instagram
+    </a>
+    ·
+    <a href="mailto:ru.yaagency01@gmail.com">
+      Contact us
+    </a>
+  </div>
+
 </div>
 
 <script>
@@ -157,17 +196,15 @@ function toggleLanguage() {
   document.getElementById("servicesTitle").innerText = arabic ? "خدماتنا" : "Our Services";
   document.getElementById("servicesEn").style.display = arabic ? "none" : "block";
   document.getElementById("servicesAr").style.display = arabic ? "block" : "none";
-  document.getElementById("success").innerText = arabic ? "تم استلام طلبك، سنتواصل معك لتحديد موعد." : "Your submission is received. We will contact you soon to schedule a meeting.";
 }
 
-// حركة اللوغو عند وصول قسم Our Services (حركة طفيفة فقط)
+// حركة اللوغو
 window.addEventListener('scroll', () => {
   const servicesSection = document.getElementById('servicesSection');
   const logo = document.querySelector('.logo');
   const rect = servicesSection.getBoundingClientRect();
 
   if(rect.top <= 100) {
-    // حركة طفيفة أقصى 30px
     let offset = Math.min(window.scrollY - (servicesSection.offsetTop - 100), 30);
     logo.style.transform = `translateY(${offset}px)`;
   } else {
