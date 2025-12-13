@@ -9,7 +9,6 @@
 html, body {
   margin: 0;
   padding: 0;
-  width: 100%;
   height: 100%;
   overflow: hidden;
 }
@@ -20,7 +19,6 @@ body {
   background: linear-gradient(120deg, #02030f, #051437, #02030f);
   background-size: 300% 300%;
   animation: gradientMove 15s ease infinite;
-  touch-action: none;
 }
 
 @keyframes gradientMove {
@@ -29,9 +27,18 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-.wrapper { position: relative; width: 100%; height: 100%; overflow: hidden; }
+.wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain; /* يمنع over-scroll */
+  position: relative;
+}
 
-.content { position: absolute; top: 0; left: 0; width: 100%; }
+.content {
+  position: relative;
+}
 
 .logo {
   position: absolute;
@@ -121,10 +128,10 @@ button:hover { opacity: 0.8; }
 
 <body>
 <div class="wrapper">
-  <img src="logo.png" class="logo">
-  <div class="lang-btn" onclick="toggleLanguage()">AR</div>
-
   <div class="content" id="content">
+    <img src="logo.png" class="logo">
+    <div class="lang-btn" onclick="toggleLanguage()">AR</div>
+
     <div class="container">
       <h1 id="title">RU'YA AGENCY</h1>
       <h2 class="subtitle" id="subtitle">Everything your brand needs, all in one place</h2>
@@ -148,7 +155,6 @@ button:hover { opacity: 0.8; }
               impactful strategies that elevate your brand and expand your market presence.
             </p>
           </div>
-
           <div id="servicesAr" style="display:none">
             <ul>
               <li>بناء الهوية الشخصية والعلامة التجارية</li>
@@ -186,7 +192,7 @@ clickSound.volume = 0.3;
 dclickSound.volume = 0.35;
 
 function playClick() { clickSound.currentTime = 0; clickSound.play(); }
-function submitAction() { dclickSound.currentTime = 0; dclickSound.play(); window.open('https://forms.gle/NrANWtgv5zWuhn6K9', '_blank'); }
+function submitAction() { dclickSound.currentTime = 0; dclickSound.play(); window.open('https://forms.gle/NrANWtgv5zWuhn6K9','_blank'); }
 
 let arabic = false;
 function toggleLanguage() {
@@ -199,58 +205,6 @@ function toggleLanguage() {
   document.getElementById("servicesEn").style.display = arabic ? "none" : "block";
   document.getElementById("servicesAr").style.display = arabic ? "block" : "none";
 }
-
-// السحب الديناميكي
-let startY = 0;
-let currentY = 0;
-let velocity = 0;
-let isDragging = false;
-const content = document.getElementById('content');
-
-function animate() {
-  if(!isDragging) {
-    velocity *= 0.95; // تباطؤ تدريجي
-    currentY += velocity;
-
-    let minY = window.innerHeight - content.offsetHeight;
-    if(currentY > 0) { currentY = 0; velocity = 0; }
-    if(currentY < minY) { currentY = minY; velocity = 0; }
-
-    content.style.transform = `translateY(${currentY}px)`;
-    document.querySelector('.logo').style.transform = `translateY(${currentY}px)`;
-    document.querySelector('.lang-btn').style.transform = `translateY(${currentY}px)`;
-  }
-  requestAnimationFrame(animate);
-}
-animate();
-
-function startDrag(y) {
-  isDragging = true;
-  startY = y - currentY;
-  velocity = 0;
-}
-
-function moveDrag(y) {
-  let newY = y - startY;
-  let minY = window.innerHeight - content.offsetHeight;
-  let maxY = 0;
-  if(newY > maxY) newY = maxY;
-  if(newY < minY) newY = minY;
-  velocity = newY - currentY;
-  currentY = newY;
-}
-
-function endDrag() { isDragging = false; }
-
-// دعم اللمس
-document.addEventListener('touchstart', e => startDrag(e.touches[0].clientY));
-document.addEventListener('touchmove', e => { moveDrag(e.touches[0].clientY); e.preventDefault(); });
-document.addEventListener('touchend', endDrag);
-
-// دعم الماوس
-document.addEventListener('mousedown', e => startDrag(e.clientY));
-document.addEventListener('mousemove', e => { if(isDragging) moveDrag(e.clientY); });
-document.addEventListener('mouseup', endDrag);
 </script>
 </body>
 </html>
