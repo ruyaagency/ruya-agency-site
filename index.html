@@ -176,7 +176,7 @@ button:hover { opacity: 0.8; }
           <li>الهوية البصرية والتصميم الإبداعي</li>
         </ul>
         <p id="servicesParagraphAr">
-          في وكالة RU'YA، نحن أكثر من مجرد وكالة تسويق، نحن شركاؤك في النمو الإبداعي. فريقنا مدفوع بالابتكار والتفكير خارج الصندوق، مكرس لوضع استراتيجيات ذكية وفعّالة تعزز علامتك التجارية وتوسع حضورك في السوق.
+          في وكالة رؤية، نحن أكثر من مجرد وكالة تسويق، نحن شركاؤك في النمو الإبداعي. فريقنا مدفوع بالابتكار والتفكير خارج الصندوق، مكرس لوضع استراتيجيات ذكية وفعّالة تعزز علامتك التجارية وتوسع حضورك في السوق.
         </p>
       </div>
     </div>
@@ -204,10 +204,12 @@ let arabic = false;
 document.getElementById("langBtn").addEventListener("click", () => {
   arabic = !arabic;
   document.getElementById("langBtn").innerText = arabic ? "EN" : "AR";
-  document.getElementById("title").innerText = arabic ? "وكالة RU'YA" : "RU'YA AGENCY";
+  document.getElementById("title").innerText = arabic ? "وكالة رؤية" : "RU'YA AGENCY";
   document.getElementById("subtitle").innerText = arabic ? "كل ما تحتاجه علامتك التجارية، في مكان واحد" : "Everything your brand needs, all in one place";
   document.getElementById("submitBtn").innerText = arabic ? "إرسال" : "Submit";
   document.getElementById("servicesTitle").innerText = arabic ? "خدماتنا" : "Our Services";
+  
+  // إظهار الخدمات والفقرة المناسبة لكل لغة
   document.getElementById("servicesEn").style.display = arabic ? "none" : "block";
   document.getElementById("servicesAr").style.display = arabic ? "block" : "none";
 });
@@ -216,11 +218,9 @@ document.getElementById("langBtn").addEventListener("click", () => {
 const clickSound = document.getElementById("clickSound");
 const dclickSound = document.getElementById("dclickSound");
 
-// ضبط مستوى الصوت
 clickSound.volume = 0.15;  // 15%
 dclickSound.volume = 0.5;  // 50%
 
-// تشغيل الصوت فور الضغط
 function playSound(audio) {
   audio.pause();
   audio.currentTime = 0;
