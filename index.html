@@ -6,7 +6,6 @@
 <title>RU'YA AGENCY</title>
 
 <style>
-/* الخلفية المتدرجة المتحركة */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -22,7 +21,6 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* اللوغو */
 .logo {
   position: fixed;
   top: 10px;
@@ -32,7 +30,6 @@ body {
   transition: transform 0.3s ease;
 }
 
-/* زر اللغة */
 .lang-btn {
   position: fixed;
   top: 20px;
@@ -45,7 +42,6 @@ body {
   font-weight: bold;
 }
 
-/* حاوية المحتوى */
 .container {
   max-width: 600px;
   margin: 160px auto;
@@ -74,7 +70,6 @@ button {
 
 button:hover { opacity: 0.8; }
 
-/* الخدمات */
 .services {
   margin-top: 40px;
   padding: 20px;
@@ -86,7 +81,7 @@ button:hover { opacity: 0.8; }
 .services-content {
   margin-top: 10px;
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .services-content ul {
@@ -94,16 +89,14 @@ button:hover { opacity: 0.8; }
   margin-left: 20px;
 }
 
-/* رسالة النجاح */
-#success {
-  display: none;
+/* الفقرة الجديدة */
+.about-text {
   margin-top: 20px;
-  padding: 10px;
-  background: rgba(0,255,100,0.3);
-  border-radius: 8px;
+  font-size: 13.5px;
+  color: #ddd;
+  line-height: 1.6;
 }
 
-/* ====== FOOTER ====== */
 .footer {
   margin-top: 140px;
   margin-bottom: 40px;
@@ -127,21 +120,15 @@ button:hover { opacity: 0.8; }
 
 <body>
 
-<!-- اللوغو -->
 <img src="logo.png" class="logo">
 
-<!-- زر اللغة -->
 <div class="lang-btn" onclick="toggleLanguage()">AR</div>
 
 <div class="container">
   <h1 id="title">RU'YA AGENCY</h1>
   <h2 class="subtitle" id="subtitle">Everything your brand needs, all in one place</h2>
 
-  <button id="submitBtn" onclick="window.open('https://forms.gle/NrANWtgv5zWuhn6K9', '_blank')">
-    Submit
-  </button>
-
-  <div id="success">Your submission is received. We will contact you soon to schedule a meeting.</div>
+  <button onclick="submitWithSound()">Submit</button>
 
   <div class="services" id="servicesSection">
     <h2 id="servicesTitle">Our Services</h2>
@@ -156,6 +143,13 @@ button:hover { opacity: 0.8; }
           <li>Sales growth and market expansion solutions</li>
           <li>Visual identity and creative design</li>
         </ul>
+
+        <!-- الفقرة الجديدة -->
+        <div class="about-text">
+          At Ru'ya Agency, we are more than just a marketing agency, we are your creative growth partners.
+          Our team is driven by innovation and outside-the-box thinking, dedicated to crafting smart,
+          impactful strategies that elevate your brand and expand your market presence.
+        </div>
       </div>
 
       <div id="servicesAr" style="display:none">
@@ -167,38 +161,57 @@ button:hover { opacity: 0.8; }
           <li>نمو المبيعات وتوسيع السوق</li>
           <li>الهوية البصرية والتصميم الإبداعي</li>
         </ul>
+
+        <div class="about-text">
+          في وكالة Ru'ya نحن أكثر من مجرد وكالة تسويق، نحن شركاؤك في النمو الإبداعي.
+          فريقنا مدفوع بالابتكار والتفكير خارج الصندوق، نعمل على تصميم استراتيجيات ذكية
+          ومؤثرة ترتقي بعلامتك التجارية وتوسع حضورك في السوق.
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ====== FOOTER ====== -->
   <div class="footer">
-    <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" target="_blank">
+    <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5"
+       target="_blank"
+       onclick="playClick()">
       Instagram
     </a>
     ·
-    <a href="mailto:ru.yaagency01@gmail.com">
+    <a href="mailto:ru.yaagency01@gmail.com"
+       onclick="playClick()">
       Contact us
     </a>
   </div>
-
 </div>
 
+<!-- الأصوات -->
+<audio id="clickSound" src="click.mp3"></audio>
+<audio id="dclickSound" src="dclick.mp3"></audio>
+
 <script>
-// تبديل اللغة
+function playClick() {
+  document.getElementById("clickSound").play();
+}
+
+function submitWithSound() {
+  document.getElementById("dclickSound").play();
+  setTimeout(() => {
+    window.open('https://forms.gle/NrANWtgv5zWuhn6K9', '_blank');
+  }, 200);
+}
+
 let arabic = false;
 function toggleLanguage() {
   arabic = !arabic;
   document.querySelector(".lang-btn").innerText = arabic ? "EN" : "AR";
   document.getElementById("title").innerText = arabic ? "وكالة RU'YA" : "RU'YA AGENCY";
   document.getElementById("subtitle").innerText = arabic ? "كل ما تحتاجه علامتك التجارية، في مكان واحد" : "Everything your brand needs, all in one place";
-  document.getElementById("submitBtn").innerText = arabic ? "إرسال" : "Submit";
   document.getElementById("servicesTitle").innerText = arabic ? "خدماتنا" : "Our Services";
   document.getElementById("servicesEn").style.display = arabic ? "none" : "block";
   document.getElementById("servicesAr").style.display = arabic ? "block" : "none";
 }
 
-// حركة اللوغو
 window.addEventListener('scroll', () => {
   const servicesSection = document.getElementById('servicesSection');
   const logo = document.querySelector('.logo');
