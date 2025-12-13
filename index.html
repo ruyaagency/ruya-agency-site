@@ -6,6 +6,7 @@
 <title>RU'YA AGENCY</title>
 
 <style>
+/* الخلفية المتدرجة المتحركة */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -21,34 +22,29 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* اللوغو */
+/* اللوغو الآن يتحرك مع الصفحة */
 .logo {
-  position: fixed;
-  top: 10px;
-  left: 10px;
   width: 60px;
-  z-index: 999;
+  margin: 20px;
   transition: transform 0.3s ease;
 }
 
-/* زر اللغة */
+/* زر اللغة الآن يتحرك مع الصفحة */
 .lang-btn {
-  position: fixed;
-  top: 20px;
-  right: 25px;
   background: white;
   color: black;
   padding: 8px 12px;
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
-  transition: transform 0.3s ease;
+  display: inline-block;
+  margin: 20px;
 }
 
 /* حاوية المحتوى */
 .container {
   max-width: 600px;
-  margin: 160px auto;
+  margin: 40px auto;
   padding: 30px;
   background: rgba(255,255,255,0.08);
   border-radius: 12px;
@@ -74,6 +70,7 @@ button {
 
 button:hover { opacity: 0.8; }
 
+/* الخدمات */
 .services {
   margin-top: 40px;
   padding: 20px;
@@ -93,6 +90,7 @@ button:hover { opacity: 0.8; }
   margin-left: 20px;
 }
 
+/* رسالة النجاح */
 #success {
   display: none;
   margin-top: 20px;
@@ -101,6 +99,7 @@ button:hover { opacity: 0.8; }
   border-radius: 8px;
 }
 
+/* ====== FOOTER ====== */
 .footer {
   margin-top: 140px;
   margin-bottom: 40px;
@@ -124,7 +123,10 @@ button:hover { opacity: 0.8; }
 
 <body>
 
+<!-- اللوغو -->
 <img src="logo.png" class="logo" alt="Logo">
+
+<!-- زر اللغة -->
 <div class="lang-btn" id="langBtn">AR</div>
 
 <div class="container">
@@ -165,6 +167,7 @@ button:hover { opacity: 0.8; }
     </div>
   </div>
 
+  <!-- ====== FOOTER ====== -->
   <div class="footer">
     <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" target="_blank">
       Instagram
@@ -179,6 +182,7 @@ button:hover { opacity: 0.8; }
 <script>
 // ===== زر اللغة =====
 let arabic = false;
+
 document.getElementById("langBtn").addEventListener("click", () => {
   arabic = !arabic;
   document.getElementById("langBtn").innerText = arabic ? "EN" : "AR";
@@ -188,20 +192,6 @@ document.getElementById("langBtn").addEventListener("click", () => {
   document.getElementById("servicesTitle").innerText = arabic ? "خدماتنا" : "Our Services";
   document.getElementById("servicesEn").style.display = arabic ? "none" : "block";
   document.getElementById("servicesAr").style.display = arabic ? "block" : "none";
-});
-
-// ===== حركة اللوغو وزر اللغة =====
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  const maxMove = 30; // الحد الأقصى للحركة بالبيكسل
-
-  // حركة اللوغو
-  const logo = document.querySelector('.logo');
-  logo.style.transform = `translateY(${Math.min(scrollY / 2, maxMove)}px)`;
-
-  // حركة زر اللغة
-  const langBtn = document.getElementById('langBtn');
-  langBtn.style.transform = `translateY(${Math.min(scrollY / 2, maxMove)}px)`;
 });
 </script>
 
