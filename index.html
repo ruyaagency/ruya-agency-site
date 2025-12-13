@@ -6,17 +6,18 @@
 <title>RU'YA AGENCY</title>
 
 <style>
+/* الخلفية المتدرجة المتحركة */
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overscroll-behavior: none; /* منع over-scroll العمودي */
   background: linear-gradient(120deg, #02030f, #051437, #02030f);
   background-size: 300% 300%;
   animation: gradientMove 15s ease infinite;
   font-family: Arial, sans-serif;
   color: white;
+  overflow-x: hidden; /* منع السحب الأفقي */
 }
 
 @keyframes gradientMove {
@@ -31,15 +32,15 @@ html, body {
   top: 10px;
   left: 10px;
   width: 60px;
-  z-index: 999;
-  transition: top 0.3s ease, left 0.3s ease;
+  z-index: 1000;
+  transition: transform 0.3s ease;
 }
 
 /* زر اللغة */
 .lang-btn {
   position: fixed;
   top: 20px;
-  right: 25px;
+  right: 20px;
   background: white;
   color: black;
   padding: 8px 12px;
@@ -47,10 +48,10 @@ html, body {
   cursor: pointer;
   font-weight: bold;
   z-index: 1000;
-  transition: top 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
-/* حاوية المحتوى */
+/* الحاوية الرئيسية */
 .container {
   max-width: 600px;
   margin: 160px auto;
@@ -61,9 +62,11 @@ html, body {
   text-align: center;
 }
 
+/* العناوين */
 h1 { margin-bottom: 10px; font-size: 28px; }
 h2.subtitle { margin-top: 0; font-size: 16px; font-weight: normal; color: #cccccc; }
 
+/* زر Submit */
 button {
   width: 100%;
   margin-top: 20px;
@@ -76,9 +79,9 @@ button {
   border-radius: 8px;
   cursor: pointer;
 }
-
 button:hover { opacity: 0.8; }
 
+/* قسم خدماتنا */
 .services {
   margin-top: 40px;
   padding: 20px;
@@ -86,29 +89,14 @@ button:hover { opacity: 0.8; }
   border-radius: 10px;
   text-align: left;
 }
-
 .services h2 { margin-bottom: 10px; }
-
 .services-content { margin-top: 10px; font-size: 14px; line-height: 1.5; }
-
 .services-content ul { list-style: disc; margin-left: 20px; }
 
-.footer {
-  margin-top: 40px;
-  font-size: 13px;
-  color: #777;
-  text-align: center;
-}
+/* الفقرة الجديدة */
+.additional-text { margin-top: 20px; font-size: 14px; line-height: 1.5; }
 
-.footer a {
-  color: #777;
-  text-decoration: none;
-  margin: 0 10px;
-  transition: 0.2s;
-}
-
-.footer a:hover { color: #000; }
-
+/* رسالة النجاح */
 #success {
   display: none;
   margin-top: 20px;
@@ -116,6 +104,21 @@ button:hover { opacity: 0.8; }
   background: rgba(0,255,100,0.3);
   border-radius: 8px;
 }
+
+/* Footer */
+.footer {
+  margin-top: 140px;
+  font-size: 13px;
+  color: #777;
+  text-align: center;
+}
+.footer a {
+  color: #777;
+  text-decoration: none;
+  margin: 0 10px;
+  transition: 0.2s;
+}
+.footer a:hover { color: #000; }
 </style>
 </head>
 
@@ -131,7 +134,9 @@ button:hover { opacity: 0.8; }
   <h1 id="title">RU'YA AGENCY</h1>
   <h2 class="subtitle" id="subtitle">Everything your brand needs, all in one place</h2>
 
-  <button id="submitBtn" onclick="playDClick(); window.open('https://forms.gle/NrANWtgv5zWuhn6K9', '_blank')">Submit</button>
+  <button id="submitBtn">
+    Submit
+  </button>
 
   <div id="success">Your submission is received. We will contact you soon to schedule a meeting.</div>
 
@@ -148,7 +153,7 @@ button:hover { opacity: 0.8; }
           <li>Sales growth and market expansion solutions</li>
           <li>Visual identity and creative design</li>
         </ul>
-        <p>At Ru'ya Agency, we are more than just a marketing agency, we are your creative growth partners. Our team is driven by innovation and outside-the-box thinking, dedicated to crafting smart, impactful strategies that elevate your brand and expand your market presence.</p>
+        <p class="additional-text">At Ru'ya Agency, we are more than just a marketing agency, we are your creative growth partners. Our team is driven by innovation and outside-the-box thinking, dedicated to crafting smart, impactful strategies that elevate your brand and expand your market presence.</p>
       </div>
       <div id="servicesAr" style="display:none">
         <p>نقدّم مجموعة واسعة من خدمات التسويق الشاملة، بما في ذلك:</p>
@@ -160,22 +165,37 @@ button:hover { opacity: 0.8; }
           <li>نمو المبيعات وتوسيع السوق</li>
           <li>الهوية البصرية والتصميم الإبداعي</li>
         </ul>
-        <p>في وكالة Ru'ya، نحن أكثر من مجرد وكالة تسويق، نحن شركاؤك الإبداعيون للنمو. فريقنا مدفوع بالإبداع والتفكير خارج الصندوق، مكرّس لصياغة استراتيجيات ذكية وفعّالة ترتقي بعلامتك التجارية وتوسع حضورك في السوق.</p>
+        <p class="additional-text">في وكالة RU'YA، نحن أكثر من مجرد وكالة تسويق، نحن شركاؤك الإبداعيون للنمو. فريقنا مدفوع بالابتكار والتفكير خارج الصندوق، ملتزم بصياغة استراتيجيات ذكية وفعّالة ترفع من قيمة علامتك التجارية وتوسع حضورك في السوق.</p>
       </div>
     </div>
   </div>
-
-  <div class="footer">
-    <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" onclick="playClick()">Instagram</a>
-    ·
-    <a href="mailto:ru.yaagency01@gmail.com" onclick="playClick()">Contact us</a>
-  </div>
 </div>
 
-<audio id="clickSound" src="click.mp3"></audio>
-<audio id="dclickSound" src="dclick.mp3"></audio>
+<!-- Footer -->
+<div class="footer">
+  <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" id="instagramBtn" target="_blank">Instagram</a>
+  ·
+  <a href="mailto:ru.yaagency01@gmail.com" id="contactBtn">Contact us</a>
+</div>
 
 <script>
+// أصوات
+const clickSound = new Audio('click.mp3');
+clickSound.volume = 0.2; // تقليل الصوت
+const dclickSound = new Audio('dclick.mp3');
+dclickSound.volume = 0.2;
+
+// أزرار الأصوات
+document.getElementById('instagramBtn').addEventListener('click', () => clickSound.play());
+document.getElementById('contactBtn').addEventListener('click', () => clickSound.play());
+document.getElementById('submitBtn').addEventListener('click', () => dclickSound.play());
+
+// فتح submit
+document.getElementById('submitBtn').addEventListener('click', () => {
+  window.open('https://forms.gle/NrANWtgv5zWuhn6K9', '_blank');
+});
+
+// تبديل اللغة
 let arabic = false;
 function toggleLanguage() {
   arabic = !arabic;
@@ -189,37 +209,22 @@ function toggleLanguage() {
   document.getElementById("success").innerText = arabic ? "تم استلام طلبك، سنتواصل معك لتحديد موعد." : "Your submission is received. We will contact you soon to schedule a meeting.";
 }
 
-// أصوات
-function playClick() {
-  const audio = document.getElementById('clickSound');
-  audio.volume = 0.2; // قلل الصوت
-  audio.currentTime = 0;
-  audio.play();
-}
-
-function playDClick() {
-  const audio = document.getElementById('dclickSound');
-  audio.volume = 0.2; // قلل الصوت
-  audio.currentTime = 0;
-  audio.play();
-}
-
-// حركة اللوغو والزر مع الإطار فقط عند اقتراب container
+// حركة اللوغو والزر مع الإطار عند الاقتراب
 window.addEventListener('scroll', () => {
-  const container = document.getElementById('mainContainer');
+  const servicesSection = document.getElementById('servicesSection');
   const logo = document.querySelector('.logo');
   const langBtn = document.querySelector('.lang-btn');
 
-  const rect = container.getBoundingClientRect();
-  const triggerY = 120; // نقطة بداية الحركة
+  const rect = servicesSection.getBoundingClientRect();
+  const triggerPoint = window.innerHeight/2 - 30; // النقطة التي يبدأ التحرك عندها
 
-  if(rect.top <= triggerY) {
-    let offset = triggerY - rect.top;
-    logo.style.top = 10 + offset + 'px';
-    langBtn.style.top = 20 + offset + 'px';
+  if(rect.top <= triggerPoint) {
+    let offset = Math.min(rect.top - triggerPoint, 0);
+    logo.style.transform = `translateY(${offset}px)`;
+    langBtn.style.transform = `translateY(${offset}px)`;
   } else {
-    logo.style.top = '10px';
-    langBtn.style.top = '20px';
+    logo.style.transform = `translateY(0px)`;
+    langBtn.style.transform = `translateY(0px)`;
   }
 });
 </script>
