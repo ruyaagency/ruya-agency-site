@@ -128,10 +128,10 @@ button:hover { opacity: 0.8; }
 <body>
 
 <!-- اللوغو -->
-<img src="logo.png" class="logo">
+<img src="logo.png" class="logo" alt="Logo">
 
 <!-- زر اللغة -->
-<div class="lang-btn" onclick="toggleLanguage()">AR</div>
+<div class="lang-btn" id="langBtn">AR</div>
 
 <div class="container">
   <h1 id="title">RU'YA AGENCY</h1>
@@ -181,24 +181,24 @@ button:hover { opacity: 0.8; }
       Contact us
     </a>
   </div>
-
 </div>
 
 <script>
-// تبديل اللغة
+// ===== زر اللغة =====
 let arabic = false;
-function toggleLanguage() {
+
+document.getElementById("langBtn").addEventListener("click", () => {
   arabic = !arabic;
-  document.querySelector(".lang-btn").innerText = arabic ? "EN" : "AR";
+  document.getElementById("langBtn").innerText = arabic ? "EN" : "AR";
   document.getElementById("title").innerText = arabic ? "وكالة RU'YA" : "RU'YA AGENCY";
   document.getElementById("subtitle").innerText = arabic ? "كل ما تحتاجه علامتك التجارية، في مكان واحد" : "Everything your brand needs, all in one place";
   document.getElementById("submitBtn").innerText = arabic ? "إرسال" : "Submit";
   document.getElementById("servicesTitle").innerText = arabic ? "خدماتنا" : "Our Services";
   document.getElementById("servicesEn").style.display = arabic ? "none" : "block";
   document.getElementById("servicesAr").style.display = arabic ? "block" : "none";
-}
+});
 
-// حركة اللوغو
+// ===== حركة اللوغو =====
 window.addEventListener('scroll', () => {
   const servicesSection = document.getElementById('servicesSection');
   const logo = document.querySelector('.logo');
@@ -206,9 +206,9 @@ window.addEventListener('scroll', () => {
 
   if(rect.top <= 100) {
     let offset = Math.min(window.scrollY - (servicesSection.offsetTop - 100), 30);
-    logo.style.transform = translateY(${offset}px);
+    logo.style.transform = `translateY(${offset}px)`;
   } else {
-    logo.style.transform = translateY(0px);
+    logo.style.transform = `translateY(0px)`;
   }
 });
 </script>
