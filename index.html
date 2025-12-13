@@ -6,15 +6,8 @@
 <title>RU'YA AGENCY</title>
 
 <style>
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  overflow-x: hidden;
-  overscroll-behavior: none;
-}
-
 body {
+  margin: 0;
   font-family: Arial, sans-serif;
   color: white;
   background: linear-gradient(120deg, #02030f, #051437, #02030f);
@@ -33,22 +26,20 @@ body {
   top: 10px;
   left: 10px;
   width: 60px;
-  z-index: 1000;
-  transition: transform 0.1s linear;
+  z-index: 999;
+  transition: transform 0.3s ease;
 }
 
 .lang-btn {
   position: fixed;
-  top: 10px;
-  right: 10px;
+  top: 20px;
+  right: 25px;
   background: white;
   color: black;
   padding: 8px 12px;
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
-  z-index: 1001; /* فوق الإطار */
-  transition: transform 0.1s linear;
 }
 
 .container {
@@ -217,15 +208,16 @@ function toggleLanguage() {
   document.getElementById("servicesAr").style.display = arabic ? "block" : "none";
 }
 
-// حركة اللوغو والزر لتتبع سحب المحتوى
-const logo = document.querySelector('.logo');
-const langBtn = document.querySelector('.lang-btn');
-const container = document.querySelector('.container');
-
 window.addEventListener('scroll', () => {
-  let scrollY = window.scrollY;
-  logo.style.transform = `translateY(${scrollY}px)`;
-  langBtn.style.transform = `translateY(${scrollY}px)`;
+  const services = document.getElementById('servicesSection');
+  const logo = document.querySelector('.logo');
+  const rect = services.getBoundingClientRect();
+  if (rect.top <= 100) {
+    let offset = Math.min(window.scrollY - (services.offsetTop - 100), 30);
+    logo.style.transform = `translateY(${offset}px)`;
+  } else {
+    logo.style.transform = `translateY(0px)`;
+  }
 });
 </script>
 
