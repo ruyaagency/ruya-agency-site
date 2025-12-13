@@ -6,14 +6,8 @@
 <title>RU'YA AGENCY</title>
 
 <style>
-html, body {
-  margin: 0;
-  padding: 0;
-  overflow: hidden; /* منع over scroll */
-  height: 100%;
-}
-
 body {
+  margin: 0;
   font-family: Arial, sans-serif;
   color: white;
   background: linear-gradient(120deg, #02030f, #051437, #02030f);
@@ -28,15 +22,16 @@ body {
 }
 
 .logo {
-  position: absolute; /* يتحرك مع السحب */
+  position: fixed;
   top: 10px;
   left: 10px;
   width: 60px;
   z-index: 999;
+  transition: transform 0.3s ease;
 }
 
 .lang-btn {
-  position: absolute; /* يتحرك مع السحب */
+  position: fixed;
   top: 20px;
   right: 25px;
   background: white;
@@ -45,11 +40,9 @@ body {
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
-  z-index: 999;
 }
 
 .container {
-  width: 100%;
   max-width: 600px;
   margin: 160px auto;
   padding: 30px;
@@ -57,7 +50,6 @@ body {
   border-radius: 12px;
   backdrop-filter: blur(7px);
   text-align: center;
-  position: relative;
 }
 
 h1 { margin-bottom: 10px; font-size: 28px; }
@@ -87,6 +79,7 @@ button:hover { opacity: 0.8; }
 }
 
 .services-content { font-size: 14px; line-height: 1.6; }
+
 .services-content ul { margin-left: 20px; }
 
 .services-paragraph {
@@ -120,9 +113,10 @@ button:hover { opacity: 0.8; }
 <body>
 
 <img src="logo.png" class="logo">
+
 <div class="lang-btn" onclick="toggleLanguage()">AR</div>
 
-<div class="container" id="content">
+<div class="container">
   <h1 id="title">RU'YA AGENCY</h1>
   <h2 class="subtitle" id="subtitle">Everything your brand needs, all in one place</h2>
 
@@ -169,9 +163,13 @@ button:hover { opacity: 0.8; }
   </div>
 
   <div class="footer">
-    <a onclick="playClick(); window.open('https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5','_blank')">Instagram</a>
+    <a onclick="playClick(); window.open('https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5','_blank')">
+      Instagram
+    </a>
     ·
-    <a onclick="playClick(); window.location.href='mailto:ru.yaagency01@gmail.com'">Contact us</a>
+    <a onclick="playClick(); window.location.href='mailto:ru.yaagency01@gmail.com'">
+      Contact us
+    </a>
   </div>
 </div>
 
@@ -201,34 +199,26 @@ function toggleLanguage() {
   arabic = !arabic;
   document.querySelector(".lang-btn").innerText = arabic ? "EN" : "AR";
   document.getElementById("title").innerText = arabic ? "وكالة RU'YA" : "RU'YA AGENCY";
-  document.getElementById("subtitle").innerText = arabic ? "كل ما تحتاجه علامتك التجارية، في مكان واحد" : "Everything your brand needs, all in one place";
+  document.getElementById("subtitle").innerText = arabic
+    ? "كل ما تحتاجه علامتك التجارية، في مكان واحد"
+    : "Everything your brand needs, all in one place";
   document.getElementById("submitBtn").innerText = arabic ? "إرسال" : "Submit";
   document.getElementById("servicesTitle").innerText = arabic ? "خدماتنا" : "Our Services";
   document.getElementById("servicesEn").style.display = arabic ? "none" : "block";
   document.getElementById("servicesAr").style.display = arabic ? "block" : "none";
 }
 
-// حركة سلسة ديناميكية مع السحب
-let isDragging = false;
-let startY = 0;
-let scrollY = 0;
-
-function updatePosition(delta) {
-  scrollY = Math.min(Math.max(scrollY - delta, 0), document.getElementById('content').scrollHeight - window.innerHeight);
-  document.getElementById('content').style.transform = `translateY(${-scrollY}px)`;
-  document.querySelector('.logo').style.transform = `translateY(${-scrollY}px)`;
-  document.querySelector('.lang-btn').style.transform = `translateY(${-scrollY}px)`;
-}
-
-// دعم السحب بالفأرة
-document.addEventListener('mousedown', (e) => { isDragging = true; startY = e.clientY; });
-document.addEventListener('mouseup', () => { isDragging = false; });
-document.addEventListener('mousemove', (e) => { if(isDragging){ let delta = e.clientY - startY; startY = e.clientY; updatePosition(delta); } });
-
-// دعم السحب باللمس
-document.addEventListener('touchstart', (e) => { isDragging = true; startY = e.touches[0].clientY; });
-document.addEventListener('touchend', () => { isDragging = false; });
-document.addEventListener('touchmove', (e) => { if(isDragging){ let delta = e.touches[0].clientY - startY; startY = e.touches[0].clientY; updatePosition(delta); } });
+window.addEventListener('scroll', () => {
+  const services = document.getElementById('servicesSection');
+  const logo = document.querySelector('.logo');
+  const rect = services.getBoundingClientRect();
+  if (rect.top <= 100) {
+    let offset = Math.min(window.scrollY - (services.offsetTop - 100), 30);
+    logo.style.transform = translateY(${offset}px);
+  } else {
+    logo.style.transform = translateY(0px);
+  }
+});
 </script>
 
 </body>
