@@ -9,9 +9,9 @@
 html, body {
   margin: 0;
   padding: 0;
-  overflow: hidden; /* يمنع over-scroll */
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 body {
@@ -20,7 +20,7 @@ body {
   background: linear-gradient(120deg, #02030f, #051437, #02030f);
   background-size: 300% 300%;
   animation: gradientMove 15s ease infinite;
-  touch-action: none; /* يمنع السحب الافتراضي */
+  touch-action: none;
 }
 
 @keyframes gradientMove {
@@ -29,19 +29,9 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-.wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
+.wrapper { position: relative; width: 100%; height: 100%; overflow: hidden; }
 
-.content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-}
+.content { position: absolute; top: 0; left: 0; width: 100%; }
 
 .logo {
   position: absolute;
@@ -138,7 +128,6 @@ button:hover { opacity: 0.8; }
     <div class="container">
       <h1 id="title">RU'YA AGENCY</h1>
       <h2 class="subtitle" id="subtitle">Everything your brand needs, all in one place</h2>
-
       <button id="submitBtn" onclick="submitAction()">Submit</button>
 
       <div class="services" id="servicesSection">
@@ -196,72 +185,72 @@ const dclickSound = document.getElementById("dclickSound");
 clickSound.volume = 0.3;
 dclickSound.volume = 0.35;
 
-function playClick() {
-  clickSound.currentTime = 0;
-  clickSound.play();
-}
-
-function submitAction() {
-  dclickSound.currentTime = 0;
-  dclickSound.play();
-  window.open('https://forms.gle/NrANWtgv5zWuhn6K9', '_blank');
-}
+function playClick() { clickSound.currentTime = 0; clickSound.play(); }
+function submitAction() { dclickSound.currentTime = 0; dclickSound.play(); window.open('https://forms.gle/NrANWtgv5zWuhn6K9', '_blank'); }
 
 let arabic = false;
 function toggleLanguage() {
   arabic = !arabic;
   document.querySelector(".lang-btn").innerText = arabic ? "EN" : "AR";
   document.getElementById("title").innerText = arabic ? "وكالة RU'YA" : "RU'YA AGENCY";
-  document.getElementById("subtitle").innerText = arabic
-    ? "كل ما تحتاجه علامتك التجارية، في مكان واحد"
-    : "Everything your brand needs, all in one place";
+  document.getElementById("subtitle").innerText = arabic ? "كل ما تحتاجه علامتك التجارية، في مكان واحد" : "Everything your brand needs, all in one place";
   document.getElementById("submitBtn").innerText = arabic ? "إرسال" : "Submit";
   document.getElementById("servicesTitle").innerText = arabic ? "خدماتنا" : "Our Services";
   document.getElementById("servicesEn").style.display = arabic ? "none" : "block";
   document.getElementById("servicesAr").style.display = arabic ? "block" : "none";
 }
 
-// السحب العمودي
+// السحب الديناميكي
 let startY = 0;
 let currentY = 0;
-let content = document.getElementById('content');
+let velocity = 0;
+let isDragging = false;
+const content = document.getElementById('content');
 
-document.addEventListener('touchstart', (e) => {
-  startY = e.touches[0].clientY - currentY;
-});
+function animate() {
+  if(!isDragging) {
+    velocity *= 0.95; // تباطؤ تدريجي
+    currentY += velocity;
 
-document.addEventListener('touchmove', (e) => {
-  let y = e.touches[0].clientY;
-  let newY = y - startY;
-  // منع السحب خارج الحدود
-  let minY = window.innerHeight - content.offsetHeight;
-  let maxY = 0;
-  if(newY > maxY) newY = maxY;
-  if(newY < minY) newY = minY;
-  currentY = newY;
-  content.style.transform = `translateY(${currentY}px)`;
-  
-  // تحريك اللوغو وزر اللغة مع السحب
-  document.querySelector('.logo').style.transform = `translateY(${currentY}px)`;
-  document.querySelector('.lang-btn').style.transform = `translateY(${currentY}px)`;
-});
-
-document.addEventListener('mousedown', (e) => {
-  startY = e.clientY - currentY;
-  document.onmousemove = (ev) => {
-    let newY = ev.clientY - startY;
     let minY = window.innerHeight - content.offsetHeight;
-    let maxY = 0;
-    if(newY > maxY) newY = maxY;
-    if(newY < minY) newY = minY;
-    currentY = newY;
+    if(currentY > 0) { currentY = 0; velocity = 0; }
+    if(currentY < minY) { currentY = minY; velocity = 0; }
+
     content.style.transform = `translateY(${currentY}px)`;
     document.querySelector('.logo').style.transform = `translateY(${currentY}px)`;
     document.querySelector('.lang-btn').style.transform = `translateY(${currentY}px)`;
   }
-  document.onmouseup = () => { document.onmousemove = null; }
-});
-</script>
+  requestAnimationFrame(animate);
+}
+animate();
 
+function startDrag(y) {
+  isDragging = true;
+  startY = y - currentY;
+  velocity = 0;
+}
+
+function moveDrag(y) {
+  let newY = y - startY;
+  let minY = window.innerHeight - content.offsetHeight;
+  let maxY = 0;
+  if(newY > maxY) newY = maxY;
+  if(newY < minY) newY = minY;
+  velocity = newY - currentY;
+  currentY = newY;
+}
+
+function endDrag() { isDragging = false; }
+
+// دعم اللمس
+document.addEventListener('touchstart', e => startDrag(e.touches[0].clientY));
+document.addEventListener('touchmove', e => { moveDrag(e.touches[0].clientY); e.preventDefault(); });
+document.addEventListener('touchend', endDrag);
+
+// دعم الماوس
+document.addEventListener('mousedown', e => startDrag(e.clientY));
+document.addEventListener('mousemove', e => { if(isDragging) moveDrag(e.clientY); });
+document.addEventListener('mouseup', endDrag);
+</script>
 </body>
 </html>
