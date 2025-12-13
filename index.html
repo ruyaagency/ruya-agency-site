@@ -6,13 +6,21 @@
 <title>RU'YA AGENCY</title>
 
 <style>
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  overflow: hidden; /* يمنع over-scroll */
+  width: 100%;
+  height: 100%;
+}
+
+body {
   font-family: Arial, sans-serif;
   color: white;
   background: linear-gradient(120deg, #02030f, #051437, #02030f);
   background-size: 300% 300%;
   animation: gradientMove 15s ease infinite;
+  touch-action: none; /* يمنع السحب الافتراضي */
 }
 
 @keyframes gradientMove {
@@ -21,17 +29,30 @@ body {
   100% { background-position: 0% 50%; }
 }
 
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
 .logo {
-  position: fixed;
+  position: absolute;
   top: 10px;
   left: 10px;
   width: 60px;
   z-index: 999;
-  transition: transform 0.3s ease;
 }
 
 .lang-btn {
-  position: fixed;
+  position: absolute;
   top: 20px;
   right: 25px;
   background: white;
@@ -40,6 +61,7 @@ body {
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
+  z-index: 999;
 }
 
 .container {
@@ -79,7 +101,6 @@ button:hover { opacity: 0.8; }
 }
 
 .services-content { font-size: 14px; line-height: 1.6; }
-
 .services-content ul { margin-left: 20px; }
 
 .services-paragraph {
@@ -104,72 +125,65 @@ button:hover { opacity: 0.8; }
   cursor: pointer;
 }
 
-.footer a:hover {
-  color: #fff;
-}
+.footer a:hover { color: #fff; }
 </style>
 </head>
 
 <body>
+<div class="wrapper">
+  <img src="logo.png" class="logo">
+  <div class="lang-btn" onclick="toggleLanguage()">AR</div>
 
-<img src="logo.png" class="logo">
+  <div class="content" id="content">
+    <div class="container">
+      <h1 id="title">RU'YA AGENCY</h1>
+      <h2 class="subtitle" id="subtitle">Everything your brand needs, all in one place</h2>
 
-<div class="lang-btn" onclick="toggleLanguage()">AR</div>
+      <button id="submitBtn" onclick="submitAction()">Submit</button>
 
-<div class="container">
-  <h1 id="title">RU'YA AGENCY</h1>
-  <h2 class="subtitle" id="subtitle">Everything your brand needs, all in one place</h2>
+      <div class="services" id="servicesSection">
+        <h2 id="servicesTitle">Our Services</h2>
+        <div class="services-content">
+          <div id="servicesEn">
+            <ul>
+              <li>Brand and personal identity building</li>
+              <li>Creative advertising campaigns</li>
+              <li>Digital marketing and content management</li>
+              <li>Influencer marketing strategies</li>
+              <li>Sales growth and market expansion solutions</li>
+              <li>Visual identity and creative design</li>
+            </ul>
+            <p class="services-paragraph">
+              At Ru'ya Agency, we are more than just a marketing agency, we are your creative growth partners.
+              Our team is driven by innovation and outside-the-box thinking, dedicated to crafting smart,
+              impactful strategies that elevate your brand and expand your market presence.
+            </p>
+          </div>
 
-  <button id="submitBtn" onclick="submitAction()">Submit</button>
-
-  <div class="services" id="servicesSection">
-    <h2 id="servicesTitle">Our Services</h2>
-
-    <div class="services-content">
-      <div id="servicesEn">
-        <ul>
-          <li>Brand and personal identity building</li>
-          <li>Creative advertising campaigns</li>
-          <li>Digital marketing and content management</li>
-          <li>Influencer marketing strategies</li>
-          <li>Sales growth and market expansion solutions</li>
-          <li>Visual identity and creative design</li>
-        </ul>
-
-        <p class="services-paragraph">
-          At Ru'ya Agency, we are more than just a marketing agency, we are your creative growth partners.
-          Our team is driven by innovation and outside-the-box thinking, dedicated to crafting smart,
-          impactful strategies that elevate your brand and expand your market presence.
-        </p>
+          <div id="servicesAr" style="display:none">
+            <ul>
+              <li>بناء الهوية الشخصية والعلامة التجارية</li>
+              <li>حملات إعلانية إبداعية</li>
+              <li>التسويق الرقمي وإدارة المحتوى</li>
+              <li>استراتيجيات التسويق عبر المؤثرين</li>
+              <li>تنمية المبيعات وتوسيع السوق</li>
+              <li>الهوية البصرية والتصميم الإبداعي</li>
+            </ul>
+            <p class="services-paragraph">
+              في وكالة رؤيا، نحن أكثر من مجرد وكالة تسويق، نحن شركاؤك في النمو الإبداعي.
+              فريقنا مدفوع بالابتكار والتفكير خارج الصندوق، ونعمل على ابتكار استراتيجيات ذكية
+              ومؤثرة ترفع من قيمة علامتك التجارية وتوسّع حضورك في السوق.
+            </p>
+          </div>
+        </div>
       </div>
 
-      <div id="servicesAr" style="display:none">
-        <ul>
-          <li>بناء الهوية الشخصية والعلامة التجارية</li>
-          <li>حملات إعلانية إبداعية</li>
-          <li>التسويق الرقمي وإدارة المحتوى</li>
-          <li>استراتيجيات التسويق عبر المؤثرين</li>
-          <li>تنمية المبيعات وتوسيع السوق</li>
-          <li>الهوية البصرية والتصميم الإبداعي</li>
-        </ul>
-
-        <p class="services-paragraph">
-          في وكالة رؤيا، نحن أكثر من مجرد وكالة تسويق، نحن شركاؤك في النمو الإبداعي.
-          فريقنا مدفوع بالابتكار والتفكير خارج الصندوق، ونعمل على ابتكار استراتيجيات ذكية
-          ومؤثرة ترفع من قيمة علامتك التجارية وتوسّع حضورك في السوق.
-        </p>
+      <div class="footer">
+        <a onclick="playClick(); window.open('https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5','_blank')">Instagram</a>
+        ·
+        <a onclick="playClick(); window.location.href='mailto:ru.yaagency01@gmail.com'">Contact us</a>
       </div>
     </div>
-  </div>
-
-  <div class="footer">
-    <a onclick="playClick(); window.open('https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5','_blank')">
-      Instagram
-    </a>
-    ·
-    <a onclick="playClick(); window.location.href='mailto:ru.yaagency01@gmail.com'">
-      Contact us
-    </a>
   </div>
 </div>
 
@@ -179,7 +193,6 @@ button:hover { opacity: 0.8; }
 <script>
 const clickSound = document.getElementById("clickSound");
 const dclickSound = document.getElementById("dclickSound");
-
 clickSound.volume = 0.3;
 dclickSound.volume = 0.35;
 
@@ -208,16 +221,45 @@ function toggleLanguage() {
   document.getElementById("servicesAr").style.display = arabic ? "block" : "none";
 }
 
-window.addEventListener('scroll', () => {
-  const services = document.getElementById('servicesSection');
-  const logo = document.querySelector('.logo');
-  const rect = services.getBoundingClientRect();
-  if (rect.top <= 100) {
-    let offset = Math.min(window.scrollY - (services.offsetTop - 100), 30);
-    logo.style.transform = `translateY(${offset}px)`;
-  } else {
-    logo.style.transform = `translateY(0px)`;
+// السحب العمودي
+let startY = 0;
+let currentY = 0;
+let content = document.getElementById('content');
+
+document.addEventListener('touchstart', (e) => {
+  startY = e.touches[0].clientY - currentY;
+});
+
+document.addEventListener('touchmove', (e) => {
+  let y = e.touches[0].clientY;
+  let newY = y - startY;
+  // منع السحب خارج الحدود
+  let minY = window.innerHeight - content.offsetHeight;
+  let maxY = 0;
+  if(newY > maxY) newY = maxY;
+  if(newY < minY) newY = minY;
+  currentY = newY;
+  content.style.transform = `translateY(${currentY}px)`;
+  
+  // تحريك اللوغو وزر اللغة مع السحب
+  document.querySelector('.logo').style.transform = `translateY(${currentY}px)`;
+  document.querySelector('.lang-btn').style.transform = `translateY(${currentY}px)`;
+});
+
+document.addEventListener('mousedown', (e) => {
+  startY = e.clientY - currentY;
+  document.onmousemove = (ev) => {
+    let newY = ev.clientY - startY;
+    let minY = window.innerHeight - content.offsetHeight;
+    let maxY = 0;
+    if(newY > maxY) newY = maxY;
+    if(newY < minY) newY = minY;
+    currentY = newY;
+    content.style.transform = `translateY(${currentY}px)`;
+    document.querySelector('.logo').style.transform = `translateY(${currentY}px)`;
+    document.querySelector('.lang-btn').style.transform = `translateY(${currentY}px)`;
   }
+  document.onmouseup = () => { document.onmousemove = null; }
 });
 </script>
 
