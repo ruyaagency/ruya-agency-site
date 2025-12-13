@@ -28,22 +28,23 @@ body {
   top: 10px;
   left: 10px;
   width: 60px;
-  z-index: 1001; /* أعلى من أي شيء */
-  transition: transform 0.3s ease;
+  z-index: 999;
+  transition: transform 0.3s ease, top 0.3s ease;
 }
 
 /* زر اللغة */
 .lang-btn {
   position: fixed;
   top: 10px;
-  right: 10px;
+  right: 25px;
   background: white;
   color: black;
   padding: 8px 12px;
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
-  z-index: 1002; /* أعلى من الإطار */
+  z-index: 1000; /* فوق الإطار */
+  transition: transform 0.3s ease, top 0.3s ease;
 }
 
 /* حاوية المحتوى */
@@ -89,8 +90,6 @@ button:hover { opacity: 0.8; }
 
 .services-content ul { list-style: disc; margin-left: 20px; }
 
-#additionalText { margin-top: 20px; font-size: 14px; line-height: 1.5; }
-
 #success {
   display: none;
   margin-top: 20px;
@@ -99,9 +98,9 @@ button:hover { opacity: 0.8; }
   border-radius: 8px;
 }
 
-/* Footer */
+/* Footer الأزرار */
 .footer {
-  margin-top: 140px;
+  margin-top: 60px;
   font-size: 13px;
   color: #777;
   text-align: center;
@@ -151,6 +150,7 @@ button:hover { opacity: 0.8; }
           <li>Sales growth and market expansion solutions</li>
           <li>Visual identity and creative design</li>
         </ul>
+        <p>At Ru'ya Agency, we are more than just a marketing agency, we are your creative growth partners. Our team is driven by innovation and outside-the-box thinking, dedicated to crafting smart, impactful strategies that elevate your brand and expand your market presence.</p>
       </div>
       <div id="servicesAr" style="display:none">
         <p>نقدّم مجموعة واسعة من خدمات التسويق الشاملة، بما في ذلك:</p>
@@ -162,38 +162,34 @@ button:hover { opacity: 0.8; }
           <li>نمو المبيعات وتوسيع السوق</li>
           <li>الهوية البصرية والتصميم الإبداعي</li>
         </ul>
-      </div>
-    </div>
-
-    <!-- الفقرة الإضافية -->
-    <div id="additionalText">
-      At Ru'ya Agency, we are more than just a marketing agency, we are your creative growth partners. Our team is driven by innovation and outside-the-box thinking, dedicated to crafting smart, impactful strategies that elevate your brand and expand your market presence.
-      <div id="additionalTextAr" style="display:none">
-        في وكالة RU'YA، نحن أكثر من مجرد وكالة تسويق، نحن شركاء نموك الإبداعي. فريقنا مدفوع بالابتكار والتفكير خارج الصندوق، ملتزم بصياغة استراتيجيات ذكية وفعالة ترفع من مستوى علامتك التجارية وتوسع وجودك في السوق.
+        <p>في وكالة RU'YA، نحن أكثر من مجرد وكالة تسويق، نحن شركاؤك الإبداعيون للنمو. فريقنا مدفوع بالابتكار والتفكير خارج الصندوق، مكرس لصياغة استراتيجيات ذكية وفعّالة ترتقي بعلامتك التجارية وتوسع حضورك في السوق.</p>
       </div>
     </div>
   </div>
+
+  <div class="footer">
+    <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" id="instaBtn">Instagram</a>
+    ·
+    <a href="mailto:ru.yaagency01@gmail.com" id="contactBtn">Contact us</a>
+  </div>
 </div>
 
-<!-- Footer -->
-<div class="footer">
-  <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" id="instagramBtn" target="_blank">Instagram</a>
-  ·
-  <a href="mailto:ru.yaagency01@gmail.com" id="contactBtn">Contact us</a>
-</div>
+<!-- أصوات النقر -->
+<audio id="clickSound" src="click.mp3" preload="auto"></audio>
+<audio id="dclickSound" src="dclick.mp3" preload="auto"></audio>
 
 <script>
-// أصوات
-const clickSound = new Audio('click.mp3');
-clickSound.volume = 0.2; // منخفض
-const dclickSound = new Audio('dclick.mp3');
-dclickSound.volume = 0.2;
+// أصوات النقر مع تخفيض الصوت
+const clickAudio = document.getElementById('clickSound');
+clickAudio.volume = 0.2;
+const dclickAudio = document.getElementById('dclickSound');
+dclickAudio.volume = 0.2;
 
-// روابط بأصوات
-document.getElementById('instagramBtn').addEventListener('click', () => { clickSound.play(); });
-document.getElementById('contactBtn').addEventListener('click', () => { clickSound.play(); });
+// أزرار الروابط
+document.getElementById('instaBtn').addEventListener('click', () => { clickAudio.play(); });
+document.getElementById('contactBtn').addEventListener('click', () => { clickAudio.play(); });
 document.getElementById('submitBtn').addEventListener('click', () => { 
-  dclickSound.play(); 
+  dclickAudio.play(); 
   window.open('https://forms.gle/NrANWtgv5zWuhn6K9', '_blank');
 });
 
@@ -208,26 +204,24 @@ function toggleLanguage() {
   document.getElementById("servicesTitle").innerText = arabic ? "خدماتنا" : "Our Services";
   document.getElementById("servicesEn").style.display = arabic ? "none" : "block";
   document.getElementById("servicesAr").style.display = arabic ? "block" : "none";
-  document.getElementById("additionalText").innerHTML = arabic
-    ? document.getElementById("additionalTextAr").innerHTML
-    : "At Ru'ya Agency, we are more than just a marketing agency, we are your creative growth partners. Our team is driven by innovation and outside-the-box thinking, dedicated to crafting smart, impactful strategies that elevate your brand and expand your market presence.";
   document.getElementById("success").innerText = arabic ? "تم استلام طلبك، سنتواصل معك لتحديد موعد." : "Your submission is received. We will contact you soon to schedule a meeting.";
 }
 
-// حركة اللوغو واللغة عند الوصول لأعلى الإطار
+// حركة اللوغو وزر اللغة عند اقتراب الإطار
+const logo = document.querySelector('.logo');
+const langBtn = document.querySelector('.lang-btn');
+const container = document.getElementById('mainContainer');
+const offsetTrigger = 150; // نقطة بداية الحركة
+
 window.addEventListener('scroll', () => {
-  const container = document.getElementById('mainContainer');
-  const logo = document.querySelector('.logo');
-  const langBtn = document.querySelector('.lang-btn');
   const rect = container.getBoundingClientRect();
-  
-  if(rect.top <= 60) { // قرب الأعلى
-    let offset = Math.min(window.scrollY - (container.offsetTop - 60), 30);
-    logo.style.transform = `translateY(${offset}px)`;
-    langBtn.style.transform = `translateY(${offset}px)`;
+  if(rect.top <= offsetTrigger) {
+    let offset = Math.min(offsetTrigger - rect.top, 50); // الحد الأقصى لتحريك اللوغو/الزر
+    logo.style.top = 10 + offset + 'px';
+    langBtn.style.top = 10 + offset + 'px';
   } else {
-    logo.style.transform = `translateY(0px)`;
-    langBtn.style.transform = `translateY(0px)`;
+    logo.style.top = '10px';
+    langBtn.style.top = '10px';
   }
 });
 </script>
