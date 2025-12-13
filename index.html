@@ -148,7 +148,7 @@ button:hover { opacity: 0.8; }
   <h1 id="title">RU'YA AGENCY</h1>
   <h2 class="subtitle" id="subtitle">Everything your brand needs, all in one place</h2>
 
-  <button id="submitBtn" onclick="window.open('https://forms.gle/NrANWtgv5zWuhn6K9', '_blank')">
+  <button id="submitBtn">
     Submit
   </button>
 
@@ -184,11 +184,11 @@ button:hover { opacity: 0.8; }
 
   <!-- ====== FOOTER ====== -->
   <div class="footer">
-    <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" target="_blank">
+    <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" id="instagramLink" target="_blank">
       Instagram
     </a>
     ·
-    <a href="mailto:ru.yaagency01@gmail.com">
+    <a href="mailto:ru.yaagency01@gmail.com" id="contactLink">
       Contact us
     </a>
   </div>
@@ -207,6 +207,33 @@ document.getElementById("langBtn").addEventListener("click", () => {
   document.getElementById("servicesTitle").innerText = arabic ? "خدماتنا" : "Our Services";
   document.getElementById("servicesEn").style.display = arabic ? "none" : "block";
   document.getElementById("servicesAr").style.display = arabic ? "block" : "none";
+});
+
+// ===== الأصوات للأزرار =====
+// تحميل الملفات الصوتية
+const clickSound = new Audio('click.mp3');
+clickSound.volume = 0.2; // تقليل الصوت
+const dclickSound = new Audio('dclick.mp3');
+dclickSound.volume = 0.2;
+
+// دالة لتشغيل الصوت بسلاسة حتى لو ضغط المستخدم بسرعة
+function playSound(audio) {
+  const sound = audio.cloneNode(); // إنشاء نسخة جديدة لتجنب التوقف
+  sound.play().catch(e => {});
+}
+
+// زر Submit
+document.getElementById("submitBtn").addEventListener("click", () => {
+  playSound(dclickSound);
+  window.open('https://forms.gle/NrANWtgv5zWuhn6K9', '_blank');
+});
+
+// روابط Instagram و Contact
+document.getElementById("instagramLink").addEventListener("click", () => {
+  playSound(clickSound);
+});
+document.getElementById("contactLink").addEventListener("click", () => {
+  playSound(clickSound);
 });
 </script>
 
