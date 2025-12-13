@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RU'YA AGENCY</title>
+
 <style>
 /* الخلفية المتدرجة المتحركة */
 body {
@@ -9,7 +16,6 @@ body {
   animation: gradientMove 15s ease infinite;
 }
 
-/* حركة الخلفية */
 @keyframes gradientMove {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -22,10 +28,11 @@ body {
   top: 10px;
   left: 10px;
   width: 60px;
-  z-index: 1000; /* أعلى من كل شيء */
+  z-index: 999;
+  transition: transform 0.3s ease;
 }
 
-/* زر اللغة دائمًا أمام كل العناصر */
+/* زر اللغة */
 .lang-btn {
   position: fixed;
   top: 20px;
@@ -36,7 +43,6 @@ body {
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
-  z-index: 1001; /* أعلى من اللوغو وكل العناصر الأخرى */
 }
 
 /* حاوية المحتوى */
@@ -117,3 +123,84 @@ button:hover { opacity: 0.8; }
   color: #fff;
 }
 </style>
+</head>
+
+<body>
+
+<!-- اللوغو -->
+<img src="logo.png" class="logo" alt="Logo">
+
+<!-- زر اللغة -->
+<div class="lang-btn" id="langBtn">AR</div>
+
+<div class="container">
+  <h1 id="title">RU'YA AGENCY</h1>
+  <h2 class="subtitle" id="subtitle">Everything your brand needs, all in one place</h2>
+
+  <button id="submitBtn" onclick="window.open('https://forms.gle/NrANWtgv5zWuhn6K9', '_blank')">
+    Submit
+  </button>
+
+  <div id="success">Your submission is received. We will contact you soon to schedule a meeting.</div>
+
+  <div class="services" id="servicesSection">
+    <h2 id="servicesTitle">Our Services</h2>
+
+    <div class="services-content">
+      <div id="servicesEn">
+        <ul>
+          <li>Brand and personal identity building</li>
+          <li>Creative advertising campaigns</li>
+          <li>Digital marketing and content management</li>
+          <li>Influencer marketing strategies</li>
+          <li>Sales growth and market expansion solutions</li>
+          <li>Visual identity and creative design</li>
+        </ul>
+      </div>
+
+      <div id="servicesAr" style="display:none">
+        <ul>
+          <li>بناء الهوية الشخصية والعلامة التجارية</li>
+          <li>حملات إعلانية إبداعية</li>
+          <li>التسويق الرقمي وإدارة المحتوى</li>
+          <li>استراتيجيات التسويق عبر المؤثرين</li>
+          <li>نمو المبيعات وتوسيع السوق</li>
+          <li>الهوية البصرية والتصميم الإبداعي</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== FOOTER ====== -->
+  <div class="footer">
+    <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" target="_blank">
+      Instagram
+    </a>
+    ·
+    <a href="mailto:ru.yaagency01@gmail.com">
+      Contact us
+    </a>
+  </div>
+</div>
+
+<script>
+// ===== زر اللغة =====
+let arabic = false;
+
+document.getElementById("langBtn").addEventListener("click", () => {
+  arabic = !arabic;
+  document.getElementById("langBtn").innerText = arabic ? "EN" : "AR";
+  document.getElementById("title").innerText = arabic ? "وكالة RU'YA" : "RU'YA AGENCY";
+  document.getElementById("subtitle").innerText = arabic ? "كل ما تحتاجه علامتك التجارية، في مكان واحد" : "Everything your brand needs, all in one place";
+  document.getElementById("submitBtn").innerText = arabic ? "إرسال" : "Submit";
+  document.getElementById("servicesTitle").innerText = arabic ? "خدماتنا" : "Our Services";
+  document.getElementById("servicesEn").style.display = arabic ? "none" : "block";
+  document.getElementById("servicesAr").style.display = arabic ? "block" : "none";
+});
+
+// ===== حركة اللوغو تم تعطيلها =====
+// اللوغو أصبح ثابتًا تمامًا مثل زر اللغة
+</script>
+
+</body>
+</html>
