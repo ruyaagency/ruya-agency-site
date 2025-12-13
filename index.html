@@ -98,6 +98,14 @@ button:hover { opacity: 0.8; }
   margin-left: 20px;
 }
 
+/* الفقرة الجديدة */
+.services-content p {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #ddd;
+  line-height: 1.6;
+}
+
 #success {
   display: none;
   margin-top: 20px;
@@ -129,7 +137,6 @@ button:hover { opacity: 0.8; }
 
 <body>
 
-<!-- رأس الصفحة -->
 <header>
   <img src="logo.png" class="logo" alt="Logo">
   <div class="lang-btn" id="langBtn">AR</div>
@@ -156,6 +163,11 @@ button:hover { opacity: 0.8; }
           <li>Sales growth and market expansion solutions</li>
           <li>Visual identity and creative design</li>
         </ul>
+        <p>
+          At Ru'ya Agency, we are more than just a marketing agency, we are your creative growth partners. 
+          Our team is driven by innovation and outside-the-box thinking, dedicated to crafting smart, 
+          impactful strategies that elevate your brand and expand your market presence.
+        </p>
       </div>
 
       <div id="servicesAr" style="display:none">
@@ -182,8 +194,9 @@ button:hover { opacity: 0.8; }
   </div>
 </div>
 
-<audio id="clickSound" src="click.mp3"></audio>
-<audio id="dclickSound" src="dclick.mp3"></audio>
+<!-- الأصوات -->
+<audio id="clickSound" src="click.mp3" preload="auto"></audio>
+<audio id="dclickSound" src="dclick.mp3" preload="auto"></audio>
 
 <script>
 // ===== زر اللغة =====
@@ -200,28 +213,31 @@ document.getElementById("langBtn").addEventListener("click", () => {
   document.getElementById("servicesAr").style.display = arabic ? "block" : "none";
 });
 
-// ===== الأصوات عند الضغط =====
+// ===== الأصوات عند الضغط مع تحسين التشغيل السريع =====
 const clickSound = document.getElementById("clickSound");
 const dclickSound = document.getElementById("dclickSound");
 
-// ضبط مستوى الصوت
-clickSound.volume = 0.15;  // 15%
+clickSound.volume = 0.15; // 15%
 dclickSound.volume = 0.5;  // 50%
+
+function playSound(sound) {
+  sound.pause();
+  sound.currentTime = 0;
+  sound.play();
+}
 
 // روابط Instagram و Contact
 document.getElementById("instagramLink").addEventListener("click", () => {
-  clickSound.currentTime = 0;
-  clickSound.play();
+  playSound(clickSound);
 });
+
 document.getElementById("contactLink").addEventListener("click", () => {
-  clickSound.currentTime = 0;
-  clickSound.play();
+  playSound(clickSound);
 });
 
 // زر Submit
 document.getElementById("submitBtn").addEventListener("click", () => {
-  dclickSound.currentTime = 0;
-  dclickSound.play();
+  playSound(dclickSound);
   window.open('https://forms.gle/NrANWtgv5zWuhn6K9', '_blank');
 });
 </script>
