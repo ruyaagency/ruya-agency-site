@@ -134,7 +134,6 @@ button:hover { opacity: 0.8; }
 
 <body>
 
-<!-- رأس الصفحة -->
 <header>
   <img src="logo.png" class="logo" alt="Logo">
   <div class="lang-btn" id="langBtn">AR</div>
@@ -142,9 +141,9 @@ button:hover { opacity: 0.8; }
 
 <div class="container">
   <h1 id="title">RU'YA AGENCY</h1>
-  <h2 class="subtitle" id="subtitle">Everything your brand needs, all in one place</h2>
+  <h2 class="subtitle" id="subtitle">Building strategic marketing systems that help brands generate paying customers</h2>
 
-  <button id="submitBtn">Register Now</button>
+  <button id="submitBtn">📞 Book your free consultation</button>
 
   <div id="success">Your submission is received. We will contact you soon to schedule a meeting.</div>
 
@@ -154,29 +153,25 @@ button:hover { opacity: 0.8; }
     <div class="services-content">
       <div id="servicesEn">
         <ul>
-          <li>Brand and personal identity building</li>
-          <li>Creative advertising campaigns</li>
-          <li>Digital marketing and content management</li>
-          <li>Influencer marketing strategies</li>
-          <li>Sales growth and market expansion solutions</li>
-          <li>Visual identity and creative design</li>
+          <li>Brand frameworks for businesses and personal brands</li>
+          <li>Creative campaigns aligned with brand identity</li>
+          <li>Visual identity and messaging methodology</li>
+          <li>Market positioning and growth solutions</li>
         </ul>
         <p id="servicesParagraphEn">
-          At Ru'ya Agency, we are more than just a marketing agency, we are your creative growth partners. Our team is driven by innovation and outside-the-box thinking, dedicated to crafting smart, impactful strategies that elevate your brand and expand your market presence.
+          At Ru’ya Agency, we build strategic marketing systems that turn brands into customer-generating machines. We focus on aligning your brand, messaging, and campaigns to deliver real business results.
         </p>
       </div>
 
       <div id="servicesAr" style="display:none">
         <ul>
-          <li>بناء الهوية الشخصية والعلامة التجارية</li>
-          <li>حملات إعلانية إبداعية</li>
-          <li>التسويق الرقمي وإدارة المحتوى</li>
-          <li>استراتيجيات التسويق عبر المؤثرين</li>
-          <li>نمو المبيعات وتوسيع السوق</li>
-          <li>الهوية البصرية والتصميم الإبداعي</li>
+          <li>أطر عمل للبراند للشركات والعلامات الشخصية</li>
+          <li>حملات إبداعية متوافقة مع هوية البراند</li>
+          <li>الهوية البصرية ومنهجية الرسائل</li>
+          <li>تحديد موقع السوق وحلول النمو</li>
         </ul>
         <p id="servicesParagraphAr">
-          في وكالة رؤية، نحن أكثر من مجرد وكالة تسويق، نحن شركاؤك في النمو الإبداعي. فريقنا مدفوع بالابتكار والتفكير خارج الصندوق، مكرس لوضع استراتيجيات ذكية وفعّالة تعزز علامتك التجارية وتوسع حضورك في السوق.
+          في وكالة رؤية، نحن نبني أنظمة تسويق استراتيجية تحول علامتك التجارية إلى آلة تجذب العملاء الفعليين. نركز على مواءمة العلامة التجارية والرسائل والحملات لضمان نتائج أعمال حقيقية.
         </p>
       </div>
     </div>
@@ -193,33 +188,29 @@ button:hover { opacity: 0.8; }
   </div>
 </div>
 
-<!-- الأصوات -->
 <audio id="clickSound" src="click.mp3" preload="auto"></audio>
 <audio id="dclickSound" src="dclick.mp3" preload="auto"></audio>
 
 <script>
-// ===== زر اللغة =====
 let arabic = false;
 
 document.getElementById("langBtn").addEventListener("click", () => {
   arabic = !arabic;
   document.getElementById("langBtn").innerText = arabic ? "EN" : "AR";
   document.getElementById("title").innerText = arabic ? "وكالة رؤية" : "RU'YA AGENCY";
-  document.getElementById("subtitle").innerText = arabic ? "كل ما تحتاجه علامتك التجارية، في مكان واحد" : "Everything your brand needs, all in one place";
-  document.getElementById("submitBtn").innerText = arabic ? "سجل الآن" : "Register Now";
+  document.getElementById("subtitle").innerText = arabic ? "بناء أنظمة تسويق استراتيجية تساعد العلامات التجارية على جذب عملائها الفعليين" : "Building strategic marketing systems that help brands generate paying customers";
+  document.getElementById("submitBtn").innerText = arabic ? "📞 احجز استشارتك المجانية" : "📞 Book your free consultation";
   document.getElementById("servicesTitle").innerText = arabic ? "خدماتنا" : "Our Services";
   
-  // إظهار الخدمات والفقرة المناسبة لكل لغة
   document.getElementById("servicesEn").style.display = arabic ? "none" : "block";
   document.getElementById("servicesAr").style.display = arabic ? "block" : "none";
 });
 
-// ===== الأصوات عند الضغط =====
 const clickSound = document.getElementById("clickSound");
 const dclickSound = document.getElementById("dclickSound");
 
-clickSound.volume = 0.15;  // 15%
-dclickSound.volume = 0.5;  // 50%
+clickSound.volume = 0.15;
+dclickSound.volume = 0.5;
 
 function playSound(audio) {
   audio.pause();
@@ -227,11 +218,9 @@ function playSound(audio) {
   audio.play();
 }
 
-// روابط Instagram و Contact
 document.getElementById("instagramLink").addEventListener("click", () => playSound(clickSound));
 document.getElementById("contactLink").addEventListener("click", () => playSound(clickSound));
 
-// زر Submit
 document.getElementById("submitBtn").addEventListener("click", () => {
   playSound(dclickSound);
   window.open('https://forms.gle/NrANWtgv5zWuhn6K9', '_blank');
