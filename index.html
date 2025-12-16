@@ -14,20 +14,23 @@ html, body {
   overflow-x: hidden;
   overflow-y: auto;
   box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  color: white;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  color: white;
-  background: linear-gradient(120deg, #02030f, #051437, #02030f);
-  background-size: 300% 300%;
-  animation: gradientMove 15s ease infinite;
+  position: relative;
 }
 
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* فيديو الخلفية */
+#bgVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
 
 header {
@@ -134,6 +137,11 @@ button:hover { opacity: 0.8; }
 
 <body>
 
+<!-- فيديو الخلفية -->
+<video autoplay muted loop playsinline id="bgVideo">
+  <source src="gradientbg.mp4" type="video/mp4">
+</video>
+
 <header>
   <img src="logo.png" class="logo" alt="Logo">
   <div class="lang-btn" id="langBtn">AR</div>
@@ -143,7 +151,7 @@ button:hover { opacity: 0.8; }
   <h1 id="title">RU'YA AGENCY</h1>
   <h2 class="subtitle" id="subtitle">Building strategic marketing systems that help brands generate paying customers</h2>
 
-  <button id="submitBtn">✆ Book your free consultation</button>
+  <button id="submitBtn">📞 Book your free consultation</button>
 
   <div id="success">Your submission is received. We will contact you soon to schedule a meeting.</div>
 
@@ -155,7 +163,7 @@ button:hover { opacity: 0.8; }
         <ul>
           <li>Brand frameworks for businesses and personal brands</li>
           <li>Creative campaigns aligned with brand identity</li>
-          <li>Visual identity and brand voice</li>
+          <li>Visual identity and messaging methodology</li>
           <li>Market positioning and growth solutions</li>
         </ul>
         <p id="servicesParagraphEn">
@@ -167,7 +175,7 @@ button:hover { opacity: 0.8; }
         <ul>
           <li>أطر عمل للبراند للشركات والعلامات الشخصية</li>
           <li>حملات إبداعية متوافقة مع هوية البراند</li>
-          <li>الهوية البصرية ونبرة العلامة التجارية</li>
+          <li>الهوية البصرية ومنهجية الرسائل</li>
           <li>تحديد موقع السوق وحلول النمو</li>
         </ul>
         <p id="servicesParagraphAr">
@@ -199,7 +207,7 @@ document.getElementById("langBtn").addEventListener("click", () => {
   document.getElementById("langBtn").innerText = arabic ? "EN" : "AR";
   document.getElementById("title").innerText = arabic ? "وكالة رؤية" : "RU'YA AGENCY";
   document.getElementById("subtitle").innerText = arabic ? "بناء أنظمة تسويق استراتيجية تساعد العلامات التجارية على جذب عملائها الفعليين" : "Building strategic marketing systems that help brands generate paying customers";
-  document.getElementById("submitBtn").innerText = arabic ? "✆ احجز استشارتك المجانية" : "✆ Book your free consultation";
+  document.getElementById("submitBtn").innerText = arabic ? "📞 احجز استشارتك المجانية" : "📞 Book your free consultation";
   document.getElementById("servicesTitle").innerText = arabic ? "خدماتنا" : "Our Services";
   
   document.getElementById("servicesEn").style.display = arabic ? "none" : "block";
