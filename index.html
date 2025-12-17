@@ -67,7 +67,7 @@ body {
   100% { opacity: 0.2; }
 }
 
-/* إخفاء الموقع إلى أن يكتمل التحميل */
+/* إخفاء الموقع حتى يكتمل التحميل */
 #site {
   display: none;
 }
@@ -97,36 +97,31 @@ header {
 }
 
 /* ================= CONTENT ================= */
-.container {
+.content-wrapper {
   max-width: 600px;
   width: calc(100% - 80px);
   margin: 40px auto;
-  padding: 30px;
   text-align: center;
 }
 
 h1 { margin-bottom: 10px; font-size: 28px; }
 h2.subtitle { margin-top: 0; font-size: 16px; color: white; }
 
-/* زر Book your free consultation مع Glass Blur */
-#submitBtn {
-  width: calc(100% - 0px);
-  max-width: 600px;
-  margin-top: 20px;
+button#submitBtn {
+  width: 100%;
   padding: 12px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(7px);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: white;
   font-weight: bold;
   font-size: 15px;
   border-radius: 8px;
   cursor: pointer;
-  color: white;
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(7px);
-  border: 1px solid rgba(255,255,255,0.25);
+  margin-top: 20px;
 }
 
-#submitBtn:hover {
-  opacity: 0.85;
-}
+button#submitBtn:hover { opacity: 0.85; }
 
 /* ================= SERVICES ================= */
 .services {
@@ -205,12 +200,14 @@ h2.subtitle { margin-top: 0; font-size: 16px; color: white; }
   <div class="lang-btn" id="langBtn">AR</div>
 </header>
 
-<h1 id="title">RU'YA AGENCY</h1>
-<h2 class="subtitle" id="subtitle">
-  Building marketing systems that help brands generate paying customers
-</h2>
+<div class="content-wrapper">
+  <h1 id="title">RU'YA AGENCY</h1>
+  <h2 class="subtitle" id="subtitle">
+    Building marketing systems that help brands generate paying customers
+  </h2>
 
-<button id="submitBtn">✆ Book your free consultation</button>
+  <button id="submitBtn">✆ Book your free consultation</button>
+</div>
 
 <div class="services">
   <h2 id="servicesTitle">Our Services</h2>
