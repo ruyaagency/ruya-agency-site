@@ -264,7 +264,6 @@ button#submitBtn:active {
 <script>
 /* ===== SHOW SITE AFTER FULL LOAD ===== */
 window.addEventListener("load", () => {
-  // تحميل الأصوات بصمت
   clickSound.play().catch(()=>{});
   clickSound.pause();
   clickSound.currentTime = 0;
@@ -303,42 +302,29 @@ dclickSound.volume = 0.5;
 instagramLink.addEventListener('click', () => clickSound.play());
 contactLink.addEventListener('click', () => clickSound.play());
 
-/* ===== BUTTON INTERACTION - ALWAYS WORK ===== */
-function activateSubmitBtn() {
-  submitBtn.style.transform = "scale(1.05)";
-  submitBtn.style.background = "rgba(255,255,255,0.15)";
-  dclickSound.play();
-  setTimeout(() => {
-    submitBtn.style.transform = "scale(1)";
-    submitBtn.style.background = "rgba(255,255,255,0.08)";
-    window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
-  }, 50);
-}
+/* ===== BUTTON INTERACTION - MOUSE + TOUCH ===== */
+const submitBtnEl = submitBtn;
 
-// ماوس
-submitBtn.addEventListener('mousedown', activateSubmitBtn);
-submitBtn.addEventListener('mouseup', () => {
-  submitBtn.style.transform = "scale(1)";
-  submitBtn.style.background = "rgba(255,255,255,0.08)";
-});
-submitBtn.addEventListener('mouseleave', () => {
-  submitBtn.style.transform = "scale(1)";
-  submitBtn.style.background = "rgba(255,255,255,0.08)";
+// Hover دائم على اللابتوب
+submitBtnEl.addEventListener('mouseenter', () => submitBtnEl.style.transform = "scale(1.03)");
+submitBtnEl.addEventListener('mouseleave', () => {
+  submitBtnEl.style.transform = "scale(1)";
+  submitBtnEl.style.background = "rgba(255,255,255,0.08)";
+  clickSound.play();
 });
 
-// لمس الهاتف
-submitBtn.addEventListener('touchstart', (e) => {
-  submitBtn.style.transform = "scale(1.05)";
-  submitBtn.style.background = "rgba(255,255,255,0.15)";
-  dclickSound.play();
-}, {passive:true});
+// لمس الهاتف - التكبير أثناء اللمس
+submitBtnEl.addEventListener('touchstart', () => submitBtnEl.style.transform = "scale(1.03)", {passive:true});
+submitBtnEl.addEventListener('touchend', () => {
+  submitBtnEl.style.transform = "scale(1)";
+  submitBtnEl.style.background = "rgba(255,255,255,0.08)";
+  clickSound.play();
+});
 
-submitBtn.addEventListener('touchend', (e) => {
-  submitBtn.style.transform = "scale(1)";
-  submitBtn.style.background = "rgba(255,255,255,0.08)";
-  setTimeout(() => {
-    window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
-  }, 50);
+// الضغط الفعلي للتوجيه + صوت عند العودة للمكان
+submitBtnEl.addEventListener('click', () => {
+  dclickSound.play();
+  window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
 });
 </script>
 
