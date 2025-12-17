@@ -67,7 +67,7 @@ body {
   100% { opacity: 0.2; }
 }
 
-/* إخفاء الموقع إلى أن يكتمل التحميل */
+/* إخفاء الموقع حتى التحميل */
 #site {
   display: none;
 }
@@ -97,41 +97,33 @@ header {
 }
 
 /* ================= CONTENT ================= */
-/* الحاوية الكبيرة شفافة بالكامل */
 .container {
   max-width: 600px;
   margin: 40px auto;
   padding: 30px;
-  background: rgba(255,255,255,0.08);
+  /* الإطار الأكبر شفاف */
+  opacity: 0;
   border-radius: 12px;
-  backdrop-filter: blur(7px);
   text-align: center;
-  opacity: 0; /* اجعل الحاوية الكبيرة غير مرئية */
-}
-
-/* محتوى داخل الحاوية يبقى مرئي */
-.container h1,
-.container h2,
-.container button,
-.container .services,
-.container .footer {
-  opacity: 1;
 }
 
 h1 { margin-bottom: 10px; font-size: 28px; }
 h2.subtitle { margin-top: 0; font-size: 16px; color: white; }
 
+/* Glass style للزر */
 button {
   width: 100%;
   margin-top: 20px;
   padding: 12px;
-  background: white;
-  color: black;
-  border: none;
+  background: rgba(255,255,255,0.1);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.3);
   font-weight: bold;
   font-size: 15px;
   border-radius: 8px;
   cursor: pointer;
+  backdrop-filter: blur(7px);
+  transition: opacity 0.3s;
 }
 
 button:hover { opacity: 0.85; }
