@@ -123,6 +123,16 @@ button#submitBtn {
   transition: transform 0.2s ease, background 0.1s ease;
 }
 
+/* تكبير عند المرور بالماوس */
+button#submitBtn:hover {
+  transform: scale(1.03);
+}
+
+/* إعادة اللون عند رفع الضغط */
+button#submitBtn:active {
+  background: rgba(255,255,255,0.08);
+}
+
 /* ================= SERVICES ================= */
 .services {
   max-width: 600px;
@@ -290,33 +300,30 @@ langBtn.onclick = () => {
 clickSound.volume = 0.15;
 dclickSound.volume = 0.5;
 
-/* ===== BUTTON INTERACTIONS ===== */
-function setupButton(button, sound=null) {
-  // Hover / Mouse interactions
-  button.addEventListener("mouseenter", () => button.style.transform = "scale(1.03)");
-  button.addEventListener("mouseleave", () => button.style.transform = "scale(1)");  
-  button.addEventListener("mousedown", () => {
-    if(sound) sound.play();
-    button.style.background = "rgba(200,200,200,0.3)";
-  });
-  button.addEventListener("mouseup", () => button.style.background = "rgba(255,255,255,0.08)");
-  button.addEventListener("mouseleave", () => button.style.background = "rgba(255,255,255,0.08)");
+instagramLink.onclick = () => clickSound.play();
+contactLink.onclick = () => clickSound.play();
 
-  // Touch / Mobile interactions
-  button.addEventListener("touchstart", () => button.style.transform = "scale(1.03)");
-  button.addEventListener("touchend", () => {
-    button.style.transform = "scale(1)";
-    button.style.background = "rgba(255,255,255,0.08)";
-  });
+/* ===== BUTTON INTERACTIONS ===== */
+function handleSubmitBtn(e){
+  submitBtn.style.transform = "scale(1.05)"; // يكبر فور الضغط
+  submitBtn.style.background = "rgba(255,255,255,0.15)";
+
+  function resetAndOpenLink(){
+    submitBtn.style.transform = "scale(1)";
+    submitBtn.style.background = "rgba(255,255,255,0.08)";
+    window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
+    submitBtn.removeEventListener('transitionend', resetAndOpenLink);
+  }
+
+  submitBtn.addEventListener('transitionend', resetAndOpenLink);
 }
 
-// إعداد زر الحجز
-setupButton(submitBtn, dclickSound);
-submitBtn.addEventListener("click", () => window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank"));
-
-// إعداد أزرار التواصل
-setupButton(instagramLink, clickSound);
-setupButton(contactLink, clickSound);
+// للأجهزة التي تعمل بالماوس
+submitBtn.onmousedown = handleSubmitBtn;
+// للأجهزة التي تعمل باللمس
+submitBtn.ontouchstart = handleSubmitBtn;
+submitBtn.onmouseup = () => { submitBtn.style.transform="scale(1)"; submitBtn.style.background="rgba(255,255,255,0.08)"; };
+submitBtn.ontouchend = () => { submitBtn.style.transform="scale(1)"; submitBtn.style.background="rgba(255,255,255,0.08)"; };
 </script>
 
 </body>
