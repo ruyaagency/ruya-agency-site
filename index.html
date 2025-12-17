@@ -97,6 +97,7 @@ header {
 }
 
 /* ================= CONTENT ================= */
+/* الحاوية الكبيرة شفافة بالكامل */
 .container {
   max-width: 600px;
   margin: 40px auto;
@@ -105,6 +106,16 @@ header {
   border-radius: 12px;
   backdrop-filter: blur(7px);
   text-align: center;
+  opacity: 0; /* اجعل الحاوية الكبيرة غير مرئية */
+}
+
+/* محتوى داخل الحاوية يبقى مرئي */
+.container h1,
+.container h2,
+.container button,
+.container .services,
+.container .footer {
+  opacity: 1;
 }
 
 h1 { margin-bottom: 10px; font-size: 28px; }
@@ -200,17 +211,15 @@ button:hover { opacity: 0.85; }
   <div class="lang-btn" id="langBtn">AR</div>
 </header>
 
-<!-- الحاوية الكبيرة تمت إزالتها بالكامل -->
-<h1 id="title" style="text-align:center;">RU'YA AGENCY</h1>
-<h2 class="subtitle" id="subtitle" style="text-align:center;">
-  Building marketing systems that help brands generate paying customers
-</h2>
-
-<button id="submitBtn" style="display:block; margin:20px auto;">✆ Book your free consultation</button>
-
-<!-- حاوية Our Services فقط -->
 <div class="container">
-  <div class="services" id="servicesSection">
+  <h1 id="title">RU'YA AGENCY</h1>
+  <h2 class="subtitle" id="subtitle">
+    Building marketing systems that help brands generate paying customers
+  </h2>
+
+  <button id="submitBtn">✆ Book your free consultation</button>
+
+  <div class="services">
     <h2 id="servicesTitle">Our Services</h2>
 
     <div class="services-content">
@@ -239,12 +248,12 @@ button:hover { opacity: 0.85; }
       </div>
     </div>
   </div>
-</div>
 
-<div class="footer">
-  <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" id="instagramLink" target="_blank">Instagram</a>
-  ·
-  <a href="mailto:ru.yaagency01@gmail.com" id="contactLink">Contact us</a>
+  <div class="footer">
+    <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" id="instagramLink" target="_blank">Instagram</a>
+    ·
+    <a href="mailto:ru.yaagency01@gmail.com" id="contactLink">Contact us</a>
+  </div>
 </div>
 
 </div>
