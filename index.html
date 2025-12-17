@@ -123,14 +123,8 @@ button#submitBtn {
   transition: transform 0.2s ease, background 0.1s ease;
 }
 
-/* تكبير عند المرور بالماوس */
 button#submitBtn:hover {
   transform: scale(1.03);
-}
-
-/* إعادة اللون عند رفع الضغط */
-button#submitBtn:active {
-  background: rgba(255,255,255,0.08);
 }
 
 /* ================= SERVICES ================= */
@@ -300,14 +294,21 @@ langBtn.onclick = () => {
 clickSound.volume = 0.15;
 dclickSound.volume = 0.5;
 
-instagramLink.onclick = () => clickSound.play();
-contactLink.onclick = () => clickSound.play();
+instagramLink.onmousedown = () => clickSound.play();
+instagramLink.onmouseup = () => instagramLink.style.color = "white";
+contactLink.onmousedown = () => clickSound.play();
+contactLink.onmouseup = () => contactLink.style.color = "white";
 
-/* ===== BUTTON INTERACTIONS ===== */
+/* ===== BUTTON BOOK CONSULTATION ===== */
 function handleSubmitBtn(e){
-  submitBtn.style.transform = "scale(1.05)"; // يكبر فور الضغط
+  // تشغيل الصوت فور الضغط
+  dclickSound.play();
+
+  // تكبير الزر وتغيير اللون عند الضغط
+  submitBtn.style.transform = "scale(1.05)";
   submitBtn.style.background = "rgba(255,255,255,0.15)";
 
+  // استرجاع الحالة الطبيعية ثم فتح الرابط
   function resetAndOpenLink(){
     submitBtn.style.transform = "scale(1)";
     submitBtn.style.background = "rgba(255,255,255,0.08)";
@@ -318,12 +319,12 @@ function handleSubmitBtn(e){
   submitBtn.addEventListener('transitionend', resetAndOpenLink);
 }
 
-// للأجهزة التي تعمل بالماوس
+// أحداث الزر
 submitBtn.onmousedown = handleSubmitBtn;
-// للأجهزة التي تعمل باللمس
-submitBtn.ontouchstart = handleSubmitBtn;
-submitBtn.onmouseup = () => { submitBtn.style.transform="scale(1)"; submitBtn.style.background="rgba(255,255,255,0.08)"; };
-submitBtn.ontouchend = () => { submitBtn.style.transform="scale(1)"; submitBtn.style.background="rgba(255,255,255,0.08)"; };
+submitBtn.onmouseup = () => {
+  submitBtn.style.transform = "scale(1)";
+  submitBtn.style.background = "rgba(255,255,255,0.08)";
+};
 </script>
 
 </body>
