@@ -107,6 +107,7 @@ header {
 h1 { margin-bottom: 10px; font-size: 28px; }
 h2.subtitle { margin-top: 0; font-size: 16px; color: white; }
 
+/* زر Book your free consultation */
 button#submitBtn {
   width: 100%;
   padding: 12px;
@@ -119,9 +120,18 @@ button#submitBtn {
   border-radius: 8px;
   cursor: pointer;
   margin-top: 20px;
+  transition: transform 0.2s ease, background 0.1s ease;
 }
 
-button#submitBtn:hover { opacity: 0.85; }
+/* تكبير عند المرور بالماوس */
+button#submitBtn:hover {
+  transform: scale(1.03);
+}
+
+/* إعادة اللون عند رفع الضغط */
+button#submitBtn:active {
+  background: rgba(255,255,255,0.08);
+}
 
 /* ================= SERVICES ================= */
 .services {
@@ -247,12 +257,22 @@ button#submitBtn:hover { opacity: 0.85; }
 
 </div>
 
-<audio id="clickSound" src="click.mp3"></audio>
-<audio id="dclickSound" src="dclick.mp3"></audio>
+<!-- الأصوات -->
+<audio id="clickSound" src="click.mp3" preload="auto"></audio>
+<audio id="dclickSound" src="dclick.mp3" preload="auto"></audio>
 
 <script>
 /* ===== SHOW SITE AFTER FULL LOAD ===== */
 window.addEventListener("load", () => {
+  // شغل الأصوات بصمت لتحميلها
+  clickSound.play().catch(()=>{});
+  clickSound.pause();
+  clickSound.currentTime = 0;
+
+  dclickSound.play().catch(()=>{});
+  dclickSound.pause();
+  dclickSound.currentTime = 0;
+
   document.getElementById("loader").style.display = "none";
   document.getElementById("site").style.display = "block";
 });
@@ -283,10 +303,9 @@ dclickSound.volume = 0.5;
 instagramLink.onclick = () => clickSound.play();
 contactLink.onclick = () => clickSound.play();
 
-submitBtn.onclick = () => {
-  dclickSound.play();
-  window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
-};
+submitBtn.onmousedown = () => dclickSound.play();
+submitBtn.onmouseup = () => submitBtn.style.background = "rgba(255,255,255,0.08)";
+submitBtn.onclick = () => window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
 </script>
 
 </body>
