@@ -300,19 +300,33 @@ langBtn.onclick = () => {
 clickSound.volume = 0.15;
 dclickSound.volume = 0.5;
 
-// Instagram & Contact buttons
-instagramLink.addEventListener('touchstart', () => clickSound.play(), {passive:true});
-instagramLink.addEventListener('touchend', () => instagramLink.click(), {passive:true});
-contactLink.addEventListener('touchstart', () => clickSound.play(), {passive:true});
-contactLink.addEventListener('touchend', () => contactLink.click(), {passive:true});
+instagramLink.addEventListener('mousedown', ()=> { instagramLink.style.background = "rgba(255,255,255,0.15)"; clickSound.play(); });
+instagramLink.addEventListener('mouseup', ()=> { instagramLink.style.background = "transparent"; });
+contactLink.addEventListener('mousedown', ()=> { contactLink.style.background = "rgba(255,255,255,0.15)"; clickSound.play(); });
+contactLink.addEventListener('mouseup', ()=> { contactLink.style.background = "transparent"; });
 
-// زر Book your free consultation
-// للماوس: hover يعمل كما هو
-// للهاتف: touchstart و touchend لتجنب البقاء مكبراً أو رمادي
-submitBtn.addEventListener('touchstart', (e) => {
-  dclickSound.play();
+/* ===== BUTTON INTERACTION ===== */
+submitBtn.addEventListener('mousedown', () => {
   submitBtn.style.transform = "scale(1.05)";
   submitBtn.style.background = "rgba(255,255,255,0.15)";
+  dclickSound.play();
+});
+
+submitBtn.addEventListener('mouseup', () => {
+  submitBtn.style.transform = "scale(1)";
+  submitBtn.style.background = "rgba(255,255,255,0.08)";
+});
+
+submitBtn.addEventListener('mouseleave', () => {
+  submitBtn.style.transform = "scale(1)";
+  submitBtn.style.background = "rgba(255,255,255,0.08)";
+});
+
+// دعم اللمس على الهاتف
+submitBtn.addEventListener('touchstart', (e) => {
+  submitBtn.style.transform = "scale(1.05)";
+  submitBtn.style.background = "rgba(255,255,255,0.15)";
+  dclickSound.play();
 }, {passive:true});
 
 submitBtn.addEventListener('touchend', (e) => {
@@ -321,7 +335,11 @@ submitBtn.addEventListener('touchend', (e) => {
   window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
 });
 
-// للماوس: hover لا يتأثر
+// اللابتوب: click يعمل كالمعتاد
+submitBtn.addEventListener('click', () => {
+  dclickSound.play();
+  window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
+});
 </script>
 
 </body>
