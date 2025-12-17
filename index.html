@@ -96,7 +96,7 @@ header {
   border: 1px solid rgba(255,255,255,0.25);
 }
 
-/* ================= CONTENT ================= */
+/* ================= SERVICES ================= */
 .container {
   max-width: 600px;
   margin: 40px auto;
@@ -125,7 +125,6 @@ button {
 
 button:hover { opacity: 0.85; }
 
-/* ================= SERVICES ================= */
 .services {
   margin-top: 40px;
   padding: 20px;
@@ -152,7 +151,7 @@ button:hover { opacity: 0.85; }
 
 /* ================= FOOTER ================= */
 .footer {
-  margin-top: 140px;
+  margin-top: 40px;
   margin-bottom: 40px;
   font-size: 13px;
   color: white;
@@ -200,15 +199,16 @@ button:hover { opacity: 0.85; }
   <div class="lang-btn" id="langBtn">AR</div>
 </header>
 
+<!-- العنوان الرئيسي والزر بدون حاوية -->
+<h1 id="title" style="text-align:center;">RU'YA AGENCY</h1>
+<h2 class="subtitle" id="subtitle" style="text-align:center;">
+  Building strategic marketing systems that help brands generate paying customers
+</h2>
+<button id="submitBtn" style="display:block; margin:20px auto;">✆ Book your free consultation</button>
+
+<!-- حاوية Our Services فقط -->
 <div class="container">
-  <h1 id="title">RU'YA AGENCY</h1>
-  <h2 class="subtitle" id="subtitle">
-    Building strategic marketing systems that help brands generate paying customers
-  </h2>
-
-  <button id="submitBtn">✆ Book your free consultation</button>
-
-  <div class="services">
+  <div class="services" id="servicesSection">
     <h2 id="servicesTitle">Our Services</h2>
 
     <div class="services-content">
@@ -237,12 +237,13 @@ button:hover { opacity: 0.85; }
       </div>
     </div>
   </div>
+</div>
 
-  <div class="footer">
-    <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" id="instagramLink" target="_blank">Instagram</a>
-    ·
-    <a href="mailto:ru.yaagency01@gmail.com" id="contactLink">Contact us</a>
-  </div>
+<!-- FOOTER -->
+<div class="footer">
+  <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" id="instagramLink" target="_blank">Instagram</a>
+  ·
+  <a href="mailto:ru.yaagency01@gmail.com" id="contactLink">Contact us</a>
 </div>
 
 </div>
