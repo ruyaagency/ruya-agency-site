@@ -14,9 +14,6 @@ html, body {
   overflow-x: hidden;
   overflow-y: auto;
   box-sizing: border-box;
-}
-
-body {
   font-family: Arial, sans-serif;
   color: white;
   background: none;
@@ -67,7 +64,7 @@ body {
   100% { opacity: 0.2; }
 }
 
-/* إخفاء الموقع حتى التحميل */
+/* إخفاء الموقع إلى أن يكتمل التحميل */
 #site {
   display: none;
 }
@@ -97,43 +94,31 @@ header {
 }
 
 /* ================= CONTENT ================= */
-.container {
+h1 { margin: 40px 40px 10px 40px; font-size: 28px; }
+h2.subtitle { margin: 0 40px 20px 40px; font-size: 16px; color: white; }
+
+button#submitBtn {
+  display: block;
+  width: calc(100% - 80px); /* نفس امتداد الحاوية السابقة (600px مع margin auto) */
   max-width: 600px;
-  margin: 40px auto;
-  padding: 30px;
-  /* الإطار الأكبر شفاف */
-  opacity: 0;
-  border-radius: 12px;
-  text-align: center;
-}
-
-h1 { margin-bottom: 10px; font-size: 28px; }
-h2.subtitle { margin-top: 0; font-size: 16px; color: white; }
-
-/* Glass style للزر */
-button {
-  width: 100%;
-  margin-top: 20px;
+  margin: 0 auto 20px auto;
   padding: 12px;
-  background: rgba(255,255,255,0.1);
-  color: white;
-  border: 1px solid rgba(255,255,255,0.3);
+  background: white;
+  color: black;
+  border: none;
   font-weight: bold;
   font-size: 15px;
   border-radius: 8px;
   cursor: pointer;
-  backdrop-filter: blur(7px);
-  transition: opacity 0.3s;
 }
 
-button:hover { opacity: 0.85; }
+button#submitBtn:hover { opacity: 0.85; }
 
 /* ================= SERVICES ================= */
 .services {
-  margin-top: 40px;
+  margin: 40px auto;
+  max-width: 600px;
   padding: 20px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 10px;
   text-align: left;
 }
 
@@ -155,8 +140,7 @@ button:hover { opacity: 0.85; }
 
 /* ================= FOOTER ================= */
 .footer {
-  margin-top: 140px;
-  margin-bottom: 40px;
+  margin: 140px auto 40px auto;
   font-size: 13px;
   color: white;
   text-align: center;
@@ -203,49 +187,47 @@ button:hover { opacity: 0.85; }
   <div class="lang-btn" id="langBtn">AR</div>
 </header>
 
-<div class="container">
-  <h1 id="title">RU'YA AGENCY</h1>
-  <h2 class="subtitle" id="subtitle">
-    Building marketing systems that help brands generate paying customers
-  </h2>
+<h1 id="title">RU'YA AGENCY</h1>
+<h2 class="subtitle" id="subtitle">
+  Building strategic marketing systems that help brands generate paying customers
+</h2>
 
-  <button id="submitBtn">✆ Book your free consultation</button>
+<button id="submitBtn">✆ Book your free consultation</button>
 
-  <div class="services">
-    <h2 id="servicesTitle">Our Services</h2>
+<div class="services" id="servicesSection">
+  <h2 id="servicesTitle">Our Services</h2>
 
-    <div class="services-content">
-      <div id="servicesEn">
-        <ul>
-          <li>Brand frameworks for businesses and personal brands</li>
-          <li>Creative campaigns aligned with brand identity</li>
-          <li>Visual identity and brand voice</li>
-          <li>Market positioning and growth solutions</li>
-        </ul>
-        <p>
-          We work selectively with brands we see high growth potential in.
-        </p>
-      </div>
+  <div class="services-content">
+    <div id="servicesEn">
+      <ul>
+        <li>Brand frameworks for businesses and personal brands</li>
+        <li>Creative campaigns aligned with brand identity</li>
+        <li>Visual identity and brand voice</li>
+        <li>Market positioning and growth solutions</li>
+      </ul>
+      <p>
+        At Ru’ya Agency, we build strategic marketing systems that turn brands into customer-generating machines.
+      </p>
+    </div>
 
-      <div id="servicesAr" style="display:none">
-        <ul>
-          <li>أطر عمل لبراند الشركات والعلامات الشخصية</li>
-          <li>حملات إبداعية متوافقة مع هوية البراند</li>
-          <li>الهوية البصرية ونبرة العلامة التجارية</li>
-          <li>تحديد موقع السوق وحلول النمو</li>
-        </ul>
-        <p>
-          .نختار العمل فقط مع العلامات التجارية التي نرى فيها إمكانيات نمو كبيرة
-        </p>
-      </div>
+    <div id="servicesAr" style="display:none">
+      <ul>
+        <li>أطر عمل للبراند للشركات والعلامات الشخصية</li>
+        <li>حملات إبداعية متوافقة مع هوية البراند</li>
+        <li>الهوية البصرية ونبرة العلامة التجارية</li>
+        <li>تحديد موقع السوق وحلول النمو</li>
+      </ul>
+      <p>
+        في وكالة رؤية، نحن نبني أنظمة تسويق استراتيجية تحول علامتك التجارية إلى آلة تجذب العملاء الفعليين.
+      </p>
     </div>
   </div>
+</div>
 
-  <div class="footer">
-    <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" id="instagramLink" target="_blank">Instagram</a>
-    ·
-    <a href="mailto:ru.yaagency01@gmail.com" id="contactLink">Contact us</a>
-  </div>
+<div class="footer">
+  <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" id="instagramLink" target="_blank">Instagram</a>
+  ·
+  <a href="mailto:ru.yaagency01@gmail.com" id="contactLink">Contact us</a>
 </div>
 
 </div>
@@ -254,21 +236,20 @@ button:hover { opacity: 0.85; }
 <audio id="dclickSound" src="dclick.mp3"></audio>
 
 <script>
-/* ===== SHOW SITE AFTER FULL LOAD ===== */
 window.addEventListener("load", () => {
   document.getElementById("loader").style.display = "none";
   document.getElementById("site").style.display = "block";
 });
 
-/* ===== LANGUAGE SWITCH ===== */
+/* LANGUAGE SWITCH */
 let arabic = false;
 langBtn.onclick = () => {
   arabic = !arabic;
   langBtn.innerText = arabic ? "EN" : "AR";
   title.innerText = arabic ? "وكالة رؤية" : "RU'YA AGENCY";
   subtitle.innerText = arabic
-    ? "بناء أنظمة تسويق تساعد العلامات التجارية على جذب عملائها الفعليين"
-    : "Building marketing systems that help brands generate paying customers";
+    ? "بناء أنظمة تسويق استراتيجية تساعد العلامات التجارية على جذب عملائها الفعليين"
+    : "Building strategic marketing systems that help brands generate paying customers";
 
   submitBtn.innerText = arabic
     ? "✆ احجز استشارتك المجانية"
@@ -279,13 +260,12 @@ langBtn.onclick = () => {
   servicesAr.style.display = arabic ? "block" : "none";
 };
 
-/* ===== SOUNDS ===== */
+/* SOUNDS */
 clickSound.volume = 0.15;
 dclickSound.volume = 0.5;
 
 instagramLink.onclick = () => clickSound.play();
 contactLink.onclick = () => clickSound.play();
-
 submitBtn.onclick = () => {
   dclickSound.play();
   window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
