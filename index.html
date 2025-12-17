@@ -94,44 +94,34 @@ header {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(7px);
   border: 1px solid rgba(255,255,255,0.25);
-  transition: 0.3s;
 }
 
 /* ================= CONTENT ================= */
-h1 {
-  margin: 40px auto 10px auto;
-  font-size: 28px;
-  text-align: center;
-}
-h2.subtitle {
-  margin: 0 auto 20px auto;
-  font-size: 16px;
-  color: white;
-  text-align: center;
-}
+h1 { margin-bottom: 10px; font-size: 28px; text-align: center; }
+h2.subtitle { margin-top: 0; font-size: 16px; color: white; text-align: center; }
 
-/* زر الاستشارة */
-#submitBtn {
-  display: block;
-  width: calc(100% - 80px);
-  max-width: 600px;
-  margin: 0 auto 20px auto;
+/* زر Book your free consultation – Glass Blur */
+button {
+  width: 100%;
+  margin-top: 20px;
   padding: 12px;
-  background: white;
   color: black;
-  border: none;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(7px);
+  border: 1px solid rgba(255,255,255,0.25);
   font-weight: bold;
   font-size: 15px;
   border-radius: 8px;
   cursor: pointer;
 }
 
-#submitBtn:hover { opacity: 0.85; }
+button:hover { opacity: 0.85; }
 
 /* ================= SERVICES ================= */
 .services {
-  margin: 40px auto;
-  max-width: 600px;
+  margin: 40px auto 0 auto;   /* نفس المسافة العليا السابقة */
+  width: 100%;
+  max-width: 600px;            /* نفس العرض السابق */
   padding: 20px;
   background: rgba(255,255,255,0.1);
   border-radius: 10px;
@@ -157,7 +147,8 @@ h2.subtitle {
 
 /* ================= FOOTER ================= */
 .footer {
-  margin: 140px auto 40px auto;
+  margin-top: 140px;
+  margin-bottom: 40px;
   font-size: 13px;
   color: white;
   text-align: center;
