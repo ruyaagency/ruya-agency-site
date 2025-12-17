@@ -123,8 +123,14 @@ button#submitBtn {
   transition: transform 0.2s ease, background 0.1s ease;
 }
 
+/* تكبير عند المرور بالماوس */
 button#submitBtn:hover {
   transform: scale(1.03);
+}
+
+/* إعادة اللون عند رفع الضغط */
+button#submitBtn:active {
+  background: rgba(255,255,255,0.08);
 }
 
 /* ================= SERVICES ================= */
@@ -294,37 +300,28 @@ langBtn.onclick = () => {
 clickSound.volume = 0.15;
 dclickSound.volume = 0.5;
 
-instagramLink.onmousedown = () => clickSound.play();
-instagramLink.onmouseup = () => instagramLink.style.color = "white";
-contactLink.onmousedown = () => clickSound.play();
-contactLink.onmouseup = () => contactLink.style.color = "white";
+// Instagram & Contact buttons
+instagramLink.addEventListener('touchstart', () => clickSound.play(), {passive:true});
+instagramLink.addEventListener('touchend', () => instagramLink.click(), {passive:true});
+contactLink.addEventListener('touchstart', () => clickSound.play(), {passive:true});
+contactLink.addEventListener('touchend', () => contactLink.click(), {passive:true});
 
-/* ===== BUTTON BOOK CONSULTATION ===== */
-function handleSubmitBtn(e){
-  // تشغيل الصوت فور الضغط
+// زر Book your free consultation
+// للماوس: hover يعمل كما هو
+// للهاتف: touchstart و touchend لتجنب البقاء مكبراً أو رمادي
+submitBtn.addEventListener('touchstart', (e) => {
   dclickSound.play();
-
-  // تكبير الزر وتغيير اللون عند الضغط
   submitBtn.style.transform = "scale(1.05)";
   submitBtn.style.background = "rgba(255,255,255,0.15)";
+}, {passive:true});
 
-  // استرجاع الحالة الطبيعية ثم فتح الرابط
-  function resetAndOpenLink(){
-    submitBtn.style.transform = "scale(1)";
-    submitBtn.style.background = "rgba(255,255,255,0.08)";
-    window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
-    submitBtn.removeEventListener('transitionend', resetAndOpenLink);
-  }
-
-  submitBtn.addEventListener('transitionend', resetAndOpenLink);
-}
-
-// أحداث الزر
-submitBtn.onmousedown = handleSubmitBtn;
-submitBtn.onmouseup = () => {
+submitBtn.addEventListener('touchend', (e) => {
   submitBtn.style.transform = "scale(1)";
   submitBtn.style.background = "rgba(255,255,255,0.08)";
-};
+  window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
+});
+
+// للماوس: hover لا يتأثر
 </script>
 
 </body>
