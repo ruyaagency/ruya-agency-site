@@ -94,50 +94,48 @@ header {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(7px);
   border: 1px solid rgba(255,255,255,0.25);
-  transition: 0.3s;
 }
 
 /* ================= CONTENT ================= */
-h1 {
-  margin: 40px auto 10px auto;
-  font-size: 28px;
-  text-align: center;
-}
-h2.subtitle {
-  margin: 0 auto 20px auto;
-  font-size: 16px;
-  color: white;
+.container {
+  max-width: 600px;
+  width: calc(100% - 80px);
+  margin: 40px auto;
+  padding: 30px;
   text-align: center;
 }
 
-/* زر الاستشارة – Glass Blur */
+h1 { margin-bottom: 10px; font-size: 28px; }
+h2.subtitle { margin-top: 0; font-size: 16px; color: white; }
+
+/* زر Book your free consultation مع Glass Blur */
 #submitBtn {
-  display: block;
-  width: calc(100% - 80px);
+  width: calc(100% - 0px);
   max-width: 600px;
-  margin: 0 auto 20px auto;
+  margin-top: 20px;
   padding: 12px;
-  background: rgba(255,255,255,0.8);
-  color: black;
-  border: none;
   font-weight: bold;
   font-size: 15px;
   border-radius: 8px;
   cursor: pointer;
+  color: white;
+  background: rgba(255,255,255,0.08);
   backdrop-filter: blur(7px);
+  border: 1px solid rgba(255,255,255,0.25);
 }
 
-#submitBtn:hover { opacity: 0.85; }
+#submitBtn:hover {
+  opacity: 0.85;
+}
 
 /* ================= SERVICES ================= */
 .services {
-  margin: 40px auto;
-  width: 600px; /* ضبط نفس عرض الحاوية السابقة */
-  max-width: 90%; /* لضمان تناسق على الشاشات الصغيرة */
+  max-width: 600px;
+  width: calc(100% - 80px);
+  margin: 40px auto 0 auto;
   padding: 20px;
   background: rgba(255,255,255,0.1);
   border-radius: 10px;
-  backdrop-filter: blur(7px);
   text-align: left;
 }
 
@@ -159,7 +157,8 @@ h2.subtitle {
 
 /* ================= FOOTER ================= */
 .footer {
-  margin: 140px auto 40px auto;
+  margin-top: 140px;
+  margin-bottom: 40px;
   font-size: 13px;
   color: white;
   text-align: center;
@@ -237,7 +236,7 @@ h2.subtitle {
         <li>تحديد موقع السوق وحلول النمو</li>
       </ul>
       <p>
-        نختار العمل فقط مع العلامات التجارية التي نرى فيها إمكانيات نمو كبيرة.
+        .نختار العمل فقط مع العلامات التجارية التي نرى فيها إمكانيات نمو كبيرة
       </p>
     </div>
   </div>
