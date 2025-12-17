@@ -264,7 +264,7 @@ button#submitBtn:active {
 <script>
 /* ===== SHOW SITE AFTER FULL LOAD ===== */
 window.addEventListener("load", () => {
-  // شغل الأصوات بصمت لتحميلها
+  // تحميل الأصوات بصمت
   clickSound.play().catch(()=>{});
   clickSound.pause();
   clickSound.currentTime = 0;
@@ -300,29 +300,33 @@ langBtn.onclick = () => {
 clickSound.volume = 0.15;
 dclickSound.volume = 0.5;
 
-instagramLink.addEventListener('mousedown', ()=> { instagramLink.style.background = "rgba(255,255,255,0.15)"; clickSound.play(); });
-instagramLink.addEventListener('mouseup', ()=> { instagramLink.style.background = "transparent"; });
-contactLink.addEventListener('mousedown', ()=> { contactLink.style.background = "rgba(255,255,255,0.15)"; clickSound.play(); });
-contactLink.addEventListener('mouseup', ()=> { contactLink.style.background = "transparent"; });
+instagramLink.addEventListener('click', () => clickSound.play());
+contactLink.addEventListener('click', () => clickSound.play());
 
-/* ===== BUTTON INTERACTION ===== */
-submitBtn.addEventListener('mousedown', () => {
+/* ===== BUTTON INTERACTION - ALWAYS WORK ===== */
+function activateSubmitBtn() {
   submitBtn.style.transform = "scale(1.05)";
   submitBtn.style.background = "rgba(255,255,255,0.15)";
   dclickSound.play();
-});
+  setTimeout(() => {
+    submitBtn.style.transform = "scale(1)";
+    submitBtn.style.background = "rgba(255,255,255,0.08)";
+    window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
+  }, 50);
+}
 
+// ماوس
+submitBtn.addEventListener('mousedown', activateSubmitBtn);
 submitBtn.addEventListener('mouseup', () => {
   submitBtn.style.transform = "scale(1)";
   submitBtn.style.background = "rgba(255,255,255,0.08)";
 });
-
 submitBtn.addEventListener('mouseleave', () => {
   submitBtn.style.transform = "scale(1)";
   submitBtn.style.background = "rgba(255,255,255,0.08)";
 });
 
-// دعم اللمس على الهاتف
+// لمس الهاتف
 submitBtn.addEventListener('touchstart', (e) => {
   submitBtn.style.transform = "scale(1.05)";
   submitBtn.style.background = "rgba(255,255,255,0.15)";
@@ -332,13 +336,9 @@ submitBtn.addEventListener('touchstart', (e) => {
 submitBtn.addEventListener('touchend', (e) => {
   submitBtn.style.transform = "scale(1)";
   submitBtn.style.background = "rgba(255,255,255,0.08)";
-  window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
-});
-
-// اللابتوب: click يعمل كالمعتاد
-submitBtn.addEventListener('click', () => {
-  dclickSound.play();
-  window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
+  setTimeout(() => {
+    window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
+  }, 50);
 });
 </script>
 
