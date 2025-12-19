@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RU'YA AGENCY</title>
+
+<!-- Preload logo -->
+<link rel="preload" href="logo.png" as="image">
+
 <style>
 html, body {
   margin: 0;
@@ -13,12 +17,13 @@ html, body {
   overflow-x: hidden;
   overflow-y: auto;
   box-sizing: border-box;
-  background-color: black; /* صفحة البداية عند التحميل */
+  background: black; /* صفحة سوداء قبل تحميل العناصر */
 }
 
 body {
   font-family: Arial, sans-serif;
   color: white;
+  background: none;
 }
 
 /* ================= VIDEO BACKGROUND ================= */
@@ -29,18 +34,18 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: -2;
+  z-index: -1;
 }
 
 /* ================= LOADING SCREEN ================= */
 #loader {
   position: fixed;
   inset: 0;
+  background: transparent; /* الشفافية حتى يظهر الفيديو */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  background: transparent; /* الشفافية حتى يظهر الفيديو */
 }
 
 .loader-dots {
@@ -69,6 +74,8 @@ body {
 /* إخفاء الموقع حتى يكتمل التحميل */
 #site {
   display: none;
+  opacity: 0;
+  transition: opacity 1s ease-in;
 }
 
 /* ================= HEADER ================= */
@@ -77,12 +84,13 @@ header {
   justify-content: space-between;
   align-items: center;
   margin: 20px 40px 0 40px;
-  opacity: 0;
-  transition: opacity 1s ease;
 }
 
-.logo { width: 60px; }
+.logo {
+  width: 60px;
+}
 
+/* زر اللغة – Glassmorphism */
 .lang-btn {
   padding: 8px 14px;
   border-radius: 8px;
@@ -100,12 +108,10 @@ header {
   width: calc(100% - 80px);
   margin: 40px auto;
   text-align: center;
-  opacity: 0;
-  transition: opacity 1s ease;
 }
 
-h1 { margin-bottom: 10px; font-size: 28px; }
-h2.subtitle { margin-top: 0; font-size: 16px; color: white; }
+h1 { margin-bottom: 10px; font-size: 28px; transition: opacity 1s ease-in; opacity: 0; }
+h2.subtitle { margin-top: 0; font-size: 16px; color: white; transition: opacity 1s ease-in; opacity: 0; }
 
 button#submitBtn {
   width: 100%;
@@ -119,10 +125,13 @@ button#submitBtn {
   border-radius: 8px;
   cursor: pointer;
   margin-top: 20px;
-  transition: transform 0.2s ease, background 0.1s ease;
+  transition: all 0.2s ease-in-out, opacity 1s ease-in;
+  opacity: 0;
 }
 
-button#submitBtn:hover { transform: scale(1.03); }
+button#submitBtn:hover {
+  transform: scale(1.02);
+}
 
 /* ================= SERVICES ================= */
 .services {
@@ -133,8 +142,8 @@ button#submitBtn:hover { transform: scale(1.03); }
   background: rgba(255,255,255,0.1);
   border-radius: 10px;
   text-align: left;
+  transition: opacity 1s ease-in;
   opacity: 0;
-  transition: opacity 1s ease;
 }
 
 .services-content {
@@ -143,8 +152,15 @@ button#submitBtn:hover { transform: scale(1.03); }
   line-height: 1.5;
 }
 
-.services-content ul { list-style: disc; margin-left: 20px; }
-.services-content p { margin-top: 15px; color: white; }
+.services-content ul {
+  list-style: disc;
+  margin-left: 20px;
+}
+
+.services-content p {
+  margin-top: 15px;
+  color: white;
+}
 
 /* ================= FOOTER ================= */
 .footer {
@@ -153,11 +169,24 @@ button#submitBtn:hover { transform: scale(1.03); }
   font-size: 13px;
   color: white;
   text-align: center;
+  transition: opacity 1s ease-in;
   opacity: 0;
-  transition: opacity 1s ease;
 }
 
-.footer a { color: white; text-decoration: none; margin: 0 10px; }
+.footer a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+/* ================= SUCCESS ================= */
+#success {
+  display: none;
+  margin-top: 20px;
+  padding: 10px;
+  background: rgba(0,255,100,0.3);
+  border-radius: 8px;
+}
 </style>
 </head>
 
@@ -181,7 +210,7 @@ button#submitBtn:hover { transform: scale(1.03); }
 <div id="site">
 
 <header>
-  <img src="logo.png" class="logo" alt="Logo">
+  <img src="logo.png" class="logo" alt="Logo" id="logoImg">
   <div class="lang-btn" id="langBtn">AR</div>
 </header>
 
@@ -205,7 +234,9 @@ button#submitBtn:hover { transform: scale(1.03); }
         <li>Visual identity and brand voice</li>
         <li>Market positioning and growth solutions</li>
       </ul>
-      <p>We work selectively with brands we see high growth potential in.</p>
+      <p>
+        We work selectively with brands we see high growth potential in.
+      </p>
     </div>
 
     <div id="servicesAr" style="display:none">
@@ -215,13 +246,16 @@ button#submitBtn:hover { transform: scale(1.03); }
         <li>الهوية البصرية ونبرة العلامة التجارية</li>
         <li>تحديد موقع السوق وحلول النمو</li>
       </ul>
-      <p>.نختار العمل فقط مع العلامات التجارية التي نرى فيها إمكانيات نمو كبيرة</p>
+      <p>
+        .نختار العمل فقط مع العلامات التجارية التي نرى فيها إمكانيات نمو كبيرة
+      </p>
     </div>
   </div>
 </div>
 
 <div class="footer">
-  <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" id="instagramLink" target="_blank">Instagram</a> ·
+  <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" id="instagramLink" target="_blank">Instagram</a>
+  ·
   <a href="mailto:ru.yaagency01@gmail.com" id="contactLink">Contact us</a>
 </div>
 
@@ -231,28 +265,53 @@ button#submitBtn:hover { transform: scale(1.03); }
 <audio id="dclickSound" src="dclick.mp3" preload="auto"></audio>
 
 <script>
-const loader = document.getElementById("loader");
-const site = document.getElementById("site");
-const fadeElements = [document.querySelector("header"), document.querySelector(".content-wrapper"), document.querySelector(".services"), document.querySelector(".footer")];
-
-// ===== Minimum 1s loader & show site after full load =====
+/* ===== SHOW SITE AFTER FULL LOAD ===== */
 window.addEventListener("load", () => {
-  const minLoadTime = 1000;
+  const minLoadTime = 1000; // 1 ثانية على الأقل
   const startTime = Date.now();
 
-  const showSite = () => {
+  const loader = document.getElementById("loader");
+  const site = document.getElementById("site");
+
+  const fadeElements = [
+    document.getElementById("title"),
+    document.getElementById("subtitle"),
+    document.getElementById("submitBtn"),
+    document.querySelector(".services"),
+    document.querySelector(".footer")
+  ];
+
+  // Preload logo
+  const logoImg = document.getElementById("logoImg");
+  if (logoImg.complete) {
+    showAfterMinTime();
+  } else {
+    logoImg.onload = showAfterMinTime;
+  }
+
+  function showAfterMinTime() {
+    const remaining = minLoadTime - (Date.now() - startTime);
+    if (remaining > 0) setTimeout(showSite, remaining);
+    else showSite();
+  }
+
+  function showSite() {
     loader.style.display = "none";
     site.style.display = "block";
     fadeElements.forEach(el => el.style.opacity = 1);
-  };
-
-  const remaining = minLoadTime - (Date.now() - startTime);
-  if (remaining > 0) setTimeout(showSite, remaining);
-  else showSite();
+  }
 });
 
-// ===== LANGUAGE SWITCH =====
+/* ===== LANGUAGE SWITCH ===== */
 let arabic = false;
+const langBtn = document.getElementById("langBtn");
+const title = document.getElementById("title");
+const subtitle = document.getElementById("subtitle");
+const submitBtn = document.getElementById("submitBtn");
+const servicesTitle = document.getElementById("servicesTitle");
+const servicesEn = document.getElementById("servicesEn");
+const servicesAr = document.getElementById("servicesAr");
+
 langBtn.onclick = () => {
   arabic = !arabic;
   langBtn.innerText = arabic ? "EN" : "AR";
@@ -270,20 +329,26 @@ langBtn.onclick = () => {
   servicesAr.style.display = arabic ? "block" : "none";
 };
 
-// ===== SOUNDS =====
+/* ===== SOUNDS ===== */
+const clickSound = document.getElementById("clickSound");
+const dclickSound = document.getElementById("dclickSound");
+
 clickSound.volume = 0.15;
 dclickSound.volume = 0.5;
 
-instagramLink.onmousedown = contactLink.onmousedown = submitBtn.onmousedown = e => {
-  e.target.style.background = "rgba(255,255,255,0.25)";
-};
-instagramLink.onmouseup = contactLink.onmouseup = submitBtn.onmouseup = e => {
-  e.target.style.background = e.target.id === "submitBtn" ? "rgba(255,255,255,0.08)" : "transparent";
-  if(e.target.id === "submitBtn") dclickSound.play();
-  else clickSound.play();
-};
+document.getElementById("instagramLink").onclick = () => clickSound.play();
+document.getElementById("contactLink").onclick = () => clickSound.play();
 
-submitBtn.onclick = () => { window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank"); };
+submitBtn.addEventListener("click", () => {
+  dclickSound.play();
+  window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
+});
+
+/* ===== BUTTON ACTIVE COLOR FIX ===== */
+submitBtn.addEventListener("mousedown", () => submitBtn.style.backgroundColor = "rgba(255,255,255,0.2)");
+submitBtn.addEventListener("mouseup", () => submitBtn.style.backgroundColor = "rgba(255,255,255,0.08)");
+submitBtn.addEventListener("mouseleave", () => submitBtn.style.backgroundColor = "rgba(255,255,255,0.08)");
+
 </script>
 
 </body>
