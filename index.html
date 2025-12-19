@@ -13,7 +13,6 @@ html, body {
   height: 100%;
   overflow-x: hidden;
   box-sizing: border-box;
-  background-color: black; /* لتجنب الوميض الأبيض */
 }
 
 body {
@@ -68,18 +67,6 @@ body {
 /* ================= SITE ================= */
 #site {
   display: none;
-}
-
-/* ================= FADE IN ================= */
-.fade {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity .8s ease, transform .8s ease;
-}
-
-.fade.show {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* ================= HEADER ================= */
@@ -182,14 +169,14 @@ h1 { font-size: 28px; margin-bottom: 10px; }
 </header>
 
 <div class="content-wrapper">
-  <h1 id="title" class="fade">RU'YA AGENCY</h1>
-  <p class="subtitle fade" id="subtitle">
+  <h1 id="title">RU'YA AGENCY</h1>
+  <p class="subtitle" id="subtitle">
     Building marketing systems that help brands generate paying customers
   </p>
-  <button id="submitBtn" class="fade">✆ Book your free consultation</button>
+  <button id="submitBtn">✆ Book your free consultation</button>
 </div>
 
-<div class="services fade">
+<div class="services">
   <h2 id="servicesTitle">Our Services</h2>
   <div id="servicesEn">
     <ul>
@@ -209,7 +196,7 @@ h1 { font-size: 28px; margin-bottom: 10px; }
   </div>
 </div>
 
-<div class="footer fade">
+<div class="footer">
   <a id="instagramLink" href="https://www.instagram.com/ruya.agency" target="_blank">Instagram</a> ·
   <a id="contactLink" href="mailto:ru.yaagency01@gmail.com">Contact us</a>
 </div>
@@ -247,25 +234,21 @@ logo.onload = () => {
   tryShowSite();
 };
 
-/* ===== SHOW SITE ===== */
+/* ===== CHECK ===== */
 function tryShowSite() {
   if (videoReady && logoReady && minTimePassed) {
     loader.style.display = "none";
     site.style.display = "block";
-
-    // Fade in elements
-    setTimeout(() => {
-      document.querySelectorAll(".fade").forEach(el => {
-        el.classList.add("show");
-      });
-    }, 100);
   }
 }
 
-/* ===== SOUNDS ===== */
-clickSound.volume = 0.15;
-dclickSound.volume = 0.5;
+/* ===== SOUNDS PRELOAD ===== */
+clickSound.volume = .15;
+dclickSound.volume = .5;
+clickSound.load();
+dclickSound.load();
 
+/* ===== INTERACTIONS ===== */
 instagramLink.onmousedown = () => clickSound.play();
 contactLink.onmousedown = () => clickSound.play();
 submitBtn.onmousedown = () => dclickSound.play();
@@ -279,7 +262,9 @@ langBtn.onclick=()=>{
  ar=!ar;
  langBtn.textContent=ar?"EN":"AR";
  title.textContent=ar?"وكالة رؤية":"RU'YA AGENCY";
- subtitle.textContent=ar?"بناء أنظمة تسويق تساعد العلامات التجارية على جذب عملائها الفعليين":"Building marketing systems that help brands generate paying customers";
+ subtitle.textContent=ar?
+ "بناء أنظمة تسويق تساعد العلامات التجارية على جذب عملائها الفعليين":
+ "Building marketing systems that help brands generate paying customers";
  submitBtn.textContent=ar?"✆ احجز استشارتك المجانية":"✆ Book your free consultation";
  servicesTitle.textContent=ar?"خدماتنا":"Our Services";
  servicesEn.style.display=ar?"none":"block";
