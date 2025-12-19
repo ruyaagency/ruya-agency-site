@@ -6,35 +6,38 @@
 <title>RU'YA AGENCY</title>
 
 <style>
+/* ================= RESET + BODY ================= */
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow-x: hidden;
   box-sizing: border-box;
-}
-
-body {
+  background: #000; /* الخلفية السوداء من البداية */
   font-family: Arial, sans-serif;
   color: white;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
+
+body[dir="rtl"] { direction: rtl; text-align: right; }
+body[dir="rtl"] ul { padding-right: 20px; padding-left: 0; }
 
 /* ================= VIDEO BACKGROUND ================= */
 #bgVideo {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   z-index: -1;
 }
 
-/* ================= LOADER ================= */
+/* ================= LOADING SCREEN ================= */
 #loader {
   position: fixed;
   inset: 0;
-  background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,31 +57,34 @@ body {
   animation: wave 1.2s infinite;
 }
 
-.loader-dots span:nth-child(1){animation-delay:0s}
-.loader-dots span:nth-child(2){animation-delay:.15s}
-.loader-dots span:nth-child(3){animation-delay:.3s}
+.loader-dots span:nth-child(1) { animation-delay: 0s; }
+.loader-dots span:nth-child(2) { animation-delay: 0.15s; }
+.loader-dots span:nth-child(3) { animation-delay: 0.3s; }
 
 @keyframes wave {
-  0%{opacity:.2}
-  50%{opacity:1}
-  100%{opacity:.2}
+  0% { opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { opacity: 0.2; }
 }
 
-/* ================= SITE ================= */
-#site {
-  display: none;
-}
+/* ================= FADE IN ================= */
+.fade { opacity: 0; transform: translateY(10px); transition: opacity .8s ease, transform .8s ease; }
+.fade.show { opacity: 1; transform: translateY(0); }
+
+/* إخفاء الموقع حتى يكتمل التحميل */
+#site { display: none; }
 
 /* ================= HEADER ================= */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20px 40px;
+  margin: 20px 40px 0 40px;
 }
 
 .logo { width: 60px; }
 
+/* زر اللغة – Glassmorphism */
 .lang-btn {
   padding: 8px 14px;
   border-radius: 8px;
@@ -98,12 +104,11 @@ header {
   text-align: center;
 }
 
-h1 { font-size: 28px; margin-bottom: 10px; }
-.subtitle { font-size: 16px; }
+h1 { margin-bottom: 10px; font-size: 28px; }
+h2.subtitle { margin-top: 0; font-size: 16px; color: white; }
 
-#submitBtn {
+button#submitBtn {
   width: 100%;
-  margin-top: 20px;
   padding: 12px;
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(7px);
@@ -113,36 +118,47 @@ h1 { font-size: 28px; margin-bottom: 10px; }
   font-size: 15px;
   border-radius: 8px;
   cursor: pointer;
-  transition: transform .15s ease;
+  margin-top: 20px;
+  transition: transform 0.2s, background 0.1s;
 }
 
-#submitBtn:hover {
-  transform: scale(1.03);
-}
+button#submitBtn:hover { transform: scale(1.03); opacity: 0.85; }
+button#submitBtn:active { background: rgba(200,200,200,0.2); color: white; }
 
 /* ================= SERVICES ================= */
 .services {
   max-width: 600px;
   width: calc(100% - 80px);
-  margin: 40px auto 0;
+  margin: 40px auto 0 auto;
   padding: 20px;
   background: rgba(255,255,255,0.1);
   border-radius: 10px;
   text-align: left;
 }
 
-/* ================= FOOTER ================= */
-.footer {
-  margin: 140px 0 40px;
-  text-align: center;
-  font-size: 13px;
+.services-content {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
-.footer a {
+.services-content ul { list-style: disc; margin-left: 20px; }
+.services-content p { margin-top: 15px; color: white; }
+
+/* ================= FOOTER ================= */
+.footer {
+  margin-top: 140px;
+  margin-bottom: 40px;
+  font-size: 13px;
   color: white;
-  text-decoration: none;
-  margin: 0 10px;
+  text-align: center;
 }
+
+.footer a { color: white; text-decoration: none; margin: 0 10px; }
+
+/* ================= SUCCESS ================= */
+#success { display: none; margin-top: 20px; padding: 10px; background: rgba(0,255,100,0.3); border-radius: 8px; }
+
 </style>
 </head>
 
@@ -150,55 +166,63 @@ h1 { font-size: 28px; margin-bottom: 10px; }
 
 <!-- LOADER -->
 <div id="loader">
+  <video autoplay muted loop playsinline id="bgVideo">
+    <source src="gradientbg.mp4" type="video/mp4">
+  </video>
   <div class="loader-dots">
-    <span></span><span></span><span></span>
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 </div>
-
-<!-- VIDEO -->
-<video autoplay muted loop playsinline id="bgVideo">
-  <source src="gradientbg.mp4" type="video/mp4">
-</video>
 
 <!-- SITE -->
 <div id="site">
 
 <header>
-  <img src="logo.png" class="logo" id="logoImg">
-  <div class="lang-btn" id="langBtn">AR</div>
+  <img src="logo.png" class="logo fade" id="logo" alt="Logo">
+  <div class="lang-btn fade" id="langBtn">AR</div>
 </header>
 
 <div class="content-wrapper">
-  <h1 id="title">RU'YA AGENCY</h1>
-  <p class="subtitle" id="subtitle">
+  <h1 id="title" class="fade">RU'YA AGENCY</h1>
+  <h2 class="subtitle fade" id="subtitle">
     Building marketing systems that help brands generate paying customers
-  </p>
-  <button id="submitBtn">✆ Book your free consultation</button>
+  </h2>
+
+  <button id="submitBtn" class="fade">✆ Book your free consultation</button>
 </div>
 
-<div class="services">
+<div class="services fade">
   <h2 id="servicesTitle">Our Services</h2>
-  <div id="servicesEn">
-    <ul>
-      <li>Brand frameworks for businesses and personal brands</li>
-      <li>Creative campaigns aligned with brand identity</li>
-      <li>Visual identity and brand voice</li>
-      <li>Market positioning and growth solutions</li>
-    </ul>
-  </div>
-  <div id="servicesAr" style="display:none">
-    <ul>
-      <li>أطر عمل لبراند الشركات والعلامات الشخصية</li>
-      <li>حملات إبداعية متوافقة مع هوية البراند</li>
-      <li>الهوية البصرية ونبرة العلامة التجارية</li>
-      <li>تحديد موقع السوق وحلول النمو</li>
-    </ul>
+
+  <div class="services-content">
+    <div id="servicesEn">
+      <ul>
+        <li>Brand frameworks for businesses and personal brands</li>
+        <li>Creative campaigns aligned with brand identity</li>
+        <li>Visual identity and brand voice</li>
+        <li>Market positioning and growth solutions</li>
+      </ul>
+      <p>We work selectively with brands we see high growth potential in.</p>
+    </div>
+
+    <div id="servicesAr" dir="rtl" style="display:none">
+      <ul>
+        <li>أطر عمل لبراند الشركات والعلامات الشخصية</li>
+        <li>حملات إبداعية متوافقة مع هوية البراند</li>
+        <li>الهوية البصرية ونبرة العلامة التجارية</li>
+        <li>تحديد موقع السوق وحلول النمو</li>
+      </ul>
+      <p>.نختار العمل فقط مع العلامات التجارية التي نرى فيها إمكانيات نمو كبيرة</p>
+    </div>
   </div>
 </div>
 
-<div class="footer">
-  <a id="instagramLink" href="https://www.instagram.com/ruya.agency" target="_blank">Instagram</a> ·
-  <a id="contactLink" href="mailto:ru.yaagency01@gmail.com">Contact us</a>
+<div class="footer fade">
+  <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" id="instagramLink" target="_blank">Instagram</a>
+  ·
+  <a href="mailto:ru.yaagency01@gmail.com" id="contactLink">Contact us</a>
 </div>
 
 </div>
@@ -207,69 +231,67 @@ h1 { font-size: 28px; margin-bottom: 10px; }
 <audio id="dclickSound" src="dclick.mp3" preload="auto"></audio>
 
 <script>
-const video = document.getElementById("bgVideo");
-const logo = document.getElementById("logoImg");
 const loader = document.getElementById("loader");
 const site = document.getElementById("site");
+const logo = document.getElementById("logo");
+const submitBtn = document.getElementById("submitBtn");
+const langBtn = document.getElementById("langBtn");
 
+let arabic = false;
+let minTimePassed = false;
 let videoReady = false;
 let logoReady = false;
-let minTimePassed = false;
 
-/* ===== MINIMUM LOADING TIME ===== */
-setTimeout(() => {
-  minTimePassed = true;
-  tryShowSite();
-}, 1000);
+// ===== FADE IN =====
+function showFadeElements() {
+  document.querySelectorAll(".fade").forEach(el => el.classList.add("show"));
+}
 
-/* ===== VIDEO READY ===== */
-video.addEventListener("canplaythrough", () => {
-  videoReady = true;
-  tryShowSite();
-});
+// ===== ENSURE MIN 1s LOADER =====
+setTimeout(() => { minTimePassed = true; tryShowSite(); }, 1000);
 
-/* ===== LOGO READY ===== */
-logo.onload = () => {
-  logoReady = true;
-  tryShowSite();
-};
+// ===== VIDEO & LOGO LOAD =====
+const bgVideo = document.getElementById("bgVideo");
+bgVideo.oncanplaythrough = () => { videoReady = true; tryShowSite(); };
+logo.onload = () => { logoReady = true; tryShowSite(); };
 
-/* ===== CHECK ===== */
+// ===== SHOW SITE WHEN READY =====
 function tryShowSite() {
-  if (videoReady && logoReady && minTimePassed) {
+  if(videoReady && logoReady && minTimePassed){
     loader.style.display = "none";
     site.style.display = "block";
+    setTimeout(showFadeElements, 100);
   }
 }
 
-/* ===== SOUNDS PRELOAD ===== */
-clickSound.volume = .15;
-dclickSound.volume = .5;
-clickSound.load();
-dclickSound.load();
+// ===== LANGUAGE SWITCH =====
+langBtn.onclick = () => {
+  arabic = !arabic;
+  langBtn.innerText = arabic ? "EN" : "AR";
 
-/* ===== INTERACTIONS ===== */
-instagramLink.onmousedown = () => clickSound.play();
-contactLink.onmousedown = () => clickSound.play();
-submitBtn.onmousedown = () => dclickSound.play();
+  document.body.setAttribute("dir", arabic ? "rtl" : "ltr");
 
-submitBtn.onclick = () =>
-  window.open("https://forms.gle/NrANWtgv5zWuhn6K9","_blank");
+  document.getElementById("title").innerText = arabic ? "وكالة رؤية" : "RU'YA AGENCY";
+  document.getElementById("subtitle").innerText = arabic
+    ? "بناء أنظمة تسويق تساعد العلامات التجارية على جذب عملائها الفعليين"
+    : "Building marketing systems that help brands generate paying customers";
+  submitBtn.innerText = arabic ? "✆ احجز استشارتك المجانية" : "✆ Book your free consultation";
 
-/* ===== LANGUAGE ===== */
-let ar=false;
-langBtn.onclick=()=>{
- ar=!ar;
- langBtn.textContent=ar?"EN":"AR";
- title.textContent=ar?"وكالة رؤية":"RU'YA AGENCY";
- subtitle.textContent=ar?
- "بناء أنظمة تسويق تساعد العلامات التجارية على جذب عملائها الفعليين":
- "Building marketing systems that help brands generate paying customers";
- submitBtn.textContent=ar?"✆ احجز استشارتك المجانية":"✆ Book your free consultation";
- servicesTitle.textContent=ar?"خدماتنا":"Our Services";
- servicesEn.style.display=ar?"none":"block";
- servicesAr.style.display=ar?"block":"none";
+  document.getElementById("servicesTitle").innerText = arabic ? "خدماتنا" : "Our Services";
+  document.getElementById("servicesEn").style.display = arabic ? "none" : "block";
+  document.getElementById("servicesAr").style.display = arabic ? "block" : "none";
 };
+
+// ===== SOUNDS =====
+const clickSound = document.getElementById("clickSound");
+const dclickSound = document.getElementById("dclickSound");
+
+clickSound.volume = 0.15;
+dclickSound.volume = 0.5;
+
+instagramLink.onclick = () => clickSound.play();
+contactLink.onclick = () => clickSound.play();
+submitBtn.onclick = () => { dclickSound.play(); window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank"); };
 </script>
 
 </body>
