@@ -116,9 +116,7 @@ h1 { font-size: 28px; margin-bottom: 10px; }
   transition: transform .15s ease;
 }
 
-#submitBtn:hover {
-  transform: scale(1.03);
-}
+#submitBtn:hover { transform: scale(1.03); }
 
 /* ================= SERVICES ================= */
 .services {
@@ -142,6 +140,18 @@ h1 { font-size: 28px; margin-bottom: 10px; }
   color: white;
   text-decoration: none;
   margin: 0 10px;
+}
+
+/* ================= FADE-IN ================= */
+.fade {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .8s ease, transform .8s ease;
+}
+
+.fade.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>
 </head>
@@ -169,14 +179,14 @@ h1 { font-size: 28px; margin-bottom: 10px; }
 </header>
 
 <div class="content-wrapper">
-  <h1 id="title">RU'YA AGENCY</h1>
-  <p class="subtitle" id="subtitle">
+  <h1 id="title" class="fade">RU'YA AGENCY</h1>
+  <p class="subtitle fade" id="subtitle">
     Building marketing systems that help brands generate paying customers
   </p>
-  <button id="submitBtn">✆ Book your free consultation</button>
+  <button id="submitBtn" class="fade">✆ Book your free consultation</button>
 </div>
 
-<div class="services">
+<div class="services fade">
   <h2 id="servicesTitle">Our Services</h2>
   <div id="servicesEn">
     <ul>
@@ -196,7 +206,7 @@ h1 { font-size: 28px; margin-bottom: 10px; }
   </div>
 </div>
 
-<div class="footer">
+<div class="footer fade">
   <a id="instagramLink" href="https://www.instagram.com/ruya.agency" target="_blank">Instagram</a> ·
   <a id="contactLink" href="mailto:ru.yaagency01@gmail.com">Contact us</a>
 </div>
@@ -211,44 +221,34 @@ const video = document.getElementById("bgVideo");
 const logo = document.getElementById("logoImg");
 const loader = document.getElementById("loader");
 const site = document.getElementById("site");
+const fadeEls = document.querySelectorAll(".fade");
 
 let videoReady = false;
 let logoReady = false;
 let minTimePassed = false;
 
-/* ===== MINIMUM LOADING TIME ===== */
-setTimeout(() => {
-  minTimePassed = true;
-  tryShowSite();
-}, 1000);
+setTimeout(()=>{ minTimePassed=true; tryShowSite(); }, 1000);
 
-/* ===== VIDEO READY ===== */
-video.addEventListener("canplaythrough", () => {
-  videoReady = true;
-  tryShowSite();
-});
+video.addEventListener("canplaythrough", ()=>{ videoReady=true; tryShowSite(); });
+logo.onload = ()=>{ logoReady=true; tryShowSite(); };
 
-/* ===== LOGO READY ===== */
-logo.onload = () => {
-  logoReady = true;
-  tryShowSite();
-};
-
-/* ===== CHECK ===== */
-function tryShowSite() {
-  if (videoReady && logoReady && minTimePassed) {
-    loader.style.display = "none";
-    site.style.display = "block";
+function tryShowSite(){
+  if(videoReady && logoReady && minTimePassed){
+    loader.style.display="none";
+    site.style.display="block";
+    // إضافة fade
+    fadeEls.forEach((el,i)=>{
+      setTimeout(()=> el.classList.add("show"), i*150);
+    });
   }
 }
 
-/* ===== SOUNDS PRELOAD ===== */
+/* ===== SOUNDS ===== */
 clickSound.volume = .15;
 dclickSound.volume = .5;
 clickSound.load();
 dclickSound.load();
 
-/* ===== INTERACTIONS ===== */
 instagramLink.onmousedown = () => clickSound.play();
 contactLink.onmousedown = () => clickSound.play();
 submitBtn.onmousedown = () => dclickSound.play();
@@ -262,8 +262,7 @@ langBtn.onclick=()=>{
  ar=!ar;
  langBtn.textContent=ar?"EN":"AR";
  title.textContent=ar?"وكالة رؤية":"RU'YA AGENCY";
- subtitle.textContent=ar?
- "بناء أنظمة تسويق تساعد العلامات التجارية على جذب عملائها الفعليين":
+ subtitle.textContent=ar?"بناء أنظمة تسويق تساعد العلامات التجارية على جذب عملائها الفعليين":
  "Building marketing systems that help brands generate paying customers";
  submitBtn.textContent=ar?"✆ احجز استشارتك المجانية":"✆ Book your free consultation";
  servicesTitle.textContent=ar?"خدماتنا":"Our Services";
