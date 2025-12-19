@@ -6,21 +6,23 @@
 <title>RU'YA AGENCY</title>
 
 <style>
-/* ===== الصفحة السوداء الافتراضية قبل التحميل ===== */
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  background-color: black; /* الصفحة السوداء قبل تحميل العناصر */
   overflow-x: hidden;
   overflow-y: auto;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
-  color: white;
 }
 
-/* ===== VIDEO BACKGROUND ===== */
+body {
+  font-family: Arial, sans-serif;
+  color: white;
+  background: none;
+}
+
+/* ================= VIDEO BACKGROUND ================= */
 #bgVideo {
   position: fixed;
   top: 0;
@@ -28,13 +30,14 @@ html, body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: -2;
+  z-index: -1;
 }
 
-/* ===== LOADING SCREEN ===== */
+/* ================= LOADING SCREEN ================= */
 #loader {
   position: fixed;
   inset: 0;
+  background: #02030f;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -64,23 +67,24 @@ html, body {
   100% { opacity: 0.2; }
 }
 
-/* ===== SITE HIDDEN ===== */
+/* إخفاء الموقع حتى يكتمل التحميل */
 #site {
   display: none;
 }
 
-/* ===== HEADER ===== */
+/* ================= HEADER ================= */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 20px 40px 0 40px;
-  opacity: 0;
 }
 
-.logo { width: 60px; }
+.logo {
+  width: 60px;
+}
 
-/* زر اللغة */
+/* زر اللغة – Glassmorphism */
 .lang-btn {
   padding: 8px 14px;
   border-radius: 8px;
@@ -90,18 +94,14 @@ header {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(7px);
   border: 1px solid rgba(255,255,255,0.25);
-  transition: opacity 1s;
-  opacity: 0;
 }
 
-/* ===== CONTENT ===== */
+/* ================= CONTENT ================= */
 .content-wrapper {
   max-width: 600px;
   width: calc(100% - 80px);
   margin: 40px auto;
   text-align: center;
-  opacity: 0;
-  transition: opacity 1s;
 }
 
 h1 { margin-bottom: 10px; font-size: 28px; }
@@ -119,15 +119,11 @@ button#submitBtn {
   border-radius: 8px;
   cursor: pointer;
   margin-top: 20px;
-  transition: transform 0.2s, background 0.1s;
-  opacity: 0;
 }
 
-button#submitBtn:hover {
-  transform: scale(1.03);
-}
+button#submitBtn:hover { opacity: 0.85; }
 
-/* ===== SERVICES ===== */
+/* ================= SERVICES ================= */
 .services {
   max-width: 600px;
   width: calc(100% - 80px);
@@ -136,8 +132,6 @@ button#submitBtn:hover {
   background: rgba(255,255,255,0.1);
   border-radius: 10px;
   text-align: left;
-  opacity: 0;
-  transition: opacity 1s;
 }
 
 .services-content {
@@ -156,21 +150,28 @@ button#submitBtn:hover {
   color: white;
 }
 
-/* ===== FOOTER ===== */
+/* ================= FOOTER ================= */
 .footer {
   margin-top: 140px;
   margin-bottom: 40px;
   font-size: 13px;
   color: white;
   text-align: center;
-  opacity: 0;
-  transition: opacity 1s;
 }
 
 .footer a {
   color: white;
   text-decoration: none;
   margin: 0 10px;
+}
+
+/* ================= SUCCESS ================= */
+#success {
+  display: none;
+  margin-top: 20px;
+  padding: 10px;
+  background: rgba(0,255,100,0.3);
+  border-radius: 8px;
 }
 </style>
 </head>
@@ -246,34 +247,14 @@ button#submitBtn:hover {
 
 </div>
 
-<audio id="clickSound" src="click.mp3" preload="auto"></audio>
-<audio id="dclickSound" src="dclick.mp3" preload="auto"></audio>
+<audio id="clickSound" src="click.mp3"></audio>
+<audio id="dclickSound" src="dclick.mp3"></audio>
 
 <script>
-const loader = document.getElementById("loader");
-const site = document.getElementById("site");
-
-const header = document.querySelector("header");
-const langBtn = document.getElementById("langBtn");
-const contentWrapper = document.querySelector(".content-wrapper");
-const submitBtn = document.getElementById("submitBtn");
-const services = document.querySelector(".services");
-const footer = document.querySelector(".footer");
-
-// العناصر التي ستفاد بال fade-in
-const fadeElements = [header, langBtn, contentWrapper, submitBtn, services, footer];
-
 /* ===== SHOW SITE AFTER FULL LOAD ===== */
 window.addEventListener("load", () => {
-    setTimeout(() => { // اجعل اللودر يبقى ثانية على الأقل
-        loader.style.display = "none";
-        site.style.display = "block";
-        // fade-in للعناصر
-        fadeElements.forEach(el => {
-            el.style.opacity = 0;
-            setTimeout(() => el.style.opacity = 1, 50);
-        });
-    }, 1000);
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("site").style.display = "block";
 });
 
 /* ===== LANGUAGE SWITCH ===== */
@@ -302,9 +283,10 @@ dclickSound.volume = 0.5;
 instagramLink.onclick = () => clickSound.play();
 contactLink.onclick = () => clickSound.play();
 
-submitBtn.onmousedown = () => { submitBtn.style.background = "rgba(255,255,255,0.3)"; dclickSound.play(); };
-submitBtn.onmouseup = () => submitBtn.style.background = "rgba(255,255,255,0.08)";
-submitBtn.onclick = () => window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
+submitBtn.onclick = () => {
+  dclickSound.play();
+  window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
+};
 </script>
 
 </body>
