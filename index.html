@@ -13,7 +13,7 @@ html, body {
   overflow-x: hidden;
   overflow-y: auto;
   box-sizing: border-box;
-  background-color: black; /* لتجنب وميض الأبيض */
+  background-color: black; /* صفحة البداية عند التحميل */
 }
 
 body {
@@ -29,7 +29,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: -2; /* تحت اللودر والمحتوى */
+  z-index: -2;
 }
 
 /* ================= LOADING SCREEN ================= */
@@ -40,7 +40,7 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  background: transparent;
+  background: transparent; /* الشفافية حتى يظهر الفيديو */
 }
 
 .loader-dots {
@@ -64,6 +64,11 @@ body {
   0% { opacity: 0.2; }
   50% { opacity: 1; }
   100% { opacity: 0.2; }
+}
+
+/* إخفاء الموقع حتى يكتمل التحميل */
+#site {
+  display: none;
 }
 
 /* ================= HEADER ================= */
@@ -153,15 +158,6 @@ button#submitBtn:hover { transform: scale(1.03); }
 }
 
 .footer a { color: white; text-decoration: none; margin: 0 10px; }
-
-/* ================= SUCCESS ================= */
-#success {
-  display: none;
-  margin-top: 20px;
-  padding: 10px;
-  background: rgba(0,255,100,0.3);
-  border-radius: 8px;
-}
 </style>
 </head>
 
@@ -241,7 +237,7 @@ const fadeElements = [document.querySelector("header"), document.querySelector("
 
 // ===== Minimum 1s loader & show site after full load =====
 window.addEventListener("load", () => {
-  const minLoadTime = 1000; // 1 ثانية
+  const minLoadTime = 1000;
   const startTime = Date.now();
 
   const showSite = () => {
