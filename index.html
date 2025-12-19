@@ -37,7 +37,6 @@ body {
 #loader {
   position: fixed;
   inset: 0;
-  background: none; /* الخلفية متحركة من الفيديو */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -119,16 +118,15 @@ button#submitBtn {
   border-radius: 8px;
   cursor: pointer;
   margin-top: 20px;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s, opacity 0.3s;
 }
 
-button#submitBtn:hover {
+button#submitBtn:hover { 
+  opacity: 0.85; 
   transform: scale(1.02);
 }
 
-button#submitBtn:active {
-  background: rgba(255,255,255,0.15);
-}
+button#submitBtn:active { opacity: 1; }
 
 /* ================= SERVICES ================= */
 .services {
@@ -172,16 +170,7 @@ button#submitBtn:active {
   margin: 0 10px;
 }
 
-/* ================= SUCCESS ================= */
-#success {
-  display: none;
-  margin-top: 20px;
-  padding: 10px;
-  background: rgba(0,255,100,0.3);
-  border-radius: 8px;
-}
-
-/* ================= FADE IN ================= */
+/* ================= FADE-IN ================= */
 .fade {
   opacity: 0;
   transform: translateY(10px);
@@ -199,6 +188,9 @@ button#submitBtn:active {
 
 <!-- LOADER -->
 <div id="loader">
+  <video autoplay muted loop playsinline id="bgVideoLoader" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:-1;">
+    <source src="gradientbg.mp4" type="video/mp4">
+  </video>
   <div class="loader-dots">
     <span></span>
     <span></span>
@@ -206,16 +198,11 @@ button#submitBtn:active {
   </div>
 </div>
 
-<!-- VIDEO BACKGROUND -->
-<video autoplay muted loop playsinline id="bgVideo">
-  <source src="gradientbg.mp4" type="video/mp4">
-</video>
-
 <!-- SITE -->
 <div id="site">
 
 <header>
-  <img src="logo.png" class="logo fade" id="logoImg" alt="Logo">
+  <img src="logo.png" class="logo" id="logoImg" alt="Logo">
   <div class="lang-btn" id="langBtn">AR</div>
 </header>
 
@@ -270,39 +257,44 @@ button#submitBtn:active {
 <audio id="dclickSound" src="dclick.mp3" preload="auto"></audio>
 
 <script>
-const loader = document.getElementById("loader");
-const site = document.getElementById("site");
-const logoImg = document.getElementById("logoImg");
-
-let arabic = false;
 let videoReady = false;
 let logoReady = false;
 let minTimePassed = false;
 
-// ===== FADE IN helper
-function fadeInElements() {
-  document.querySelectorAll(".fade").forEach(el => el.classList.add("show"));
-}
+const loader = document.getElementById("loader");
+const site = document.getElementById("site");
+const bgVideo = document.getElementById("bgVideo");
+const logoImg = document.getElementById("logoImg");
+const fadeElements = document.querySelectorAll(".fade");
 
-// ===== Ensure minimum loader display time
+// ===== ENSURE MINIMUM LOADER TIME 1 SECOND =====
 setTimeout(() => { minTimePassed = true; tryShowSite(); }, 1000);
 
-// ===== Video loaded
-document.getElementById("bgVideo").oncanplaythrough = () => { videoReady = true; tryShowSite(); };
-
-// ===== Logo loaded
+bgVideo.oncanplaythrough = () => { videoReady = true; tryShowSite(); };
 logoImg.onload = () => { logoReady = true; tryShowSite(); };
 
-// ===== Show site when ready
 function tryShowSite() {
-  if(videoReady && logoReady && minTimePassed) {
+  if(videoReady && logoReady && minTimePassed){
     loader.style.display = "none";
     site.style.display = "block";
-    setTimeout(fadeInElements, 100);
+
+    // Fade-in elements (excluding logo)
+    setTimeout(() => {
+      fadeElements.forEach(el => el.classList.add("show"));
+    }, 100);
   }
 }
 
-// ===== LANGUAGE SWITCH =====
+/* ===== LANGUAGE SWITCH ===== */
+let arabic = false;
+const langBtn = document.getElementById("langBtn");
+const title = document.getElementById("title");
+const subtitle = document.getElementById("subtitle");
+const submitBtn = document.getElementById("submitBtn");
+const servicesTitle = document.getElementById("servicesTitle");
+const servicesEn = document.getElementById("servicesEn");
+const servicesAr = document.getElementById("servicesAr");
+
 langBtn.onclick = () => {
   arabic = !arabic;
   langBtn.innerText = arabic ? "EN" : "AR";
@@ -320,12 +312,15 @@ langBtn.onclick = () => {
   servicesAr.style.display = arabic ? "block" : "none";
 };
 
-// ===== SOUNDS =====
+/* ===== SOUNDS ===== */
+const clickSound = document.getElementById("clickSound");
+const dclickSound = document.getElementById("dclickSound");
+
 clickSound.volume = 0.15;
 dclickSound.volume = 0.5;
 
-instagramLink.onclick = () => clickSound.play();
-contactLink.onclick = () => clickSound.play();
+document.getElementById("instagramLink").onclick = () => clickSound.play();
+document.getElementById("contactLink").onclick = () => clickSound.play();
 
 submitBtn.onclick = () => {
   dclickSound.play();
