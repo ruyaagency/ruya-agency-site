@@ -279,6 +279,11 @@ let videoReady = false;
 let logoReady = false;
 let minTimePassed = false;
 
+// ===== FADE IN helper
+function fadeInElements() {
+  document.querySelectorAll(".fade").forEach(el => el.classList.add("show"));
+}
+
 // ===== Ensure minimum loader display time
 setTimeout(() => { minTimePassed = true; tryShowSite(); }, 1000);
 
@@ -293,18 +298,7 @@ function tryShowSite() {
   if(videoReady && logoReady && minTimePassed) {
     loader.style.display = "none";
     site.style.display = "block";
-    // Fade in elements متسلسل
-    const fadeElements = [
-      logoImg,
-      document.getElementById("title"),
-      document.getElementById("subtitle"),
-      document.getElementById("submitBtn"),
-      document.querySelector(".services"),
-      document.querySelector(".footer")
-    ];
-    fadeElements.forEach((el, i) => {
-      setTimeout(() => { el.classList.add("show"); }, i * 300);
-    });
+    setTimeout(fadeInElements, 100);
   }
 }
 
