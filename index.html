@@ -101,6 +101,7 @@ header {
 h1 { font-size: 28px; margin-bottom: 10px; }
 .subtitle { font-size: 16px; }
 
+/* ================= BUTTON ================= */
 #submitBtn {
   width: 100%;
   margin-top: 20px;
@@ -173,17 +174,17 @@ h1 { font-size: 28px; margin-bottom: 10px; }
 <!-- SITE -->
 <div id="site">
 
-<header>
+<header class="fade">
   <img src="logo.png" class="logo" id="logoImg">
   <div class="lang-btn" id="langBtn">AR</div>
 </header>
 
-<div class="content-wrapper">
-  <h1 id="title" class="fade">RU'YA AGENCY</h1>
-  <p class="subtitle fade" id="subtitle">
+<div class="content-wrapper fade">
+  <h1 id="title">RU'YA AGENCY</h1>
+  <p class="subtitle" id="subtitle">
     Building marketing systems that help brands generate paying customers
   </p>
-  <button id="submitBtn" class="fade">✆ Book your free consultation</button>
+  <button id="submitBtn">✆ Book your free consultation</button>
 </div>
 
 <div class="services fade">
@@ -221,33 +222,33 @@ const video = document.getElementById("bgVideo");
 const logo = document.getElementById("logoImg");
 const loader = document.getElementById("loader");
 const site = document.getElementById("site");
-const fadeEls = document.querySelectorAll(".fade");
+const fadeElems = document.querySelectorAll('.fade');
 
 let videoReady = false;
 let logoReady = false;
 let minTimePassed = false;
 
-setTimeout(()=>{ minTimePassed=true; tryShowSite(); }, 1000);
+/* ===== MINIMUM LOADING TIME ===== */
+setTimeout(() => { minTimePassed = true; tryShowSite(); }, 1000);
 
-video.addEventListener("canplaythrough", ()=>{ videoReady=true; tryShowSite(); });
-logo.onload = ()=>{ logoReady=true; tryShowSite(); };
+/* ===== VIDEO READY ===== */
+video.addEventListener("canplaythrough", () => { videoReady = true; tryShowSite(); });
 
-function tryShowSite(){
+/* ===== LOGO READY ===== */
+logo.onload = () => { logoReady = true; tryShowSite(); };
+
+/* ===== SHOW SITE ===== */
+function tryShowSite() {
   if(videoReady && logoReady && minTimePassed){
-    loader.style.display="none";
-    site.style.display="block";
-    // إضافة fade
-    fadeEls.forEach((el,i)=>{
-      setTimeout(()=> el.classList.add("show"), i*150);
-    });
+    loader.style.display='none';
+    site.style.display='block';
+    fadeElems.forEach(el => el.classList.add('show'));
   }
 }
 
 /* ===== SOUNDS ===== */
-clickSound.volume = .15;
-dclickSound.volume = .5;
-clickSound.load();
-dclickSound.load();
+clickSound.volume=.15; dclickSound.volume=.5;
+clickSound.load(); dclickSound.load();
 
 instagramLink.onmousedown = () => clickSound.play();
 contactLink.onmousedown = () => clickSound.play();
@@ -256,18 +257,18 @@ submitBtn.onmousedown = () => dclickSound.play();
 submitBtn.onclick = () =>
   window.open("https://forms.gle/NrANWtgv5zWuhn6K9","_blank");
 
-/* ===== LANGUAGE ===== */
+/* ===== LANGUAGE SWITCH ===== */
 let ar=false;
 langBtn.onclick=()=>{
- ar=!ar;
- langBtn.textContent=ar?"EN":"AR";
- title.textContent=ar?"وكالة رؤية":"RU'YA AGENCY";
- subtitle.textContent=ar?"بناء أنظمة تسويق تساعد العلامات التجارية على جذب عملائها الفعليين":
- "Building marketing systems that help brands generate paying customers";
- submitBtn.textContent=ar?"✆ احجز استشارتك المجانية":"✆ Book your free consultation";
- servicesTitle.textContent=ar?"خدماتنا":"Our Services";
- servicesEn.style.display=ar?"none":"block";
- servicesAr.style.display=ar?"block":"none";
+  ar=!ar;
+  langBtn.textContent=ar?"EN":"AR";
+  title.textContent=ar?"وكالة رؤية":"RU'YA AGENCY";
+  subtitle.textContent=ar?"بناء أنظمة تسويق تساعد العلامات التجارية على جذب عملائها الفعليين":
+                         "Building marketing systems that help brands generate paying customers";
+  submitBtn.textContent=ar?"✆ احجز استشارتك المجانية":"✆ Book your free consultation";
+  servicesTitle.textContent=ar?"خدماتنا":"Our Services";
+  servicesEn.style.display=ar?"none":"block";
+  servicesAr.style.display=ar?"block":"none";
 };
 </script>
 
