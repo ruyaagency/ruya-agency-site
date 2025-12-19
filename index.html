@@ -30,7 +30,7 @@ body {
   z-index: -1;
 }
 
-/* ================= LOADER (OVER VIDEO) ================= */
+/* ================= LOADER ================= */
 #loader {
   position: fixed;
   inset: 0;
@@ -101,7 +101,6 @@ header {
 h1 { font-size: 28px; margin-bottom: 10px; }
 .subtitle { font-size: 16px; }
 
-/* ================= BUTTON ================= */
 #submitBtn {
   width: 100%;
   margin-top: 20px;
@@ -114,16 +113,11 @@ h1 { font-size: 28px; margin-bottom: 10px; }
   font-size: 15px;
   border-radius: 8px;
   cursor: pointer;
-  transition: transform .15s ease, opacity .15s ease;
+  transition: transform .15s ease;
 }
 
 #submitBtn:hover {
   transform: scale(1.03);
-}
-
-#submitBtn:active {
-  transform: scale(1);
-  opacity: 1;
 }
 
 /* ================= SERVICES ================= */
@@ -170,7 +164,7 @@ h1 { font-size: 28px; margin-bottom: 10px; }
 <div id="site">
 
 <header>
-  <img src="logo.png" class="logo">
+  <img src="logo.png" class="logo" id="logoImg">
   <div class="lang-btn" id="langBtn">AR</div>
 </header>
 
@@ -214,26 +208,50 @@ h1 { font-size: 28px; margin-bottom: 10px; }
 
 <script>
 const video = document.getElementById("bgVideo");
+const logo = document.getElementById("logoImg");
 const loader = document.getElementById("loader");
 const site = document.getElementById("site");
 
-/* ===== WAIT FOR VIDEO ===== */
+let videoReady = false;
+let logoReady = false;
+let minTimePassed = false;
+
+/* ===== MINIMUM LOADING TIME ===== */
+setTimeout(() => {
+  minTimePassed = true;
+  tryShowSite();
+}, 1000);
+
+/* ===== VIDEO READY ===== */
 video.addEventListener("canplaythrough", () => {
-  loader.style.display = "none";
-  site.style.display = "block";
+  videoReady = true;
+  tryShowSite();
 });
 
-/* ===== SOUNDS ===== */
+/* ===== LOGO READY ===== */
+logo.onload = () => {
+  logoReady = true;
+  tryShowSite();
+};
+
+/* ===== CHECK ===== */
+function tryShowSite() {
+  if (videoReady && logoReady && minTimePassed) {
+    loader.style.display = "none";
+    site.style.display = "block";
+  }
+}
+
+/* ===== SOUNDS PRELOAD ===== */
 clickSound.volume = .15;
 dclickSound.volume = .5;
 clickSound.load();
 dclickSound.load();
 
-const play = s => { s.currentTime = 0; s.play(); };
-
-instagramLink.onmousedown = () => play(clickSound);
-contactLink.onmousedown = () => play(clickSound);
-submitBtn.onmousedown = () => play(dclickSound);
+/* ===== INTERACTIONS ===== */
+instagramLink.onmousedown = () => clickSound.play();
+contactLink.onmousedown = () => clickSound.play();
+submitBtn.onmousedown = () => dclickSound.play();
 
 submitBtn.onclick = () =>
   window.open("https://forms.gle/NrANWtgv5zWuhn6K9","_blank");
