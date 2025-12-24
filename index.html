@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RU'YA AGENCY</title>
-<link rel="icon" href="logo.png" type="image/png">
-
+<link rel="icon" type="image/png" href="favicon.png"> <!-- فافيكون -->
 <style>
 html, body {
   margin: 0;
@@ -18,10 +17,7 @@ html, body {
   font-family: Arial, sans-serif;
   color: white;
   background: none;
-  user-select: none; /* يمنع تحديد النصوص */
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  user-select: none; /* منع تحديد النصوص */
 }
 
 /* ================= VIDEO BACKGROUND ================= */
@@ -79,13 +75,12 @@ header {
   justify-content: space-between;
   align-items: center;
   margin: 20px 40px 0 40px;
+  -webkit-user-drag: none; /* منع سحب اللوغو */
 }
 
 .logo {
   width: 60px;
-  user-drag: none;
-  -webkit-user-drag: none;
-  pointer-events: none; /* يمنع التفاعل مع اللوغو */
+  -webkit-user-drag: none; /* منع سحب اللوغو */
 }
 
 /* زر اللغة – Glassmorphism */
@@ -108,10 +103,6 @@ header {
   text-align: center;
 }
 
-h1, h2, p, li, button {
-  user-select: none; /* يمنع تحديد النصوص */
-}
-
 h1 { margin-bottom: 10px; font-size: 28px; }
 h2.subtitle { margin-top: 0; font-size: 16px; color: white; }
 
@@ -128,6 +119,8 @@ button#submitBtn {
   cursor: pointer;
   margin-top: 20px;
   transition: transform 0.2s ease;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 button#submitBtn:hover {
@@ -187,6 +180,29 @@ button#submitBtn:hover {
 .fade.show {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ================= SCROLLBAR TRANSPARENT ================= */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.15);
+  border-radius: 10px;
+  backdrop-filter: blur(4px);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+/* منع نسخ الصور */
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  user-select: none;
 }
 </style>
 </head>
