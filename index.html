@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RU'YA AGENCY</title>
-<link rel="icon" type="image/png" href="logo.png">
+
 <style>
 html, body {
   margin: 0;
@@ -17,7 +17,46 @@ html, body {
   font-family: Arial, sans-serif;
   color: white;
   background: none;
-  user-select: none; /* منع تحديد النصوص */
+}
+
+/* ================= BLUR GLASS SCROLLBAR (DESKTOP) ================= */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(10px);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.4);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.35) transparent;
+}
+
+/* ================= HIDE SCROLLBAR ON MOBILE ================= */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+
+  * {
+    scrollbar-width: none;
+  }
 }
 
 /* ================= VIDEO BACKGROUND ================= */
@@ -29,7 +68,6 @@ html, body {
   height: 100%;
   object-fit: cover;
   z-index: -1;
-  pointer-events: none;
 }
 
 /* ================= LOADING SCREEN ================= */
@@ -40,7 +78,6 @@ html, body {
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  background: none;
 }
 
 .loader-dots {
@@ -81,7 +118,6 @@ header {
 
 .logo {
   width: 60px;
-  pointer-events: none; /* منع تحميل أو تحديد الصورة */
 }
 
 /* زر اللغة – Glassmorphism */
@@ -180,31 +216,9 @@ button#submitBtn:hover {
   opacity: 1;
   transform: translateY(0);
 }
-
-/* ================= SCROLLBAR ================= */
-@media (min-width: 769px) {
-  ::-webkit-scrollbar {
-    width: 12px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: transparent;
-    backdrop-filter: blur(7px);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,0.2);
-    border-radius: 6px;
-  }
-}
-
-@media (max-width: 768px) {
-  ::-webkit-scrollbar {
-    display: none;
-  }
-}
 </style>
 </head>
+
 <body>
 
 <!-- LOADER -->
@@ -223,6 +237,7 @@ button#submitBtn:hover {
 
 <!-- SITE -->
 <div id="site">
+
 <header>
   <img src="logo.png" class="logo" alt="Logo">
   <div class="lang-btn" id="langBtn">AR</div>
@@ -233,11 +248,13 @@ button#submitBtn:hover {
   <h2 class="subtitle fade" id="subtitle">
     Building marketing systems that help brands generate paying customers
   </h2>
+
   <button id="submitBtn" class="fade">✆ Book your free consultation</button>
 </div>
 
 <div class="services fade">
   <h2 id="servicesTitle">Our Services</h2>
+
   <div class="services-content">
     <div id="servicesEn">
       <ul>
@@ -246,10 +263,9 @@ button#submitBtn:hover {
         <li>Visual identity and brand voice</li>
         <li>Market positioning and growth solutions</li>
       </ul>
-      <p>
-        We work selectively with brands we see high growth potential in.
-      </p>
+      <p>We work selectively with brands we see high growth potential in.</p>
     </div>
+
     <div id="servicesAr" style="display:none">
       <ul>
         <li>أطر عمل لبراند الشركات والعلامات الشخصية</li>
@@ -257,17 +273,17 @@ button#submitBtn:hover {
         <li>الهوية البصرية ونبرة العلامة التجارية</li>
         <li>تحديد موقع السوق وحلول النمو</li>
       </ul>
-      <p>
-        نعمل بشكل انتقائي مع العلامات التجارية التي نرى فيها إمكانات نمو عالية.
-      </p>
+      <p>.نختار العمل فقط مع العلامات التجارية التي نرى فيها إمكانيات نمو كبيرة</p>
     </div>
   </div>
 </div>
 
 <div class="footer">
-  <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" id="instagramLink" target="_blank">Instagram</a> ·
+  <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" id="instagramLink" target="_blank">Instagram</a>
+  ·
   <a href="mailto:ru.yaagency01@gmail.com" id="contactLink">Contact us</a>
 </div>
+
 </div>
 
 <audio id="clickSound" src="click.mp3" preload="auto"></audio>
@@ -283,21 +299,16 @@ let videoReady = false;
 let logoReady = false;
 let minTimePassed = false;
 
-// تأكد من تحميل الفيديو
 video.oncanplaythrough = () => { videoReady = true; tryShowSite(); };
-// تأكد من تحميل اللوغو
 logo.onload = () => { logoReady = true; tryShowSite(); };
 
-// تأخير 1 ثانية كحد أدنى
 setTimeout(() => { minTimePassed = true; tryShowSite(); }, 1000);
 
-// عرض الموقع عند اكتمال الشروط
 function tryShowSite() {
-  if(videoReady && logoReady && minTimePassed) {
+  if (videoReady && logoReady && minTimePassed) {
     loader.style.display = "none";
     site.style.display = "block";
 
-    // Fade-in للعناصر
     setTimeout(() => {
       document.querySelectorAll(".fade").forEach(el => el.classList.add("show"));
     }, 100);
@@ -330,9 +341,11 @@ dclickSound.volume = 0.5;
 instagramLink.onclick = () => clickSound.play();
 contactLink.onclick = () => clickSound.play();
 
-submitBtn.onmousedown = () => dclickSound.play();
-submitBtn.onmouseup = () => submitBtn.style.background = "rgba(255,255,255,0.08)";
-submitBtn.onclick = () => window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
+submitBtn.onclick = () => {
+  dclickSound.play();
+  window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
+};
 </script>
+
 </body>
 </html>
