@@ -6,7 +6,6 @@
 <title>RU'YA AGENCY</title>
 
 <style>
-/* ================= GLOBAL ================= */
 html, body {
   margin: 0;
   padding: 0;
@@ -20,21 +19,23 @@ html, body {
   background: none;
 }
 
-/* ================= SCROLLBAR (DARK) ================= */
+/* ================= BLUR GLASS SCROLLBAR ================= */
 
-/* Chrome, Edge, Brave */
+/* Chrome / Edge */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(10, 10, 20, 0.9);
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(10px);
 }
 
 ::-webkit-scrollbar-thumb {
   background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
   border-radius: 10px;
-  border: 2px solid rgba(10,10,20,0.9);
+  border: 1px solid rgba(255,255,255,0.2);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -44,7 +45,7 @@ html, body {
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,0.3) rgba(10,10,20,0.9);
+  scrollbar-color: rgba(255,255,255,0.35) transparent;
 }
 
 /* ================= VIDEO BACKGROUND ================= */
@@ -129,9 +130,10 @@ header {
 }
 
 h1 { margin-bottom: 10px; font-size: 28px; }
-h2.subtitle { margin-top: 0; font-size: 16px; color: white; }
+h2.subtitle { margin-top: 0; font-size: 16px; }
 
-button#submitBtn {
+/* ================= BUTTON ================= */
+#submitBtn {
   width: 100%;
   padding: 12px;
   background: rgba(255,255,255,0.08);
@@ -143,10 +145,10 @@ button#submitBtn {
   border-radius: 8px;
   cursor: pointer;
   margin-top: 20px;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-button#submitBtn:hover {
+#submitBtn:hover {
   opacity: 0.85;
   transform: scale(1.02);
 }
@@ -175,7 +177,6 @@ button#submitBtn:hover {
 
 .services-content p {
   margin-top: 15px;
-  color: white;
 }
 
 /* ================= FOOTER ================= */
@@ -183,7 +184,6 @@ button#submitBtn:hover {
   margin-top: 140px;
   margin-bottom: 40px;
   font-size: 13px;
-  color: white;
   text-align: center;
 }
 
@@ -193,7 +193,7 @@ button#submitBtn:hover {
   margin: 0 10px;
 }
 
-/* ================= FADE-IN ================= */
+/* ================= FADE ================= */
 .fade {
   opacity: 0;
   transform: translateY(10px);
@@ -209,16 +209,19 @@ button#submitBtn:hover {
 
 <body>
 
+<!-- LOADER -->
 <div id="loader">
   <div class="loader-dots">
     <span></span><span></span><span></span>
   </div>
 </div>
 
+<!-- VIDEO BACKGROUND -->
 <video autoplay muted loop playsinline id="bgVideo">
   <source src="gradientbg.mp4" type="video/mp4">
 </video>
 
+<!-- SITE -->
 <div id="site">
 
 <header>
@@ -236,6 +239,7 @@ button#submitBtn:hover {
 
 <div class="services fade">
   <h2 id="servicesTitle">Our Services</h2>
+
   <div class="services-content">
     <div id="servicesEn">
       <ul>
@@ -260,8 +264,9 @@ button#submitBtn:hover {
 </div>
 
 <div class="footer">
-  <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" target="_blank">Instagram</a> ·
-  <a href="mailto:ru.yaagency01@gmail.com">Contact us</a>
+  <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" id="instagramLink" target="_blank">Instagram</a>
+  ·
+  <a href="mailto:ru.yaagency01@gmail.com" id="contactLink">Contact us</a>
 </div>
 
 </div>
@@ -293,6 +298,33 @@ function tryShowSite() {
     }, 100);
   }
 }
+
+/* LANGUAGE */
+let arabic = false;
+langBtn.onclick = () => {
+  arabic = !arabic;
+  langBtn.innerText = arabic ? "EN" : "AR";
+  title.innerText = arabic ? "وكالة رؤية" : "RU'YA AGENCY";
+  subtitle.innerText = arabic
+    ? "بناء أنظمة تسويق تساعد العلامات التجارية على جذب عملائها الفعليين"
+    : "Building marketing systems that help brands generate paying customers";
+  submitBtn.innerText = arabic ? "✆ احجز استشارتك المجانية" : "✆ Book your free consultation";
+  servicesTitle.innerText = arabic ? "خدماتنا" : "Our Services";
+  servicesEn.style.display = arabic ? "none" : "block";
+  servicesAr.style.display = arabic ? "block" : "none";
+};
+
+/* SOUNDS */
+clickSound.volume = 0.15;
+dclickSound.volume = 0.5;
+
+instagramLink.onclick = () => clickSound.play();
+contactLink.onclick = () => clickSound.play();
+
+submitBtn.onclick = () => {
+  dclickSound.play();
+  window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
+};
 </script>
 
 </body>
