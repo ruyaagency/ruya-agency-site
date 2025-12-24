@@ -19,9 +19,7 @@ html, body {
   background: none;
 }
 
-/* ================= BLUR GLASS SCROLLBAR ================= */
-
-/* Chrome / Edge */
+/* ================= BLUR GLASS SCROLLBAR (DESKTOP) ================= */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -46,6 +44,19 @@ html, body {
 * {
   scrollbar-width: thin;
   scrollbar-color: rgba(255,255,255,0.35) transparent;
+}
+
+/* ================= HIDE SCROLLBAR ON MOBILE ================= */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+
+  * {
+    scrollbar-width: none;
+  }
 }
 
 /* ================= VIDEO BACKGROUND ================= */
@@ -109,7 +120,7 @@ header {
   width: 60px;
 }
 
-/* زر اللغة – Glass */
+/* زر اللغة – Glassmorphism */
 .lang-btn {
   padding: 8px 14px;
   border-radius: 8px;
@@ -130,10 +141,9 @@ header {
 }
 
 h1 { margin-bottom: 10px; font-size: 28px; }
-h2.subtitle { margin-top: 0; font-size: 16px; }
+h2.subtitle { margin-top: 0; font-size: 16px; color: white; }
 
-/* ================= BUTTON ================= */
-#submitBtn {
+button#submitBtn {
   width: 100%;
   padding: 12px;
   background: rgba(255,255,255,0.08);
@@ -145,10 +155,10 @@ h2.subtitle { margin-top: 0; font-size: 16px; }
   border-radius: 8px;
   cursor: pointer;
   margin-top: 20px;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
-#submitBtn:hover {
+button#submitBtn:hover {
   opacity: 0.85;
   transform: scale(1.02);
 }
@@ -177,6 +187,7 @@ h2.subtitle { margin-top: 0; font-size: 16px; }
 
 .services-content p {
   margin-top: 15px;
+  color: white;
 }
 
 /* ================= FOOTER ================= */
@@ -184,6 +195,7 @@ h2.subtitle { margin-top: 0; font-size: 16px; }
   margin-top: 140px;
   margin-bottom: 40px;
   font-size: 13px;
+  color: white;
   text-align: center;
 }
 
@@ -193,7 +205,7 @@ h2.subtitle { margin-top: 0; font-size: 16px; }
   margin: 0 10px;
 }
 
-/* ================= FADE ================= */
+/* ================= FADE-IN ================= */
 .fade {
   opacity: 0;
   transform: translateY(10px);
@@ -212,7 +224,9 @@ h2.subtitle { margin-top: 0; font-size: 16px; }
 <!-- LOADER -->
 <div id="loader">
   <div class="loader-dots">
-    <span></span><span></span><span></span>
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 </div>
 
@@ -234,6 +248,7 @@ h2.subtitle { margin-top: 0; font-size: 16px; }
   <h2 class="subtitle fade" id="subtitle">
     Building marketing systems that help brands generate paying customers
   </h2>
+
   <button id="submitBtn" class="fade">✆ Book your free consultation</button>
 </div>
 
@@ -293,13 +308,14 @@ function tryShowSite() {
   if (videoReady && logoReady && minTimePassed) {
     loader.style.display = "none";
     site.style.display = "block";
+
     setTimeout(() => {
       document.querySelectorAll(".fade").forEach(el => el.classList.add("show"));
     }, 100);
   }
 }
 
-/* LANGUAGE */
+/* ===== LANGUAGE SWITCH ===== */
 let arabic = false;
 langBtn.onclick = () => {
   arabic = !arabic;
@@ -308,13 +324,17 @@ langBtn.onclick = () => {
   subtitle.innerText = arabic
     ? "بناء أنظمة تسويق تساعد العلامات التجارية على جذب عملائها الفعليين"
     : "Building marketing systems that help brands generate paying customers";
-  submitBtn.innerText = arabic ? "✆ احجز استشارتك المجانية" : "✆ Book your free consultation";
+
+  submitBtn.innerText = arabic
+    ? "✆ احجز استشارتك المجانية"
+    : "✆ Book your free consultation";
+
   servicesTitle.innerText = arabic ? "خدماتنا" : "Our Services";
   servicesEn.style.display = arabic ? "none" : "block";
   servicesAr.style.display = arabic ? "block" : "none";
 };
 
-/* SOUNDS */
+/* ===== SOUNDS ===== */
 clickSound.volume = 0.15;
 dclickSound.volume = 0.5;
 
