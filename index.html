@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RU'YA AGENCY</title>
-<link rel="icon" type="image/png" href="favicon.png"> <!-- فافيكون -->
+<link rel="icon" href="logo.png">
 <style>
 html, body {
   margin: 0;
@@ -17,7 +17,11 @@ html, body {
   font-family: Arial, sans-serif;
   color: white;
   background: none;
-  user-select: none; /* منع تحديد النصوص */
+  scroll-behavior: smooth; /* Smooth scrolling */
+  -webkit-user-select: none; /* منع تحديد النصوص */
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /* ================= VIDEO BACKGROUND ================= */
@@ -75,12 +79,12 @@ header {
   justify-content: space-between;
   align-items: center;
   margin: 20px 40px 0 40px;
-  -webkit-user-drag: none; /* منع سحب اللوغو */
+  -webkit-user-select: none; /* منع تحديد اللوغو */
 }
 
 .logo {
   width: 60px;
-  -webkit-user-drag: none; /* منع سحب اللوغو */
+  pointer-events: none; /* منع سحب اللوغو */
 }
 
 /* زر اللغة – Glassmorphism */
@@ -119,8 +123,6 @@ button#submitBtn {
   cursor: pointer;
   margin-top: 20px;
   transition: transform 0.2s ease;
-  -webkit-user-select: none;
-  user-select: none;
 }
 
 button#submitBtn:hover {
@@ -182,7 +184,7 @@ button#submitBtn:hover {
   transform: translateY(0);
 }
 
-/* ================= SCROLLBAR TRANSPARENT ================= */
+/* ===== SCROLLBAR TRANSPARENT & BLURRED ===== */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -198,11 +200,15 @@ button#submitBtn:hover {
   background: rgba(255,255,255,0.3);
 }
 
-/* منع نسخ الصور */
-img {
-  -webkit-user-drag: none;
-  user-drag: none;
-  user-select: none;
+/* Hide scrollbar on mobile */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  html {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;     
+  }
 }
 </style>
 </head>
