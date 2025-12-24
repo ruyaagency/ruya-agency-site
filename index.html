@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RU'YA AGENCY</title>
+
 <style>
 html, body {
   margin: 0;
@@ -16,6 +17,46 @@ html, body {
   font-family: Arial, sans-serif;
   color: white;
   background: none;
+}
+
+/* ================= BLUR GLASS SCROLLBAR (DESKTOP) ================= */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(10px);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.4);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.35) transparent;
+}
+
+/* ================= HIDE SCROLLBAR ON MOBILE ================= */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+
+  * {
+    scrollbar-width: none;
+  }
 }
 
 /* ================= VIDEO BACKGROUND ================= */
@@ -222,9 +263,7 @@ button#submitBtn:hover {
         <li>Visual identity and brand voice</li>
         <li>Market positioning and growth solutions</li>
       </ul>
-      <p>
-        We work selectively with brands we see high growth potential in.
-      </p>
+      <p>We work selectively with brands we see high growth potential in.</p>
     </div>
 
     <div id="servicesAr" style="display:none">
@@ -234,9 +273,7 @@ button#submitBtn:hover {
         <li>الهوية البصرية ونبرة العلامة التجارية</li>
         <li>تحديد موقع السوق وحلول النمو</li>
       </ul>
-      <p>
-        .نختار العمل فقط مع العلامات التجارية التي نرى فيها إمكانيات نمو كبيرة
-      </p>
+      <p>.نختار العمل فقط مع العلامات التجارية التي نرى فيها إمكانيات نمو كبيرة</p>
     </div>
   </div>
 </div>
@@ -262,21 +299,16 @@ let videoReady = false;
 let logoReady = false;
 let minTimePassed = false;
 
-// تأكد من تحميل الفيديو
 video.oncanplaythrough = () => { videoReady = true; tryShowSite(); };
-// تأكد من تحميل اللوغو
 logo.onload = () => { logoReady = true; tryShowSite(); };
 
-// تأخير 1 ثانية كحد أدنى
 setTimeout(() => { minTimePassed = true; tryShowSite(); }, 1000);
 
-// عرض الموقع عند اكتمال الشروط
 function tryShowSite() {
-  if(videoReady && logoReady && minTimePassed) {
+  if (videoReady && logoReady && minTimePassed) {
     loader.style.display = "none";
     site.style.display = "block";
 
-    // Fade-in للعناصر
     setTimeout(() => {
       document.querySelectorAll(".fade").forEach(el => el.classList.add("show"));
     }, 100);
@@ -309,9 +341,10 @@ dclickSound.volume = 0.5;
 instagramLink.onclick = () => clickSound.play();
 contactLink.onclick = () => clickSound.play();
 
-submitBtn.onmousedown = () => dclickSound.play();
-submitBtn.onmouseup = () => submitBtn.style.background = "rgba(255,255,255,0.08)";
-submitBtn.onclick = () => window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
+submitBtn.onclick = () => {
+  dclickSound.play();
+  window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
+};
 </script>
 
 </body>
