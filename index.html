@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RU'YA AGENCY</title>
+
 <style>
+/* ================= GLOBAL ================= */
 html, body {
   margin: 0;
   padding: 0;
@@ -16,6 +18,33 @@ html, body {
   font-family: Arial, sans-serif;
   color: white;
   background: none;
+}
+
+/* ================= SCROLLBAR (DARK) ================= */
+
+/* Chrome, Edge, Brave */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(10, 10, 20, 0.9);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.25);
+  border-radius: 10px;
+  border: 2px solid rgba(10,10,20,0.9);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.4);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.3) rgba(10,10,20,0.9);
 }
 
 /* ================= VIDEO BACKGROUND ================= */
@@ -79,7 +108,7 @@ header {
   width: 60px;
 }
 
-/* زر اللغة – Glassmorphism */
+/* زر اللغة – Glass */
 .lang-btn {
   padding: 8px 14px;
   border-radius: 8px;
@@ -180,21 +209,16 @@ button#submitBtn:hover {
 
 <body>
 
-<!-- LOADER -->
 <div id="loader">
   <div class="loader-dots">
-    <span></span>
-    <span></span>
-    <span></span>
+    <span></span><span></span><span></span>
   </div>
 </div>
 
-<!-- VIDEO BACKGROUND -->
 <video autoplay muted loop playsinline id="bgVideo">
   <source src="gradientbg.mp4" type="video/mp4">
 </video>
 
-<!-- SITE -->
 <div id="site">
 
 <header>
@@ -207,13 +231,11 @@ button#submitBtn:hover {
   <h2 class="subtitle fade" id="subtitle">
     Building marketing systems that help brands generate paying customers
   </h2>
-
   <button id="submitBtn" class="fade">✆ Book your free consultation</button>
 </div>
 
 <div class="services fade">
   <h2 id="servicesTitle">Our Services</h2>
-
   <div class="services-content">
     <div id="servicesEn">
       <ul>
@@ -222,9 +244,7 @@ button#submitBtn:hover {
         <li>Visual identity and brand voice</li>
         <li>Market positioning and growth solutions</li>
       </ul>
-      <p>
-        We work selectively with brands we see high growth potential in.
-      </p>
+      <p>We work selectively with brands we see high growth potential in.</p>
     </div>
 
     <div id="servicesAr" style="display:none">
@@ -234,17 +254,14 @@ button#submitBtn:hover {
         <li>الهوية البصرية ونبرة العلامة التجارية</li>
         <li>تحديد موقع السوق وحلول النمو</li>
       </ul>
-      <p>
-        .نختار العمل فقط مع العلامات التجارية التي نرى فيها إمكانيات نمو كبيرة
-      </p>
+      <p>.نختار العمل فقط مع العلامات التجارية التي نرى فيها إمكانيات نمو كبيرة</p>
     </div>
   </div>
 </div>
 
 <div class="footer">
-  <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" id="instagramLink" target="_blank">Instagram</a>
-  ·
-  <a href="mailto:ru.yaagency01@gmail.com" id="contactLink">Contact us</a>
+  <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" target="_blank">Instagram</a> ·
+  <a href="mailto:ru.yaagency01@gmail.com">Contact us</a>
 </div>
 
 </div>
@@ -262,56 +279,20 @@ let videoReady = false;
 let logoReady = false;
 let minTimePassed = false;
 
-// تأكد من تحميل الفيديو
 video.oncanplaythrough = () => { videoReady = true; tryShowSite(); };
-// تأكد من تحميل اللوغو
 logo.onload = () => { logoReady = true; tryShowSite(); };
 
-// تأخير 1 ثانية كحد أدنى
 setTimeout(() => { minTimePassed = true; tryShowSite(); }, 1000);
 
-// عرض الموقع عند اكتمال الشروط
 function tryShowSite() {
-  if(videoReady && logoReady && minTimePassed) {
+  if (videoReady && logoReady && minTimePassed) {
     loader.style.display = "none";
     site.style.display = "block";
-
-    // Fade-in للعناصر
     setTimeout(() => {
       document.querySelectorAll(".fade").forEach(el => el.classList.add("show"));
     }, 100);
   }
 }
-
-/* ===== LANGUAGE SWITCH ===== */
-let arabic = false;
-langBtn.onclick = () => {
-  arabic = !arabic;
-  langBtn.innerText = arabic ? "EN" : "AR";
-  title.innerText = arabic ? "وكالة رؤية" : "RU'YA AGENCY";
-  subtitle.innerText = arabic
-    ? "بناء أنظمة تسويق تساعد العلامات التجارية على جذب عملائها الفعليين"
-    : "Building marketing systems that help brands generate paying customers";
-
-  submitBtn.innerText = arabic
-    ? "✆ احجز استشارتك المجانية"
-    : "✆ Book your free consultation";
-
-  servicesTitle.innerText = arabic ? "خدماتنا" : "Our Services";
-  servicesEn.style.display = arabic ? "none" : "block";
-  servicesAr.style.display = arabic ? "block" : "none";
-};
-
-/* ===== SOUNDS ===== */
-clickSound.volume = 0.15;
-dclickSound.volume = 0.5;
-
-instagramLink.onclick = () => clickSound.play();
-contactLink.onclick = () => clickSound.play();
-
-submitBtn.onmousedown = () => dclickSound.play();
-submitBtn.onmouseup = () => submitBtn.style.background = "rgba(255,255,255,0.08)";
-submitBtn.onclick = () => window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
 </script>
 
 </body>
