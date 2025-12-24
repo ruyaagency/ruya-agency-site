@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RU'YA AGENCY</title>
-<link rel="icon" type="image/png" href="logo.png"> <!-- favicon -->
-
+<link rel="icon" type="image/png" href="logo.png">
 <style>
 html, body {
   margin: 0;
@@ -78,12 +77,11 @@ header {
   justify-content: space-between;
   align-items: center;
   margin: 20px 40px 0 40px;
-  user-select: none; /* منع تحديد اللوغو */
 }
 
 .logo {
   width: 60px;
-  pointer-events: none; /* منع سحب أو تحميل الصورة */
+  pointer-events: none; /* منع تحميل أو تحديد الصورة */
 }
 
 /* زر اللغة – Glassmorphism */
@@ -96,7 +94,6 @@ header {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(7px);
   border: 1px solid rgba(255,255,255,0.25);
-  user-select: none;
 }
 
 /* ================= CONTENT ================= */
@@ -123,7 +120,6 @@ button#submitBtn {
   cursor: pointer;
   margin-top: 20px;
   transition: transform 0.2s ease;
-  user-select: none;
 }
 
 button#submitBtn:hover {
@@ -140,7 +136,22 @@ button#submitBtn:hover {
   background: rgba(255,255,255,0.1);
   border-radius: 10px;
   text-align: left;
-  user-select: none;
+}
+
+.services-content {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.services-content ul {
+  list-style: disc;
+  margin-left: 20px;
+}
+
+.services-content p {
+  margin-top: 15px;
+  color: white;
 }
 
 /* ================= FOOTER ================= */
@@ -150,7 +161,6 @@ button#submitBtn:hover {
   font-size: 13px;
   color: white;
   text-align: center;
-  user-select: none;
 }
 
 .footer a {
@@ -195,7 +205,6 @@ button#submitBtn:hover {
 }
 </style>
 </head>
-
 <body>
 
 <!-- LOADER -->
@@ -214,7 +223,6 @@ button#submitBtn:hover {
 
 <!-- SITE -->
 <div id="site">
-
 <header>
   <img src="logo.png" class="logo" alt="Logo">
   <div class="lang-btn" id="langBtn">AR</div>
@@ -225,13 +233,11 @@ button#submitBtn:hover {
   <h2 class="subtitle fade" id="subtitle">
     Building marketing systems that help brands generate paying customers
   </h2>
-
   <button id="submitBtn" class="fade">✆ Book your free consultation</button>
 </div>
 
 <div class="services fade">
   <h2 id="servicesTitle">Our Services</h2>
-
   <div class="services-content">
     <div id="servicesEn">
       <ul>
@@ -244,7 +250,6 @@ button#submitBtn:hover {
         We work selectively with brands we see high growth potential in.
       </p>
     </div>
-
     <div id="servicesAr" style="display:none">
       <ul>
         <li>أطر عمل لبراند الشركات والعلامات الشخصية</li>
@@ -260,11 +265,9 @@ button#submitBtn:hover {
 </div>
 
 <div class="footer">
-  <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" id="instagramLink" target="_blank">Instagram</a>
-  ·
+  <a href="https://www.instagram.com/ruya.agency?igsh=NWZlN3N1eXVyZ2d5" id="instagramLink" target="_blank">Instagram</a> ·
   <a href="mailto:ru.yaagency01@gmail.com" id="contactLink">Contact us</a>
 </div>
-
 </div>
 
 <audio id="clickSound" src="click.mp3" preload="auto"></audio>
@@ -331,6 +334,5 @@ submitBtn.onmousedown = () => dclickSound.play();
 submitBtn.onmouseup = () => submitBtn.style.background = "rgba(255,255,255,0.08)";
 submitBtn.onclick = () => window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
 </script>
-
 </body>
 </html>
