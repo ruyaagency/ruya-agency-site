@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RU'YA AGENCY</title>
-<link rel="icon" href="logo.png" type="image/png">
+<link rel="icon" type="image/png" href="logo.png"> <!-- favicon -->
 
 <style>
 html, body {
@@ -18,10 +18,7 @@ html, body {
   font-family: Arial, sans-serif;
   color: white;
   background: none;
-  user-select: none; /* يمنع تحديد النصوص */
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  user-select: none; /* منع تحديد النصوص */
 }
 
 /* ================= VIDEO BACKGROUND ================= */
@@ -33,6 +30,7 @@ html, body {
   height: 100%;
   object-fit: cover;
   z-index: -1;
+  pointer-events: none;
 }
 
 /* ================= LOADING SCREEN ================= */
@@ -43,6 +41,7 @@ html, body {
   justify-content: center;
   align-items: center;
   z-index: 9999;
+  background: none;
 }
 
 .loader-dots {
@@ -79,13 +78,12 @@ header {
   justify-content: space-between;
   align-items: center;
   margin: 20px 40px 0 40px;
+  user-select: none; /* منع تحديد اللوغو */
 }
 
 .logo {
   width: 60px;
-  user-drag: none;
-  -webkit-user-drag: none;
-  pointer-events: none; /* يمنع التفاعل مع اللوغو */
+  pointer-events: none; /* منع سحب أو تحميل الصورة */
 }
 
 /* زر اللغة – Glassmorphism */
@@ -98,6 +96,7 @@ header {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(7px);
   border: 1px solid rgba(255,255,255,0.25);
+  user-select: none;
 }
 
 /* ================= CONTENT ================= */
@@ -106,10 +105,6 @@ header {
   width: calc(100% - 80px);
   margin: 40px auto;
   text-align: center;
-}
-
-h1, h2, p, li, button {
-  user-select: none; /* يمنع تحديد النصوص */
 }
 
 h1 { margin-bottom: 10px; font-size: 28px; }
@@ -128,6 +123,7 @@ button#submitBtn {
   cursor: pointer;
   margin-top: 20px;
   transition: transform 0.2s ease;
+  user-select: none;
 }
 
 button#submitBtn:hover {
@@ -144,22 +140,7 @@ button#submitBtn:hover {
   background: rgba(255,255,255,0.1);
   border-radius: 10px;
   text-align: left;
-}
-
-.services-content {
-  margin-top: 10px;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.services-content ul {
-  list-style: disc;
-  margin-left: 20px;
-}
-
-.services-content p {
-  margin-top: 15px;
-  color: white;
+  user-select: none;
 }
 
 /* ================= FOOTER ================= */
@@ -169,6 +150,7 @@ button#submitBtn:hover {
   font-size: 13px;
   color: white;
   text-align: center;
+  user-select: none;
 }
 
 .footer a {
@@ -187,6 +169,29 @@ button#submitBtn:hover {
 .fade.show {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ================= SCROLLBAR ================= */
+@media (min-width: 769px) {
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+    backdrop-filter: blur(7px);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+    border-radius: 6px;
+  }
+}
+
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }
 </style>
 </head>
