@@ -17,8 +17,8 @@ html, body {
   font-family: Arial, sans-serif;
   color: white;
   background: none;
-  scroll-behavior: smooth;
-  -webkit-user-select: none;
+  scroll-behavior: smooth; /* Smooth scrolling */
+  -webkit-user-select: none; /* منع تحديد النصوص */
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -79,12 +79,12 @@ header {
   justify-content: space-between;
   align-items: center;
   margin: 20px 40px 0 40px;
-  -webkit-user-select: none;
+  -webkit-user-select: none; /* منع تحديد اللوغو */
 }
 
 .logo {
   width: 60px;
-  pointer-events: none;
+  pointer-events: none; /* منع سحب اللوغو */
 }
 
 /* زر اللغة – Glassmorphism */
@@ -152,8 +152,8 @@ button#submitBtn:hover {
   margin-left: 20px;
 }
 
-.services-content p {
-  margin-top: 15px;
+.services-content p, .services-content li {
+  margin-top: 10px;
   color: white;
 }
 
@@ -200,9 +200,15 @@ button#submitBtn:hover {
   background: rgba(255,255,255,0.3);
 }
 
+/* Hide scrollbar on mobile */
 @media (max-width: 768px) {
-  ::-webkit-scrollbar { display: none; }
-  html { -ms-overflow-style: none; scrollbar-width: none; }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  html {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;     
+  }
 }
 </style>
 </head>
@@ -244,7 +250,7 @@ button#submitBtn:hover {
   <h2 id="servicesTitle" class="fade">What we do</h2>
 
   <div class="services-content">
-    <div id="servicesEn" class="fade">
+    <div id="servicesEn">
       <ul>
         <li>Brand frameworks for businesses and personal brands, building clear positioning, marketing messages, audience-focused content, and strategic vision.</li>
         <li>Organic content and sales campaigns aligned with brand identity, designed to turn attention into trust and long-term customers.</li>
@@ -254,9 +260,9 @@ button#submitBtn:hover {
       <p>We work selectively with brands we see high growth potential in.</p>
     </div>
 
-    <div id="servicesAr" class="fade" style="display:none">
+    <div id="servicesAr" style="display:none">
       <ul>
-        <li>أطر عمل لبراند الشركات والعلامات الشخصية، لبناء وضوح في التموقع، رسائل تسويقية ومحتوى موجه للجمهور، و رؤية استراتيجية.</li>
+        <li>أطر عمل لبراند الشركات والعلامات الشخصية، لبناء وضوح في التموقع، رسائل تسويقية، محتوى موجه للجمهور و رؤية استراتيجية.</li>
         <li>محتوى عضوي وحملات مبيعات متوافقة مع هوية العلامة التجارية، مصممة لتحويل الانتباه إلى ثقة وعملاء دائمين.</li>
         <li>هوية بصرية وصوت العلامة التجارية مصممان للوضوح، والمصداقية، والتحويل.</li>
         <li>تحديد موقع السوق وحلول النمو التي تجعل العلامة التجارية واضحة، قوية، ومؤثرة في مجالها.</li>
@@ -289,6 +295,7 @@ let minTimePassed = false;
 
 // تأكد من تحميل الفيديو
 video.oncanplaythrough = () => { videoReady = true; tryShowSite(); };
+// تأكد من تحميل اللوغو
 logo.onload = () => { logoReady = true; tryShowSite(); };
 
 // تأخير 1 ثانية كحد أدنى
@@ -300,7 +307,7 @@ function tryShowSite() {
     loader.style.display = "none";
     site.style.display = "block";
 
-    // Fade-in لجميع العناصر
+    // Fade-in للعناصر
     setTimeout(() => {
       document.querySelectorAll(".fade").forEach(el => el.classList.add("show"));
     }, 100);
@@ -312,7 +319,8 @@ let arabic = false;
 langBtn.onclick = () => {
   arabic = !arabic;
   langBtn.innerText = arabic ? "EN" : "AR";
-  title.innerText = arabic ? "وكالة رؤية" : "RU'YA AGENCY";
+
+  title.innerText = arabic ? "وكالة رؤيا" : "RU'YA AGENCY";
   subtitle.innerText = arabic
     ? "بناء أنظمة تسويق تساعد العلامات التجارية على جذب عملائها الفعليين"
     : "Building marketing systems that help brands generate paying customers";
@@ -325,10 +333,18 @@ langBtn.onclick = () => {
   servicesEn.style.display = arabic ? "none" : "block";
   servicesAr.style.display = arabic ? "block" : "none";
 
-  // حفظ fade-in عند تغيير اللغة
+  // تطبيق fade-in عند تغيير اللغة
   setTimeout(() => {
     document.querySelectorAll(".fade").forEach(el => el.classList.add("show"));
-  }, 50);
+  }, 100);
+
+  // تحديث رابط الزر حسب اللغة
+  submitBtn.onclick = () => {
+    let link = arabic
+      ? "https://docs.google.com/forms/d/e/1FAIpQLSemPBNo1C7ZaOu3PeglGyf0jfNufiZ2K15VYuG2wWiXl0MbhQ/viewform?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAb21jcAO7exVleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA81NjcwNjczNDMzNTI0MjcAAadEzZ7wC7ews2EKaGX9VY_Zo0BrZVLHWIHNj48To_NE_Mee-O8N6RhTUXlo3Q_aem_hIrZjYhrntFPkn2t3bSCVA"
+      : "https://forms.gle/NrANWtgv5zWuhn6K9";
+    window.open(link, "_blank");
+  };
 };
 
 /* ===== SOUNDS ===== */
