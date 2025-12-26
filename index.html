@@ -257,9 +257,7 @@ button#submitBtn:hover {
         <li>Visual identity and brand voice crafted for clarity, credibility, and conversion.</li>
         <li>Market positioning and growth solutions that make the brand clear, strong, and impactful within its space.</li>
       </ul>
-      <p class="fade">
-        We work selectively with brands we see high growth potential in.
-      </p>
+      <p class="fade">We work selectively with brands we see high growth potential in.</p>
     </div>
 
     <div id="servicesAr" style="display:none">
@@ -269,9 +267,7 @@ button#submitBtn:hover {
         <li>هوية بصرية وصوت العلامة التجارية مصممان للوضوح، والمصداقية، والتحويل.</li>
         <li>تحديد موقع السوق وحلول النمو التي تجعل العلامة التجارية واضحة، قوية، ومؤثرة في مجالها.</li>
       </ul>
-      <p class="fade">
-        نعمل بشكل انتقائي مع العلامات التجارية التي نرى فيها إمكانات نمو عالية.
-      </p>
+      <p class="fade">نعمل بشكل انتقائي مع العلامات التجارية التي نرى فيها إمكانات نمو عالية.</p>
     </div>
   </div>
 </div>
@@ -336,16 +332,10 @@ langBtn.onclick = () => {
   servicesEn.style.display = arabic ? "none" : "block";
   servicesAr.style.display = arabic ? "block" : "none";
 
-  // Fade-in لعناصر اللغة الجديدة
+  // تطبيق fade-in على النصوص بعد تغيير اللغة
   setTimeout(() => {
     document.querySelectorAll(".fade").forEach(el => el.classList.add("show"));
   }, 100);
-
-  // تغيير رابط الزر عند اللغة العربية
-  submitBtn.onclick = () => window.open(
-    arabic 
-    ? "https://docs.google.com/forms/d/e/1FAIpQLSemPBNo1C7ZaOu3PeglGyf0jfNufiZ2K15VYuG2wWiXl0MbhQ/viewform?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAb21jcAO7exVleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA81NjcwNjczNDMzNTI0MjcAAadEzZ7wC7ews2EKaGX9VY_Zo0BrZVLHWIHNj48To_NE_Mee-O8N6RhTUXlo3Q_aem_hIrZjYhrntFPkn2t3bSCVA"
-    : "https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
 };
 
 /* ===== SOUNDS ===== */
