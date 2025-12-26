@@ -24,7 +24,6 @@ html, body {
   user-select: none;
 }
 
-/* ================= VIDEO BACKGROUND ================= */
 #bgVideo {
   position: fixed;
   top: 0;
@@ -35,7 +34,6 @@ html, body {
   z-index: -1;
 }
 
-/* ================= LOADING SCREEN ================= */
 #loader {
   position: fixed;
   inset: 0;
@@ -177,7 +175,6 @@ button#submitBtn:hover {
   transform: translateY(0);
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -236,10 +233,10 @@ button#submitBtn:hover {
   <div class="services-content">
     <div id="servicesEn">
       <ul>
-        <li>Brand frameworks for businesses and personal brands</li>
-        <li>Organic content & creative campaigns aligned with brand identity</li>
-        <li>Visual identity and brand voice</li>
-        <li>Market positioning and growth solutions</li>
+        <li>Brand frameworks for businesses and personal brands, building clear positioning, marketing messages, audience-focused content, and strategic direction.</li>
+        <li>Organic content and sales campaigns aligned with brand identity, designed to turn attention into trust and long-term customers.</li>
+        <li>Visual identity and brand voice crafted for clarity, credibility, and conversion.</li>
+        <li>Market positioning and growth solutions that make the brand clear, strong, and impactful within its space.</li>
       </ul>
       <p>
         We work selectively with brands we see high growth potential in.
@@ -248,10 +245,10 @@ button#submitBtn:hover {
 
     <div id="servicesAr" style="display:none">
       <ul>
-        <li>أطر عمل لبراند الشركات والعلامات الشخصية</li>
-        <li>محتوى عضوي وحملات إبداعية متوافقة مع هوية البراند</li>
-        <li>الهوية البصرية ونبرة العلامة التجارية</li>
-        <li>تحديد موقع السوق وحلول النمو</li>
+        <li>أطر عمل براند الشركات والعلامات الشخصية، لبناء وضوح في التموقع، الرسائل التسويقية والمحتوى الموجه للجمهور، واتجاه العمل.</li>
+        <li>محتوى عضوي وحملات مبيعات متوافقة مع هوية العلامة التجارية، مصممة لتحويل الانتباه إلى ثقة وعملاء دائمين.</li>
+        <li>هوية بصرية وصوت العلامة التجارية مصممان للوضوح، والمصداقية، والتحويل.</li>
+        <li>تحديد موقع السوق وحلول النمو التي تجعل العلامة التجارية واضحة، قوية، ومؤثرة في مجالها.</li>
       </ul>
       <p>
         نعمل بشكل انتقائي مع العلامات التجارية التي نرى فيها إمكانات نمو عالية.
@@ -303,7 +300,7 @@ const submitBtnLinkAr = "https://docs.google.com/forms/d/e/1FAIpQLSemPBNo1C7ZaOu
 langBtn.onclick = () => {
   arabic = !arabic;
   langBtn.innerText = arabic ? "EN" : "AR";
-  title.innerText = arabic ? "وكالة رؤيا" : "RU'YA AGENCY";
+  title.innerText = arabic ? "وكالة رؤية" : "RU'YA AGENCY";
   subtitle.innerText = arabic
     ? "بناء أنظمة تسويق تساعد العلامات التجارية على جذب عملائها الفعليين"
     : "Building marketing systems that help brands generate paying customers";
@@ -312,10 +309,9 @@ langBtn.onclick = () => {
     ? "✆ احجز استشارتك المجانية"
     : "✆ Book your free consultation";
 
-  // تغيير الرابط حسب اللغة
   submitBtn.onclick = () => window.open(arabic ? submitBtnLinkAr : submitBtnLinkEn, "_blank");
 
-  servicesTitle.innerText = arabic ? "خدماتنا" : "Our Services";
+  servicesTitle.innerText = arabic ? "ما نقوم به" : "What we do";
   servicesEn.style.display = arabic ? "none" : "block";
   servicesAr.style.display = arabic ? "block" : "none";
 };
