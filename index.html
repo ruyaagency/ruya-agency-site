@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,14 +18,14 @@ html, body {
   font-family: Arial, sans-serif;
   color: white;
   background: none;
-  scroll-behavior: smooth;
-  -webkit-user-select: none;
+  scroll-behavior: smooth; /* Smooth scrolling */
+  -webkit-user-select: none; /* منع تحديد النصوص */
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 
-/* VIDEO BACKGROUND */
+/* ================= VIDEO BACKGROUND ================= */
 #bgVideo {
   position: fixed;
   top: 0;
@@ -35,7 +36,7 @@ html, body {
   z-index: -1;
 }
 
-/* LOADING SCREEN */
+/* ================= LOADING SCREEN ================= */
 #loader {
   position: fixed;
   inset: 0;
@@ -68,23 +69,26 @@ html, body {
   100% { opacity: 0.2; }
 }
 
-/* SITE HIDDEN UNTIL LOADED */
-#site { display: none; }
+/* إخفاء الموقع حتى يكتمل التحميل */
+#site {
+  display: none;
+}
 
-/* HEADER */
+/* ================= HEADER ================= */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 20px 40px 0 40px;
-  -webkit-user-select: none;
+  -webkit-user-select: none; /* منع تحديد اللوغو */
 }
 
 .logo {
   width: 60px;
-  pointer-events: none;
+  pointer-events: none; /* منع سحب اللوغو */
 }
 
+/* زر اللغة – Glassmorphism */
 .lang-btn {
   padding: 8px 14px;
   border-radius: 8px;
@@ -96,7 +100,7 @@ header {
   border: 1px solid rgba(255,255,255,0.25);
 }
 
-/* CONTENT */
+/* ================= CONTENT ================= */
 .content-wrapper {
   max-width: 600px;
   width: calc(100% - 80px);
@@ -127,7 +131,7 @@ button#submitBtn:hover {
   transform: scale(1.02);
 }
 
-/* SERVICES */
+/* ================= SERVICES ================= */
 .services {
   max-width: 600px;
   width: calc(100% - 80px);
@@ -149,12 +153,12 @@ button#submitBtn:hover {
   margin-left: 20px;
 }
 
-.services-content p {
-  margin-top: 15px;
+.services-content p, .services-content li {
+  margin-top: 10px;
   color: white;
 }
 
-/* FOOTER */
+/* ================= FOOTER ================= */
 .footer {
   margin-top: 140px;
   margin-bottom: 40px;
@@ -169,7 +173,7 @@ button#submitBtn:hover {
   margin: 0 10px;
 }
 
-/* FADE-IN */
+/* ================= FADE-IN ================= */
 .fade {
   opacity: 0;
   transform: translateY(10px);
@@ -181,19 +185,31 @@ button#submitBtn:hover {
   transform: translateY(0);
 }
 
-/* SCROLLBAR TRANSPARENT & BLURRED */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: transparent; }
+/* ===== SCROLLBAR TRANSPARENT & BLURRED ===== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
 ::-webkit-scrollbar-thumb {
   background: rgba(255,255,255,0.15);
   border-radius: 10px;
   backdrop-filter: blur(4px);
 }
-::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.3);
+}
 
+/* Hide scrollbar on mobile */
 @media (max-width: 768px) {
-  ::-webkit-scrollbar { display: none; }
-  html { -ms-overflow-style: none; scrollbar-width: none; }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  html {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;     
+  }
 }
 </style>
 </head>
@@ -232,7 +248,7 @@ button#submitBtn:hover {
 </div>
 
 <div class="services fade">
-  <h2 id="servicesTitle">Our Services</h2>
+  <h2 id="servicesTitle" class="fade">What we do</h2>
 
   <div class="services-content">
     <div id="servicesEn">
@@ -278,15 +294,24 @@ let videoReady = false;
 let logoReady = false;
 let minTimePassed = false;
 
+// تأكد من تحميل الفيديو
 video.oncanplaythrough = () => { videoReady = true; tryShowSite(); };
+// تأكد من تحميل اللوغو
 logo.onload = () => { logoReady = true; tryShowSite(); };
+
+// تأخير 1 ثانية كحد أدنى
 setTimeout(() => { minTimePassed = true; tryShowSite(); }, 1000);
 
+// عرض الموقع عند اكتمال الشروط
 function tryShowSite() {
   if(videoReady && logoReady && minTimePassed) {
     loader.style.display = "none";
     site.style.display = "block";
-    document.querySelectorAll(".fade").forEach(el => el.classList.add("show"));
+
+    // Fade-in للعناصر
+    setTimeout(() => {
+      document.querySelectorAll(".fade").forEach(el => el.classList.add("show"));
+    }, 100);
   }
 }
 
@@ -306,30 +331,30 @@ langBtn.onclick = () => {
     : "✆ Book your free consultation";
 
   servicesTitle.innerText = arabic ? "ما نقوم به" : "What we do";
-
   servicesEn.style.display = arabic ? "none" : "block";
   servicesAr.style.display = arabic ? "block" : "none";
 
-  // fade-in عند تغيير اللغة
-  document.querySelectorAll(".fade").forEach(el => {
-    el.classList.remove("show");
-    setTimeout(() => el.classList.add("show"), 50);
-  });
+  // تطبيق fade-in عند تغيير اللغة
+  setTimeout(() => {
+    document.querySelectorAll(".fade").forEach(el => el.classList.add("show"));
+  }, 100);
 
-  // تغيير رابط الزر حسب اللغة
+  // تحديث رابط الزر حسب اللغة
   submitBtn.onclick = () => {
-    const url = arabic 
+    let link = arabic
       ? "https://docs.google.com/forms/d/e/1FAIpQLSemPBNo1C7ZaOu3PeglGyf0jfNufiZ2K15VYuG2wWiXl0MbhQ/viewform?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAb21jcAO7exVleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA81NjcwNjczNDMzNTI0MjcAAadEzZ7wC7ews2EKaGX9VY_Zo0BrZVLHWIHNj48To_NE_Mee-O8N6RhTUXlo3Q_aem_hIrZjYhrntFPkn2t3bSCVA"
       : "https://forms.gle/NrANWtgv5zWuhn6K9";
-    window.open(url, "_blank");
+    window.open(link, "_blank");
   };
 };
 
 /* ===== SOUNDS ===== */
 clickSound.volume = 0.15;
 dclickSound.volume = 0.5;
+
 instagramLink.onclick = () => clickSound.play();
 contactLink.onclick = () => clickSound.play();
+
 submitBtn.onmousedown = () => dclickSound.play();
 submitBtn.onmouseup = () => submitBtn.style.background = "rgba(255,255,255,0.08)";
 submitBtn.onclick = () => window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
