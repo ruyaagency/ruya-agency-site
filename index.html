@@ -17,8 +17,8 @@ html, body {
   font-family: Arial, sans-serif;
   color: white;
   background: none;
-  scroll-behavior: smooth; /* Smooth scrolling */
-  -webkit-user-select: none; /* منع تحديد النصوص */
+  scroll-behavior: smooth;
+  -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -68,26 +68,23 @@ html, body {
   100% { opacity: 0.2; }
 }
 
-/* إخفاء الموقع حتى يكتمل التحميل */
 #site {
   display: none;
 }
 
-/* ================= HEADER ================= */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 20px 40px 0 40px;
-  -webkit-user-select: none; /* منع تحديد اللوغو */
+  -webkit-user-select: none;
 }
 
 .logo {
   width: 60px;
-  pointer-events: none; /* منع سحب اللوغو */
+  pointer-events: none;
 }
 
-/* زر اللغة – Glassmorphism */
 .lang-btn {
   padding: 8px 14px;
   border-radius: 8px;
@@ -99,7 +96,6 @@ header {
   border: 1px solid rgba(255,255,255,0.25);
 }
 
-/* ================= CONTENT ================= */
 .content-wrapper {
   max-width: 600px;
   width: calc(100% - 80px);
@@ -130,7 +126,6 @@ button#submitBtn:hover {
   transform: scale(1.02);
 }
 
-/* ================= SERVICES ================= */
 .services {
   max-width: 600px;
   width: calc(100% - 80px);
@@ -157,7 +152,6 @@ button#submitBtn:hover {
   color: white;
 }
 
-/* ================= FOOTER ================= */
 .footer {
   margin-top: 140px;
   margin-bottom: 40px;
@@ -172,7 +166,6 @@ button#submitBtn:hover {
   margin: 0 10px;
 }
 
-/* ================= FADE-IN ================= */
 .fade {
   opacity: 0;
   transform: translateY(10px);
@@ -184,7 +177,7 @@ button#submitBtn:hover {
   transform: translateY(0);
 }
 
-/* ===== SCROLLBAR TRANSPARENT & BLURRED ===== */
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -200,22 +193,15 @@ button#submitBtn:hover {
   background: rgba(255,255,255,0.3);
 }
 
-/* Hide scrollbar on mobile */
 @media (max-width: 768px) {
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  html {
-    -ms-overflow-style: none;  
-    scrollbar-width: none;     
-  }
+  ::-webkit-scrollbar { display: none; }
+  html { -ms-overflow-style: none; scrollbar-width: none; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOADER -->
 <div id="loader">
   <div class="loader-dots">
     <span></span>
@@ -224,12 +210,10 @@ button#submitBtn:hover {
   </div>
 </div>
 
-<!-- VIDEO BACKGROUND -->
 <video autoplay muted loop playsinline id="bgVideo">
   <source src="gradientbg.mp4" type="video/mp4">
 </video>
 
-<!-- SITE -->
 <div id="site">
 
 <header>
@@ -297,21 +281,14 @@ let videoReady = false;
 let logoReady = false;
 let minTimePassed = false;
 
-// تأكد من تحميل الفيديو
 video.oncanplaythrough = () => { videoReady = true; tryShowSite(); };
-// تأكد من تحميل اللوغو
 logo.onload = () => { logoReady = true; tryShowSite(); };
-
-// تأخير 1 ثانية كحد أدنى
 setTimeout(() => { minTimePassed = true; tryShowSite(); }, 1000);
 
-// عرض الموقع عند اكتمال الشروط
 function tryShowSite() {
   if(videoReady && logoReady && minTimePassed) {
     loader.style.display = "none";
     site.style.display = "block";
-
-    // Fade-in للعناصر
     setTimeout(() => {
       document.querySelectorAll(".fade").forEach(el => el.classList.add("show"));
     }, 100);
@@ -320,6 +297,9 @@ function tryShowSite() {
 
 /* ===== LANGUAGE SWITCH ===== */
 let arabic = false;
+const submitBtnLinkEn = "https://forms.gle/NrANWtgv5zWuhn6K9";
+const submitBtnLinkAr = "https://docs.google.com/forms/d/e/1FAIpQLSemPBNo1C7ZaOu3PeglGyf0jfNufiZ2K15VYuG2wWiXl0MbhQ/viewform?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAb21jcAO7exVleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA81NjcwNjczNDMzNTI0MjcAAadEzZ7wC7ews2EKaGX9VY_Zo0BrZVLHWIHNj48To_NE_Mee-O8N6RhTUXlo3Q_aem_hIrZjYhrntFPkn2t3bSCVA";
+
 langBtn.onclick = () => {
   arabic = !arabic;
   langBtn.innerText = arabic ? "EN" : "AR";
@@ -331,6 +311,9 @@ langBtn.onclick = () => {
   submitBtn.innerText = arabic
     ? "✆ احجز استشارتك المجانية"
     : "✆ Book your free consultation";
+
+  // تغيير الرابط حسب اللغة
+  submitBtn.onclick = () => window.open(arabic ? submitBtnLinkAr : submitBtnLinkEn, "_blank");
 
   servicesTitle.innerText = arabic ? "خدماتنا" : "Our Services";
   servicesEn.style.display = arabic ? "none" : "block";
@@ -346,7 +329,7 @@ contactLink.onclick = () => clickSound.play();
 
 submitBtn.onmousedown = () => dclickSound.play();
 submitBtn.onmouseup = () => submitBtn.style.background = "rgba(255,255,255,0.08)";
-submitBtn.onclick = () => window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
+submitBtn.onclick = () => window.open(submitBtnLinkEn, "_blank");
 </script>
 
 </body>
