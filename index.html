@@ -17,8 +17,8 @@ html, body {
   font-family: Arial, sans-serif;
   color: white;
   background: none;
-  scroll-behavior: smooth; /* Smooth scrolling */
-  -webkit-user-select: none; /* منع تحديد النصوص */
+  scroll-behavior: smooth;
+  -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -79,12 +79,12 @@ header {
   justify-content: space-between;
   align-items: center;
   margin: 20px 40px 0 40px;
-  -webkit-user-select: none; /* منع تحديد اللوغو */
+  -webkit-user-select: none;
 }
 
 .logo {
   width: 60px;
-  pointer-events: none; /* منع سحب اللوغو */
+  pointer-events: none;
 }
 
 /* زر اللغة – Glassmorphism */
@@ -200,15 +200,9 @@ button#submitBtn:hover {
   background: rgba(255,255,255,0.3);
 }
 
-/* Hide scrollbar on mobile */
 @media (max-width: 768px) {
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  html {
-    -ms-overflow-style: none;  
-    scrollbar-width: none;     
-  }
+  ::-webkit-scrollbar { display: none; }
+  html { -ms-overflow-style: none; scrollbar-width: none; }
 }
 </style>
 </head>
@@ -247,27 +241,27 @@ button#submitBtn:hover {
 </div>
 
 <div class="services fade">
-  <h2 id="servicesTitle" class="fade">Our Services</h2>
+  <h2 id="servicesTitle" class="fade">What we do</h2>
 
   <div class="services-content">
-    <div id="servicesEn">
-      <ul class="fade">
+    <div id="servicesEn" class="fade">
+      <ul>
         <li>Brand frameworks for businesses and personal brands, building clear positioning, marketing messages, audience-focused content, and strategic vision.</li>
         <li>Organic content and sales campaigns aligned with brand identity, designed to turn attention into trust and long-term customers.</li>
         <li>Visual identity and brand voice crafted for clarity, credibility, and conversion.</li>
         <li>Market positioning and growth solutions that make the brand clear, strong, and impactful within its space.</li>
       </ul>
-      <p class="fade">We work selectively with brands we see high growth potential in.</p>
+      <p>We work selectively with brands we see high growth potential in.</p>
     </div>
 
-    <div id="servicesAr" style="display:none">
-      <ul class="fade">
+    <div id="servicesAr" class="fade" style="display:none">
+      <ul>
         <li>أطر عمل لبراند الشركات والعلامات الشخصية، لبناء وضوح في التموقع، رسائل تسويقية ومحتوى موجه للجمهور، و رؤية استراتيجية.</li>
         <li>محتوى عضوي وحملات مبيعات متوافقة مع هوية العلامة التجارية، مصممة لتحويل الانتباه إلى ثقة وعملاء دائمين.</li>
         <li>هوية بصرية وصوت العلامة التجارية مصممان للوضوح، والمصداقية، والتحويل.</li>
         <li>تحديد موقع السوق وحلول النمو التي تجعل العلامة التجارية واضحة، قوية، ومؤثرة في مجالها.</li>
       </ul>
-      <p class="fade">نعمل بشكل انتقائي مع العلامات التجارية التي نرى فيها إمكانات نمو عالية.</p>
+      <p>نعمل بشكل انتقائي مع العلامات التجارية التي نرى فيها إمكانات نمو عالية.</p>
     </div>
   </div>
 </div>
@@ -295,7 +289,6 @@ let minTimePassed = false;
 
 // تأكد من تحميل الفيديو
 video.oncanplaythrough = () => { videoReady = true; tryShowSite(); };
-// تأكد من تحميل اللوغو
 logo.onload = () => { logoReady = true; tryShowSite(); };
 
 // تأخير 1 ثانية كحد أدنى
@@ -307,7 +300,7 @@ function tryShowSite() {
     loader.style.display = "none";
     site.style.display = "block";
 
-    // Fade-in للعناصر
+    // Fade-in لجميع العناصر
     setTimeout(() => {
       document.querySelectorAll(".fade").forEach(el => el.classList.add("show"));
     }, 100);
@@ -332,10 +325,10 @@ langBtn.onclick = () => {
   servicesEn.style.display = arabic ? "none" : "block";
   servicesAr.style.display = arabic ? "block" : "none";
 
-  // تطبيق fade-in على النصوص بعد تغيير اللغة
+  // حفظ fade-in عند تغيير اللغة
   setTimeout(() => {
     document.querySelectorAll(".fade").forEach(el => el.classList.add("show"));
-  }, 100);
+  }, 50);
 };
 
 /* ===== SOUNDS ===== */
