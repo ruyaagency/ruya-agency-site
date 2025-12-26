@@ -17,13 +17,14 @@ html, body {
   font-family: Arial, sans-serif;
   color: white;
   background: none;
-  scroll-behavior: smooth;
-  -webkit-user-select: none;
+  scroll-behavior: smooth; /* Smooth scrolling */
+  -webkit-user-select: none; /* منع تحديد النصوص */
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 
+/* ================= VIDEO BACKGROUND ================= */
 #bgVideo {
   position: fixed;
   top: 0;
@@ -34,6 +35,7 @@ html, body {
   z-index: -1;
 }
 
+/* ================= LOADING SCREEN ================= */
 #loader {
   position: fixed;
   inset: 0;
@@ -66,23 +68,26 @@ html, body {
   100% { opacity: 0.2; }
 }
 
+/* إخفاء الموقع حتى يكتمل التحميل */
 #site {
   display: none;
 }
 
+/* ================= HEADER ================= */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 20px 40px 0 40px;
-  -webkit-user-select: none;
+  -webkit-user-select: none; /* منع تحديد اللوغو */
 }
 
 .logo {
   width: 60px;
-  pointer-events: none;
+  pointer-events: none; /* منع سحب اللوغو */
 }
 
+/* زر اللغة – Glassmorphism */
 .lang-btn {
   padding: 8px 14px;
   border-radius: 8px;
@@ -94,6 +99,7 @@ header {
   border: 1px solid rgba(255,255,255,0.25);
 }
 
+/* ================= CONTENT ================= */
 .content-wrapper {
   max-width: 600px;
   width: calc(100% - 80px);
@@ -124,6 +130,7 @@ button#submitBtn:hover {
   transform: scale(1.02);
 }
 
+/* ================= SERVICES ================= */
 .services {
   max-width: 600px;
   width: calc(100% - 80px);
@@ -150,6 +157,7 @@ button#submitBtn:hover {
   color: white;
 }
 
+/* ================= FOOTER ================= */
 .footer {
   margin-top: 140px;
   margin-bottom: 40px;
@@ -164,6 +172,7 @@ button#submitBtn:hover {
   margin: 0 10px;
 }
 
+/* ================= FADE-IN ================= */
 .fade {
   opacity: 0;
   transform: translateY(10px);
@@ -175,6 +184,7 @@ button#submitBtn:hover {
   transform: translateY(0);
 }
 
+/* ===== SCROLLBAR TRANSPARENT & BLURRED ===== */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -190,15 +200,22 @@ button#submitBtn:hover {
   background: rgba(255,255,255,0.3);
 }
 
+/* Hide scrollbar on mobile */
 @media (max-width: 768px) {
-  ::-webkit-scrollbar { display: none; }
-  html { -ms-overflow-style: none; scrollbar-width: none; }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  html {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;     
+  }
 }
 </style>
 </head>
 
 <body>
 
+<!-- LOADER -->
 <div id="loader">
   <div class="loader-dots">
     <span></span>
@@ -207,10 +224,12 @@ button#submitBtn:hover {
   </div>
 </div>
 
+<!-- VIDEO BACKGROUND -->
 <video autoplay muted loop playsinline id="bgVideo">
   <source src="gradientbg.mp4" type="video/mp4">
 </video>
 
+<!-- SITE -->
 <div id="site">
 
 <header>
@@ -228,29 +247,29 @@ button#submitBtn:hover {
 </div>
 
 <div class="services fade">
-  <h2 id="servicesTitle">Our Services</h2>
+  <h2 id="servicesTitle" class="fade">Our Services</h2>
 
   <div class="services-content">
     <div id="servicesEn">
-      <ul>
-        <li>Brand frameworks for businesses and personal brands, building clear positioning, marketing messages, audience-focused content, and strategic direction.</li>
+      <ul class="fade">
+        <li>Brand frameworks for businesses and personal brands, building clear positioning, marketing messages, audience-focused content, and strategic vision.</li>
         <li>Organic content and sales campaigns aligned with brand identity, designed to turn attention into trust and long-term customers.</li>
         <li>Visual identity and brand voice crafted for clarity, credibility, and conversion.</li>
         <li>Market positioning and growth solutions that make the brand clear, strong, and impactful within its space.</li>
       </ul>
-      <p>
+      <p class="fade">
         We work selectively with brands we see high growth potential in.
       </p>
     </div>
 
     <div id="servicesAr" style="display:none">
-      <ul>
-        <li>أطر عمل براند الشركات والعلامات الشخصية، لبناء وضوح في التموقع، الرسائل التسويقية والمحتوى الموجه للجمهور، واتجاه العمل.</li>
+      <ul class="fade">
+        <li>أطر عمل براند الشركات والعلامات الشخصية، لبناء وضوح في التموقع، الرسائل التسويقية والمحتوى الموجه للجمهور، والرؤية الاستراتيجية للعلامة التجارية.</li>
         <li>محتوى عضوي وحملات مبيعات متوافقة مع هوية العلامة التجارية، مصممة لتحويل الانتباه إلى ثقة وعملاء دائمين.</li>
         <li>هوية بصرية وصوت العلامة التجارية مصممان للوضوح، والمصداقية، والتحويل.</li>
         <li>تحديد موقع السوق وحلول النمو التي تجعل العلامة التجارية واضحة، قوية، ومؤثرة في مجالها.</li>
       </ul>
-      <p>
+      <p class="fade">
         نعمل بشكل انتقائي مع العلامات التجارية التي نرى فيها إمكانات نمو عالية.
       </p>
     </div>
@@ -278,14 +297,21 @@ let videoReady = false;
 let logoReady = false;
 let minTimePassed = false;
 
+// تأكد من تحميل الفيديو
 video.oncanplaythrough = () => { videoReady = true; tryShowSite(); };
+// تأكد من تحميل اللوغو
 logo.onload = () => { logoReady = true; tryShowSite(); };
+
+// تأخير 1 ثانية كحد أدنى
 setTimeout(() => { minTimePassed = true; tryShowSite(); }, 1000);
 
+// عرض الموقع عند اكتمال الشروط
 function tryShowSite() {
   if(videoReady && logoReady && minTimePassed) {
     loader.style.display = "none";
     site.style.display = "block";
+
+    // Fade-in للعناصر
     setTimeout(() => {
       document.querySelectorAll(".fade").forEach(el => el.classList.add("show"));
     }, 100);
@@ -294,9 +320,6 @@ function tryShowSite() {
 
 /* ===== LANGUAGE SWITCH ===== */
 let arabic = false;
-const submitBtnLinkEn = "https://forms.gle/NrANWtgv5zWuhn6K9";
-const submitBtnLinkAr = "https://docs.google.com/forms/d/e/1FAIpQLSemPBNo1C7ZaOu3PeglGyf0jfNufiZ2K15VYuG2wWiXl0MbhQ/viewform?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAb21jcAO7exVleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA81NjcwNjczNDMzNTI0MjcAAadEzZ7wC7ews2EKaGX9VY_Zo0BrZVLHWIHNj48To_NE_Mee-O8N6RhTUXlo3Q_aem_hIrZjYhrntFPkn2t3bSCVA";
-
 langBtn.onclick = () => {
   arabic = !arabic;
   langBtn.innerText = arabic ? "EN" : "AR";
@@ -309,11 +332,15 @@ langBtn.onclick = () => {
     ? "✆ احجز استشارتك المجانية"
     : "✆ Book your free consultation";
 
-  submitBtn.onclick = () => window.open(arabic ? submitBtnLinkAr : submitBtnLinkEn, "_blank");
-
   servicesTitle.innerText = arabic ? "ما نقوم به" : "What we do";
   servicesEn.style.display = arabic ? "none" : "block";
   servicesAr.style.display = arabic ? "block" : "none";
+
+  // Fade-in للعناصر عند تغيير اللغة
+  document.querySelectorAll(".services-content .fade").forEach(el => {
+    el.classList.remove("show");
+    setTimeout(() => el.classList.add("show"), 100);
+  });
 };
 
 /* ===== SOUNDS ===== */
@@ -325,7 +352,7 @@ contactLink.onclick = () => clickSound.play();
 
 submitBtn.onmousedown = () => dclickSound.play();
 submitBtn.onmouseup = () => submitBtn.style.background = "rgba(255,255,255,0.08)";
-submitBtn.onclick = () => window.open(submitBtnLinkEn, "_blank");
+submitBtn.onclick = () => window.open("https://forms.gle/NrANWtgv5zWuhn6K9", "_blank");
 </script>
 
 </body>
