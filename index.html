@@ -334,6 +334,16 @@ langBtn.onclick = () => {
   servicesEn.style.display = arabic ? "none" : "block";
   servicesAr.style.display = arabic ? "block" : "none";
 
+  if (arabic) {
+  servicesAr.style.direction = "rtl";
+  servicesAr.style.textAlign = "right";
+  servicesTitle.style.textAlign = "right";
+} else {
+  servicesAr.style.direction = "ltr";
+  servicesAr.style.textAlign = "left";
+  servicesTitle.style.textAlign = "left";
+}
+
     // **ترجمة أزرار التواصل**
   instagramLink.innerText = arabic ? "انستغرام" : "Instagram";
   contactLink.innerText = arabic ? "تواصل معنا" : "Contact Us";
