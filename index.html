@@ -334,6 +334,10 @@ langBtn.onclick = () => {
   servicesEn.style.display = arabic ? "none" : "block";
   servicesAr.style.display = arabic ? "block" : "none";
 
+    // **ترجمة أزرار التواصل**
+  instagramLink.innerText = arabic ? "انستغرام" : "Instagram";
+  contactLink.innerText = arabic ? "تواصل معنا" : "Contact Us";
+
   // تطبيق fade-in عند تغيير اللغة
   setTimeout(() => {
     document.querySelectorAll(".fade").forEach(el => el.classList.add("show"));
